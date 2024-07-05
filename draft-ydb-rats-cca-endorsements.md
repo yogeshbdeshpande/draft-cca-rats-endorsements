@@ -62,8 +62,7 @@ informative:
 
 --- abstract
 
-Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to
-appraise Attestation Evidence produced by Arm CCA system.
+Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to appraise Attestation Evidence produced by an Arm CCA system.
 
 --- middle
 
@@ -84,7 +83,7 @@ The reader is assumed to be familiar with the terms defined in Section A7.2.1 of
 # Arm CCA Endorsements
 {: #sec-cca-endorsements }
 
-Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation & a Realm Attestation. Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.
+Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation & a Realm Attestation{{CCA-ARCH}}. Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.
 
 
 ## Arm CCA Platform Endorsements
@@ -150,9 +149,8 @@ Reference Values carry measurements and other metadata associated with the updat
 
 When appraising Evidence, the Verifier compares Reference Values against:
 
-a. the values found in the Software Components of the CCA platform token (see Section A7.2.3.2.7 of {{CCA-TOKEN}}).
-
-b. the value set in the platform configuration of the CCA platform token (see Section A7.2.3.2.5 of {{CCA-TOKEN}}).
+* The values found in the Software Components of the CCA platform token (see Section A7.2.3.2.7 of {{CCA-TOKEN}}).
+* The value set in the platform configuration of the CCA platform token (see Section A7.2.3.2.5 of {{CCA-TOKEN}}).
 
 Each measurement is encoded in a `measurement-map` of a CoMID
 `reference-triple-record`.  Since a `measurement-map` can encode one or more
@@ -190,6 +188,8 @@ A Reference value for CCA platform configuration describes the set of chosen imp
 CCA platform configuration reference value represent vendor specific variable length data. As a result, in the CCA platform CoRIM profile, it is represented in a `measurement-values-map` using `raw-values` set to `tagged-bytes` to express a variable length byte string, representing platform configuration data.
 
 $raw-value-type-choice /= tagged-bytes
+
+#### Complete Representation
 
 The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval}}.
 
