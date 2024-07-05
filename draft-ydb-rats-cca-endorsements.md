@@ -56,8 +56,8 @@ informative:
   RATS-ARCH: RFC9334
 
   CCA-TOKEN:
-   target: https://documentation-service.arm.com/static/63a16f163f28e5456434c719?token=
-   title: Realm Management Monitor specification
+   target: https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/
+   title: Arm's Confidential Compute Architecture Reference Attestation Token
    date: 2022
 
 --- abstract
@@ -300,23 +300,6 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | 600 | tagged bytes | CCA Implementation ID ({{sec-cca-rot-id}} of RFCTHIS) |
 | 601 | tagged map | CCA Software Component Identifier ({{sec-ref-values}} of RFCTHIS) |
 {: #tbl-psa-cbor-tag title="CoRIM CBOR Tags"}
-
-## CoRIM Profile Registration
-
-IANA is requested to register the following profile value in the
-<cref>TODO</cref> CoRIM registry.
-
-| Profile Value | Type | Semantics |
-|---
-| `http://arm.com/cca/ssd/1` | uri | The CoRIM profile specified by this document |
-{: #tbl-cca-corim-platform-profile title="CCA platform profile for CoRIM"}
-
-
-| Profile Value | Type | Semantics |
-|---
-| `http://arm.com/cca/realm/1` | uri | The CoRIM profile specified by this document |
-{: #tbl-cca-corim-realm-profile title="CCA realm profile for CoRIM"}
-
 
 # Acknowledgements
 
