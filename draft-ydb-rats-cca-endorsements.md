@@ -179,7 +179,7 @@ In order to support CCA Reference Value identifiers, the CoMID type
 and automatically bound to the `comid.mkey` in the `measurement-map`.
 
 The raw measurement is encoded in a `digests-type` object in the
-`measurement-values-map`.  The `digests-type` array MUST contain at least one entry. The `digests-type` array MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist. Refer below {{ex-cca-platform-refval}}.
+`measurement-values-map`.  The `digests-type` array MUST contain at least one entry. The `digests-type` array MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist. Refer below {{ex-cca-platform-refval-meas}}.
 
 #### CCA Platform Configuration
 
@@ -191,12 +191,17 @@ $raw-value-type-choice /= tagged-bytes
 
 #### Complete Representation
 
-The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval}}.
+The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval-meas}} & {{ex-cca-platform-refval-cfg}}.
 
 ~~~
-{::include examples/platform-refval.diag}
+{::include examples/platform-refval-meas.diag}
 ~~~
-{: #ex-cca-platform-refval title="Example CCA Reference Values" }
+{: #ex-cca-platform-refval-meas title="Example CCA SW Component Reference Value" }
+
+~~~
+{::include examples/platform-refval-cfg.diag}
+~~~
+{: #ex-cca-platform-refval-cfg title="Example CCA Platform Configuration Reference Values" }
 
 ### Attestation Verification Claims
 {: #sec-keys}
