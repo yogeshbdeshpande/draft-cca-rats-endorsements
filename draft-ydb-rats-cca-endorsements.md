@@ -33,10 +33,24 @@ author:
   org: Linaro
   email: thomas.fossati@linaro.org
 
+contributor:
+ -  name: Simon Frost
+    organization: Arm Limited
+    email: Simon.Frost@arm.com
+ -  name: Sergei Trofimov
+    organization: Arm Limited
+    email: Sergei.Trofimov@arm.com
 
 normative:
 
   CoRIM: I-D.ietf-rats-corim
+
+  CCA-ARCH:
+    author:
+      org: Arm
+    title: Learn the architecture - Introducing Arm Confidential Compute Architecture
+    target: https://developer.arm.com/documentation/den0125/0300
+    date: 09. May. 2023
 
 informative:
   RATS-ARCH: RFC9334
@@ -48,7 +62,7 @@ informative:
 
 --- abstract
 
-Arm Confidential Computing Architecture (Arm CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to
+Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to
 appraise Attestation Evidence produced by Arm CCA system.
 
 --- middle
@@ -306,6 +320,5 @@ IANA is requested to register the following profile value in the
 
 # Acknowledgements
 
-The authors would like to thank Simon Frost (Simon.Frost@arm.com) & Sergei Trofimov (Sergei.Trofimov@arm.com) for their valuable contributions for review and feedback.
 
 <cref>TODO</cref>
