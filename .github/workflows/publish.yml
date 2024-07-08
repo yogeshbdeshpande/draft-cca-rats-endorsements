@@ -10,7 +10,10 @@ on:
         description: "Submitter email"
         default: ""
         type: string
-
+# Need to be able to write a commit to gh-pages branch
+permissions:
+      contents: write
+      
 jobs:
   build:
     name: "Publish New Draft Version"
