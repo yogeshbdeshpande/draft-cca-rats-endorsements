@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-11T00:34:58.344492+00:00",
+  "timestamp": "2024-08-13T00:32:22.551024+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -49,6 +49,23 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOMSEE_M6SsK3r",
+      "title": "Profile value update",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/1",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Note that as per DEN0137 1.0 Rel0 changes, the profile for CCA is modified to \"tag:arm.com,2023:cca_platform#1.0.0\" for the platform component. This release also introduced an (optional) profile for the realm component with value \"tag:arm.com,2023:realm#1.0.0\". ",
+      "createdAt": "2024-08-12T13:43:46Z",
+      "updatedAt": "2024-08-12T13:43:46Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
