@@ -1,6 +1,0 @@
-/ corim-map / {
-  / corim.profile / 3: [ 
-    32("http://arm.com/cca/ssd/1")
-  ]
-  / ... /
-}
