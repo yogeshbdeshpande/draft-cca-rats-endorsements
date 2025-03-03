@@ -10,10 +10,7 @@ on:
         description: "Submitter email"
         default: ""
         type: string
-# Need to be able to write a commit to gh-pages branch
-permissions:
-      contents: write
-      
+
 jobs:
   build:
     name: "Publish New Draft Version"
@@ -55,6 +52,6 @@ jobs:
         UPLOAD_EMAIL: ${{ inputs.email }}
 
     - name: "Archive Submitted Drafts"
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: "versioned/draft-*-[0-9][0-9].*"
