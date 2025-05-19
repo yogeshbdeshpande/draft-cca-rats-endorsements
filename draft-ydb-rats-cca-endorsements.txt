@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 4 September 2025                                         Linaro
-                                                            3 March 2025
+Expires: 20 November 2025                                         Linaro
+                                                             19 May 2025
 
 
 Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 20 November 2025.
 
 Copyright Notice
 
@@ -660,9 +660,9 @@ Table of Contents
 
    [CoRIM]    Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-corim-06>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-rats-corim-07>.
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
