@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:34:43.231095+00:00",
+  "timestamp": "2025-05-20T00:42:32.770861+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -78,7 +78,7 @@
       "labels": [],
       "body": "In the CCA Endorsement draft it is not clear whether the supply chain has to provide \r\nArm CCA Platform Configuration or one can omit if the Config Parameter is not used..?\r\n\r\nAs per RMM specification:\r\n`The CCA platform config claim is expected to contain the System Properties field which is present in the Root\r\nNon-volatile Storage (RNVS) public parameters.`\r\n\r\nThis issue tracks need for a clear documentation of this aspect in the next revision of the specification!\r\n",
       "createdAt": "2024-08-29T08:37:07Z",
-      "updatedAt": "2024-08-29T09:47:49Z",
+      "updatedAt": "2025-05-19T11:55:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -101,9 +101,133 @@
           "body": "> I am not convinced about item 3. The Platform Config, as received in Evidence should be an exact match of the Config as supplied in Reference Value, so 3. is not really something to tease about!\r\n\r\nIf the config ID is organised as a bitmap, with bit positions indicating specific platform features/settings, it makes sense for the verifier to check that only those of interest are enabled, and be neutral about others.",
           "createdAt": "2024-08-29T09:47:48Z",
           "updatedAt": "2024-08-29T09:47:48Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "NONE",
+          "body": "As per LIS conversation:\n\n1. To encode the expected Platform Config we will use a `raw-value` of type `tagged-mask-raw-value`.\n2. The associated `mkey` is `\"arm-platform-config\u201d`.",
+          "createdAt": "2025-05-19T11:55:08Z",
+          "updatedAt": "2025-05-19T11:55:08Z"
         }
       ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOMSEE_M63MQIW",
+      "title": "Remove Realm Class Variables",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/4",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The Realm Class Variables namely:\n1. Realm Class ID\n2. Realm Vendor ID \nneeds to be removed, as they do not appear in the CCA Realm Evidence Token.\n\nHence they are of no use in Evidence to Reference Value matching phase in CoRIM Verifier and as such cannot be part of the CCA Endorsement story!",
+      "createdAt": "2025-05-19T11:04:15Z",
+      "updatedAt": "2025-05-19T11:51:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "NONE",
+          "body": "> Hence they are of no use in Evidence to Reference Value matching phase in CoRIM Verifier and as such cannot be part of the CCA Endorsement story!\n\nVendor *can* be part of the CCA endorsement story, but as an explicit \"endorsed value\u201d rather than piggybacked on the `environment-map`.\n\nThis would require adding a new `vendor` attribute to CoRIM's `measurement-values-map`, which is not available in corim-07.\n\n",
+          "createdAt": "2025-05-19T11:50:17Z",
+          "updatedAt": "2025-05-19T11:51:27Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOMSEE_M63MUsD",
+      "title": "Redefine Realm Reference Values, using Mkey semantics",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/5",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Currently, Realm Reference Values (namely CCA RIM and CCA REM) are expressed using, Integrity Registers.\n\nWith the decision to remove Integrity Registers, need to re-model RIM and REM using `mkey` and `mval`, as the base semantics.\n\nThe new CoRIM draft allows expressing multiple Measurement Maps for an Environment so the expression of RIM and REM using the new semantics is the correct representation.",
+      "createdAt": "2025-05-19T11:11:09Z",
+      "updatedAt": "2025-05-19T11:43:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "NONE",
+          "body": "The mapping is as follows:\n\n| Realm claim name | `mkey` name | `mval` value |\n|---|---|---|\n| Realm Initial Measurement (RIM) | `rim` | `digests` |\n| Realm Extensible Measurements (REM) | `rem${i}` where `i` is the index 0..3 in the array | `digests` |\n| [Realm Personalisation Value (RPV) | `rpv` | `raw-value` of type `tagged-bytes` |\n\n",
+          "createdAt": "2025-05-19T11:43:45Z",
+          "updatedAt": "2025-05-19T11:43:45Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOMSEE_M63MZ61",
+      "title": "Align CCA Platform Measurements with CoRIM Draft 07",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/6",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The current CCA Endorsement Draft 01, uses `cca-platform-sw-component`, which is a profile specific representation.\n\nHowever  [CoRIM specification Draft 07 ](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/) has enough measurement map semantics to express the CCA Platform Software Components to be expressed using the base types.\n\nThis issue tracks the changes needed in the spec to represent `cca-platform-sw-component` using base CoRIM types!",
+      "createdAt": "2025-05-19T11:18:45Z",
+      "updatedAt": "2025-05-19T11:34:21Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "NONE",
+          "body": "The mapping is as follows:\n\n| [`arm-platform-sw-component`](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-01.html#section-4.6.1) field  | CoRIM's [`measurement-values-map`](https://www.ietf.org/archive/id/draft-ietf-rats-corim-07.html#section-5.1.4.1.4.2) field |\n|---|---|\n| component type | `name` |\n| version | `version` (without optional version scheme) |\n| signer id | `cryptokeys` of type `tagged-bytes` |\n| measurement value & hash algorithm identifier | `digests` |\n\nAlternatively, an `mkey` of type `tstr` could be used to encode the component name.",
+          "createdAt": "2025-05-19T11:34:20Z",
+          "updatedAt": "2025-05-19T11:34:20Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOMSEE_M63M382",
+      "title": "CBOR tags related actions",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/7",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "1. We need to decide which, among PSA and CCA, defines 600 (i.e., Implementation ID)\n2. We need to remove 601 as part of #6",
+      "createdAt": "2025-05-19T12:04:37Z",
+      "updatedAt": "2025-05-19T12:04:37Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 3,
+      "id": "PR_kwDOMSEE_M6NIT8k",
+      "title": "Corrected the Publish Files",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/3",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-03T10:30:54Z",
+      "updatedAt": "2025-03-03T10:31:02Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "6ff6a622c84a877cff6732c6a4e6fa8c1ad4b224",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "new-publish",
+      "headRefOid": "cf5d52fa0aee7eee74cf725e99a76dbb158f109d",
+      "closedAt": "2025-03-03T10:31:02Z",
+      "mergedAt": "2025-03-03T10:31:02Z",
+      "mergedBy": "yogeshbdeshpande",
+      "mergeCommit": {
+        "oid": "d1efb04db1d419e3d6b1dbd0494d4b0b5f342430"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
