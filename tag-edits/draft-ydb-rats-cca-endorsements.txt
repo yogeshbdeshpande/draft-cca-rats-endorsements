@@ -127,12 +127,12 @@ Table of Contents
    inside a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST have a
-   single entry set to the uri tag:arm.com,2025:cca_ssd#1.0.0 as shown
-   in Figure 1.
+   single entry set to the uri tag:arm.com,2025:cca_platform#1.0.0 as
+   shown in Figure 1.
 
    / corim-map / {
      / corim.profile / 3: [
-       32("tag:arm.com,2025:cca_ssd#1.0.0")
+       32("tag:arm.com,2025:cca_platform#1.0.0")
      ]
      / ... /
    }
