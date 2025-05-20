@@ -1,6 +1,6 @@
 / corim-map / {
   / corim.profile / 3: [ 
-    32("http://arm.com/cca/realm/1")
+    32("tag:arm.com,2025:cca_realm#1.0.0")
   ]
   / ... /
 }
