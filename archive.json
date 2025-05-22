@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T00:42:32.770861+00:00",
+  "timestamp": "2025-05-22T00:41:32.087029+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -227,6 +227,40 @@
         "oid": "d1efb04db1d419e3d6b1dbd0494d4b0b5f342430"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOMSEE_M6W7wf6",
+      "title": "Align Endorsement profile values",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/8",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #1",
+      "createdAt": "2025-05-20T17:54:20Z",
+      "updatedAt": "2025-05-20T18:00:15Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "79e6c891ea873a02c9d02f3539d714f220f37115",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "tag-edits",
+      "headRefOid": "fd6f426813f01bfefee99cc36b9fcda8d048adc3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "body": "@thomas-fossati please review!",
+          "createdAt": "2025-05-20T18:00:15Z",
+          "updatedAt": "2025-05-20T18:00:15Z"
+        }
+      ],
       "reviews": []
     }
   ]
