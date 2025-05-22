@@ -126,8 +126,8 @@ Table of Contents
    Arm CCA platform endorsements are carried in one or more CoMIDs
    inside a CoRIM.
 
-   The profile attribute in the CoRIM MUST be present and set to the URI
-   tag:arm.com,2025:cca_platform#1.0.0 as shown in Figure 1.
+   The profile attribute in the CoRIM MUST be present and MUST be the
+   URI tag:arm.com,2025:cca_platform#1.0.0 as shown in Figure 1.
 
    / corim-map / {
      / corim.profile / 3: [
@@ -493,8 +493,8 @@ Table of Contents
 
    Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.
 
-   The profile attribute in the CoRIM MUST be present and set to the URI
-   tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 10.
+   The profile attribute in the CoRIM MUST be present and MUST be the
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 10.
 
    / corim-map / {
      / corim.profile / 3: [
