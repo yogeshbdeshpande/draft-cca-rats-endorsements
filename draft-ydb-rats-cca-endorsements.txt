@@ -5,20 +5,22 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 20 November 2025                                         Linaro
-                                                             19 May 2025
+Expires: 23 November 2025                                         Linaro
+                                                             22 May 2025
 
 
-Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier
+  A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
                               Endorsements
                  draft-ydb-rats-cca-endorsements-latest
 
 Abstract
 
    Arm Confidential Computing Architecture (CCA) Endorsements comprise
-   of reference values and cryptographic key material that a Verifier
-   needs in order to appraise Attestation Evidence produced by an Arm
-   CCA system.
+   reference values and cryptographic key material that a Verifier needs
+   to appraise Attestation Evidence produced by an Arm CCA system.
+
+   This memo defines CCA Endorsements as a profile of the CoRIM data
+   model.
 
 Discussion Venues
 
@@ -42,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -84,11 +86,13 @@ Table of Contents
 
 1.  Introduction
 
-   Arm CCA Endorsements include reference values and cryptographic key
-   material information that a Verifier needs in order to appraise
-   attestation Evidence produced by a CCA System [CCA-TOKEN].  This memo
-   defines such CCA Endorsements as a profile of the CoRIM data model
-   [CoRIM].
+   Arm Confidential Computing Architecture (CCA) Endorsements comprise
+   reference values and cryptographic key material that a Verifier needs
+   to appraise Attestation Evidence produced by an Arm CCA system
+   [I-D.ffm-rats-cca-token].
+
+   This memo defines CCA Endorsements as a profile of the CoRIM data
+   model [I-D.ietf-rats-corim].
 
 2.  Conventions and Definitions
 
@@ -98,16 +102,16 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   The reader is assumed to be familiar with the terms defined in
-   Section A7.2.1 of [CCA-TOKEN] and in Section 4 of [RATS-ARCH].
+   The reader is assumed to be familiar with the terms and concepts
+   introduced in [I-D.ffm-rats-cca-token] and in Section 4 of [RFC9334].
 
 3.  Arm CCA Endorsements
 
    Arm CCA attestation scheme is a composite attestation scheme which
-   comprises a CCA Platform Attestation & a Realm Attestation[CCA-ARCH].
-   Hence appraisal of Arm CCA attestation needs endorsements for both
-   CCA Platform and CCA Realm.  This draft documents both the CCA
-   platform and realm endorsements.
+   comprises a CCA Platform Attestation & a Realm Attestation
+   [CCA-ARCH].  Hence appraisal of Arm CCA attestation needs
+   endorsements for both CCA Platform and CCA Realm.  This draft
+   documents both the CCA platform and realm endorsements.
 
 3.1.  Arm CCA Platform Endorsements
 
@@ -142,12 +146,12 @@ Table of Contents
 3.1.2.  Arm CCA Platform Endorsements linkage to CCA Platform
 
    Each CCA Platform Endorsement - be it a Reference Value or
-   Attestation Verification Claim is associated with a unique CCA
-   platform identifier.  A CCA platform identifier known as CCA Platform
-   Implementation ID (see Section A7.2.3.2.3 of [CCA-TOKEN]) uniquely
-   identifies a class of CCA platform to which the manufacturer/endorser
-   links the supplied Endorsements (Reference Values & Attestation
-   Verification Keys) for a CCA platform.
+   Attestation Verification Key is associated with a unique CCA platform
+   identifier.  A CCA platform identifier known as CCA Platform
+   Implementation ID (see Section 4.4.2 of [I-D.ffm-rats-cca-token])
+   uniquely identifies a class of CCA platform to which the
+   manufacturer/endorser links the supplied Endorsements (Reference
+   Values & Attestation Verification Keys) for a CCA platform.
 
    In order to support CCA Implementation IDs, the CoMID type $class-id-
    type-choice is extended as follows Figure 2:
@@ -164,7 +168,7 @@ Table of Contents
    of a certain CCA Platform implementation - as is the case of
    Attestation Verification Claims.  A CCA Attestation Verification
    Claims are associated with a CCA platform instance by means of the
-   Instance ID (see Section A7.2.3.2.4 of [CCA-TOKEN]) and its platform
+   Instance ID (see Section 4.4.1 of -cca-token}}) and its platform
    Implementation ID.
 
    These identifiers are typically found in the subject of a CoMID
@@ -212,10 +216,10 @@ Table of Contents
    against:
 
    *  The values found in the Software Components of the CCA platform
-      token (see Section A7.2.3.2.7 of [CCA-TOKEN]).
+      token (see Section 4.6 of [I-D.ffm-rats-cca-token]).
 
    *  The value set in the platform configuration of the CCA platform
-      token (see Section A7.2.3.2.5 of [CCA-TOKEN]).
+      token (see Section 4.5.3 of [I-D.ffm-rats-cca-token]).
 
    Each measurement is encoded in a measurement-map of a CoMID
    reference-triple-record.  Since a measurement-map can encode one or
@@ -247,9 +251,9 @@ Table of Contents
 
    The semantics of the codepoints in the arm-swcomp-id map are
    equivalent to those in the cca-platform-sw-component map defined in
-   Section A7.2.3.2.7 of [CCA-TOKEN].  The arm-swcomp-id MUST uniquely
-   identify a given software component within the CCA platform /
-   product.
+   Section 4.6.1 of [I-D.ffm-rats-cca-token].  The arm-swcomp-id MUST
+   uniquely identify a given software component within the CCA platform
+   / product.
 
    In order to support CCA Reference Value identifiers, the CoMID type
    $measured-element-type-choice is extended as followsFigure 5:
@@ -286,7 +290,7 @@ Table of Contents
 3.1.3.3.  Complete Representation
 
    The complete representation of CCA Platform Reference Values is given
-   in Figure 6 & Figure 7.
+   in Figure 6 and Figure 7.
 
  / concise-mid-tag / {
    / comid.tag-identity / 1 : {
@@ -525,7 +529,7 @@ Table of Contents
    measurement-values-map these measurements are carried as integrity-
    registers map.  Integrity Registers map is used to group together one
    or more measured objects pertaining to an environment.  Please refer
-   [CoRIM] for details about Integrity Register map.
+   to [I-D.ietf-rats-corim] for details about Integrity Register map.
 
    All the measured objects in an Integrity Registers map are explicitly
    named.  In the context of Realms, the measured objects are RIM and
@@ -637,10 +641,10 @@ Table of Contents
         | Tag | Data Item    | Semantics                         |
         +=====+==============+===================================+
         | 600 | tagged bytes | CCA Implementation ID             |
-        |     |              | (Section 3.1.2 of RFCTHIS)        |
+        |     |              | (Section 3.1.2 of RFCthis)        |
         +-----+--------------+-----------------------------------+
         | 601 | tagged map   | CCA Software Component Identifier |
-        |     |              | (Section 3.1.3 of RFCTHIS)        |
+        |     |              | (Section 3.1.3 of RFCthis)        |
         +-----+--------------+-----------------------------------+
 
                          Table 1: CoRIM CBOR Tags
@@ -654,11 +658,16 @@ Table of Contents
 
 7.1.  Normative References
 
-   [CCA-ARCH] Arm, "Learn the architecture - Introducing Arm
-              Confidential Compute Architecture", May 2023,
-              <https://developer.arm.com/documentation/den0125/0300>.
+   [I-D.ffm-rats-cca-token]
+              Frost, S., Fossati, T., and G. Mandyam, "Arm's
+              Confidential Compute Architecture Reference Attestation
+              Token", Work in Progress, Internet-Draft, draft-ffm-rats-
+              cca-token-01, 3 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-
+              token-01>.
 
-   [CoRIM]    Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
+   [I-D.ietf-rats-corim]
+              Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
               Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
               March 2025, <https://datatracker.ietf.org/doc/html/draft-
@@ -685,14 +694,11 @@ Table of Contents
 
 7.2.  Informative References
 
-   [CCA-TOKEN]
-              "Arm's Confidential Compute Architecture Reference
-              Attestation Token", 2022,
-              <https://datatracker.ietf.org/doc/draft-ffm-rats-cca-
-              token/>.
+   [CCA-ARCH] Arm, "Learn the architecture - Introducing Arm
+              Confidential Compute Architecture", March 2025,
+              <https://developer.arm.com/documentation/den0125/0400>.
 
-   [RATS-ARCH]
-              Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.

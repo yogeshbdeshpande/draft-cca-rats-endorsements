@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier Endorsements</title>
+<title>A CoRIM Profile for Arm's Confidential Computing Architecture (CCA) Endorsements</title>
 <meta content="Yogesh Deshpande" name="author">
 <meta content="Thomas Fossati" name="author">
 <meta content="
-       Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to appraise Attestation Evidence produced by an Arm CCA system. 
+       Arm Confidential Computing Architecture (CCA) Endorsements comprise reference values and cryptographic key material that a Verifier needs to appraise Attestation Evidence produced by an Arm CCA system. 
+       This memo defines CCA Endorsements as a profile of the CoRIM data model. 
     " name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="draft-ydb-rats-cca-endorsements-latest" name="ietf.draft">
@@ -1048,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Deshpande &amp; Fossati</td>
-<td class="center">Expires 20 November 2025</td>
+<td class="center">Expires 23 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ydb-rats-cca-endorsements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-19" class="published">19 May 2025</time>
+<time datetime="2025-05-22" class="published">22 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-20">20 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-23">23 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1080,10 +1081,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier Endorsements</h1>
+<h1 id="title">A CoRIM Profile for Arm's Confidential Computing Architecture (CCA) Endorsements</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to appraise Attestation Evidence produced by an Arm CCA system.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Arm Confidential Computing Architecture (CCA) Endorsements comprise reference values and cryptographic key material that a Verifier needs to appraise Attestation Evidence produced by an Arm CCA system.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This memo defines CCA Endorsements as a profile of the CoRIM data model.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1112,7 +1114,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1223,10 +1225,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Arm CCA Endorsements include reference values and cryptographic key material
-information that a Verifier needs in order to appraise
-attestation Evidence produced by a CCA System <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>.  This memo defines
-such CCA Endorsements as a profile of the CoRIM data model <span>[<a href="#CoRIM" class="cite xref">CoRIM</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Arm Confidential Computing Architecture (CCA) Endorsements comprise reference values and cryptographic key material that a Verifier needs to appraise Attestation Evidence produced by an Arm CCA system <span>[<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This memo defines CCA Endorsements as a profile of the CoRIM data model <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1239,8 +1239,7 @@ NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The reader is assumed to be familiar with the terms defined in Section A7.2.1 of
-<span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span> and in Section 4 of <span>[<a href="#RATS-ARCH" class="cite xref">RATS-ARCH</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The reader is assumed to be familiar with the terms and concepts introduced in <span>[<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span> and in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-4" class="relref">Section 4</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-cca-endorsements">
@@ -1248,7 +1247,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-arm-cca-endorsements">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-arm-cca-endorsements" class="section-name selfRef">Arm CCA Endorsements</a>
       </h2>
-<p id="section-3-1">Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation &amp; a Realm Attestation<span>[<a href="#CCA-ARCH" class="cite xref">CCA-ARCH</a>]</span>. Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation &amp; a Realm Attestation <span>[<a href="#CCA-ARCH" class="cite xref">CCA-ARCH</a>]</span>.
+Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="arm-cca-platform-endorsements">
 <section id="section-3.1">
         <h3 id="name-arm-cca-platform-endorsemen">
@@ -1294,9 +1294,9 @@ set to the uri <code>http://arm.com/cca/ssd/1</code> as shown in <a href="#ex-cc
           <h4 id="name-arm-cca-platform-endorsements">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-arm-cca-platform-endorsements" class="section-name selfRef">Arm CCA Platform Endorsements linkage to CCA Platform</a>
           </h4>
-<p id="section-3.1.2-1">Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Claim
+<p id="section-3.1.2-1">Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Key
 is associated with a unique CCA platform identifier. A CCA platform
-identifier known as CCA Platform Implementation ID (see Section A7.2.3.2.3 of <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>)
+identifier known as CCA Platform Implementation ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.2" class="relref">Section 4.4.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>)
 uniquely identifies a class of CCA platform to which the manufacturer/endorser links the supplied
 Endorsements (Reference Values &amp; Attestation Verification Keys) for a CCA platform.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-2">In order to support CCA Implementation IDs, the CoMID type
@@ -1319,7 +1319,7 @@ $class-id-type-choice /= tagged-implementation-id-type
 <p id="section-3.1.2-4">Besides, a CCA Endorsement can be associated with a specific instance of a
 certain CCA Platform implementation - as is the case of Attestation Verification Claims.  A CCA
 Attestation Verification Claims are associated with a CCA platform instance by means of the Instance ID
-(see Section A7.2.3.2.4 of <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>) and its platform Implementation ID.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
+(see Section 4.4.1 of -cca-token}}) and its platform Implementation ID.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-5">These identifiers are typically found in the subject of a CoMID triple, encoded in an <code>environment-map</code> as shown in <a href="#ex-cca-platform-id" class="auto internal xref">Figure 3</a>.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-cca-platform-identi"></span><div id="ex-cca-platform-id">
 <figure id="figure-3">
@@ -1373,10 +1373,10 @@ Consistently providing a product identifier is RECOMMENDED.<a href="#section-3.1
 <p id="section-3.1.3-3">When appraising Evidence, the Verifier compares Reference Values against:<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.3-4.1">
-              <p id="section-3.1.3-4.1.1">The values found in the Software Components of the CCA platform token (see Section A7.2.3.2.7 of <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>).<a href="#section-3.1.3-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.3-4.1.1">The values found in the Software Components of the CCA platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6" class="relref">Section 4.6</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.3-4.2">
-              <p id="section-3.1.3-4.2.1">The value set in the platform configuration of the CCA platform token (see Section A7.2.3.2.5 of <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>).<a href="#section-3.1.3-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.3-4.2.1">The value set in the platform configuration of the CCA platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.5.3" class="relref">Section 4.5.3</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.1.3-5">Each measurement is encoded in a <code>measurement-map</code> of a CoMID
@@ -1411,7 +1411,7 @@ arm.signer-id = 5
 <a href="#name-example-sw-component-id" class="selfRef">Example SW Component ID</a>
               </figcaption></figure>
 </div>
-<p id="section-3.1.3.1-3">The semantics of the codepoints in the <code>arm-swcomp-id</code> map are equivalent to those in the <code>cca-platform-sw-component</code> map defined in Section A7.2.3.2.7 of <span>[<a href="#CCA-TOKEN" class="cite xref">CCA-TOKEN</a>]</span>.  The <code>arm-swcomp-id</code> MUST uniquely identify a given software component within the CCA platform / product.<a href="#section-3.1.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.1-3">The semantics of the codepoints in the <code>arm-swcomp-id</code> map are equivalent to those in the <code>cca-platform-sw-component</code> map defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6.1" class="relref">Section 4.6.1</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>.  The <code>arm-swcomp-id</code> MUST uniquely identify a given software component within the CCA platform / product.<a href="#section-3.1.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.1-4">In order to support CCA Reference Value identifiers, the CoMID type
 <code>$measured-element-type-choice</code> is extended as follows<a href="#ex-swcomp-id-ext" class="auto internal xref">Figure 5</a>:<a href="#section-3.1.3.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-sw-component-id-ext"></span><div id="ex-swcomp-id-ext">
@@ -1447,7 +1447,7 @@ $measured-element-type-choice /= tagged-arm-swcomp-id
             <h5 id="name-complete-representation">
 <a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-complete-representation" class="section-name selfRef">Complete Representation</a>
             </h5>
-<p id="section-3.1.3.3-1">The complete representation of CCA Platform Reference Values is given in <a href="#ex-cca-platform-refval-meas" class="auto internal xref">Figure 6</a> &amp; <a href="#ex-cca-platform-refval-cfg" class="auto internal xref">Figure 7</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.3-1">The complete representation of CCA Platform Reference Values is given in <a href="#ex-cca-platform-refval-meas" class="auto internal xref">Figure 6</a> and <a href="#ex-cca-platform-refval-cfg" class="auto internal xref">Figure 7</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-cca-sw-component-re"></span><div id="ex-cca-platform-refval-meas">
 <figure id="figure-6">
               <div class="alignLeft art-text artwork" id="section-3.1.3.3-2.1">
@@ -1711,7 +1711,7 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
               <p id="section-3.2.3-3.3.1">Realm Personalization Value (RPV)<a href="#section-3.2.3-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-3.2.3-4">RIM and REMs are encoded in a <code>measurement-values-map</code> (in a <code>measurement-map</code>) of a CoMID <code>reference-triple-record</code>. Inside <code>measurement-values-map</code> these measurements are carried as <code>integrity-registers</code> map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer <span>[<a href="#CoRIM" class="cite xref">CoRIM</a>]</span> for details about Integrity Register map.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-4">RIM and REMs are encoded in a <code>measurement-values-map</code> (in a <code>measurement-map</code>) of a CoMID <code>reference-triple-record</code>. Inside <code>measurement-values-map</code> these measurements are carried as <code>integrity-registers</code> map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer to <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for details about Integrity Register map.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-5">All the measured objects in an Integrity Registers map are explicitly named. In the context of Realms, the measured objects are RIM and REMs. Inside Integrity Register map, RIM is uniquely identified by the name "rim", while REMs which is an array of measurements from 1..4 are uniquely identified by the coresponding name "rem0".."rem3".<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-6">Realm Personalization Value, (RPV) is an optional identity used by a Realm endorser to uniquely identify multiple Realms which all have the same RIM. RPV if provided is a fixed length 64 bytes identifier. In this profile, RPV is represented using Raw Value Measurements in a <code>measurement-values-map</code>, with raw value type choice set to <code>tagged-bytes</code>. See <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 11</a><a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-7">$raw-value-type-choice /= tagged-bytes<a href="#section-3.2.3-7" class="pilcrow">¶</a></p>
@@ -1843,12 +1843,12 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">600</td>
               <td class="text-left" rowspan="1" colspan="1">tagged bytes</td>
-              <td class="text-left" rowspan="1" colspan="1">CCA Implementation ID (<a href="#sec-cca-rot-id" class="auto internal xref">Section 3.1.2</a> of RFCTHIS)</td>
+              <td class="text-left" rowspan="1" colspan="1">CCA Implementation ID (<a href="#sec-cca-rot-id" class="auto internal xref">Section 3.1.2</a> of RFCthis)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">601</td>
               <td class="text-left" rowspan="1" colspan="1">tagged map</td>
-              <td class="text-left" rowspan="1" colspan="1">CCA Software Component Identifier (<a href="#sec-ref-values" class="auto internal xref">Section 3.1.3</a> of RFCTHIS)</td>
+              <td class="text-left" rowspan="1" colspan="1">CCA Software Component Identifier (<a href="#sec-ref-values" class="auto internal xref">Section 3.1.3</a> of RFCthis)</td>
             </tr>
           </tbody>
         </table>
@@ -1876,11 +1876,11 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="CCA-ARCH">[CCA-ARCH]</dt>
+<dt id="I-D.ffm-rats-cca-token">[I-D.ffm-rats-cca-token]</dt>
         <dd>
-<span class="refAuthor">Arm</span>, <span class="refTitle">"Learn the architecture - Introducing Arm Confidential Compute Architecture"</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://developer.arm.com/documentation/den0125/0300">https://developer.arm.com/documentation/den0125/0300</a>&gt;</span>. </dd>
+<span class="refAuthor">Frost, S.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">G. Mandyam</span>, <span class="refTitle">"Arm's Confidential Compute Architecture Reference Attestation Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ffm-rats-cca-token-01</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01">https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="CoRIM">[CoRIM]</dt>
+<dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-07</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
@@ -1909,11 +1909,11 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="CCA-TOKEN">[CCA-TOKEN]</dt>
+<dt id="CCA-ARCH">[CCA-ARCH]</dt>
         <dd>
-<span class="refTitle">"Arm's Confidential Compute Architecture Reference Attestation Token"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/">https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/</a>&gt;</span>. </dd>
+<span class="refAuthor">Arm</span>, <span class="refTitle">"Learn the architecture - Introducing Arm Confidential Compute Architecture"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://developer.arm.com/documentation/den0125/0400">https://developer.arm.com/documentation/den0125/0400</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RATS-ARCH">[RATS-ARCH]</dt>
+<dt id="RFC9334">[RFC9334]</dt>
       <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
 <dd class="break"></dd>
