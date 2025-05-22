@@ -10,6 +10,7 @@ Expires: 23 November 2025                                         Linaro
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
+                              Endorsements
                  draft-ydb-rats-cca-endorsements-latest
 
 Abstract
