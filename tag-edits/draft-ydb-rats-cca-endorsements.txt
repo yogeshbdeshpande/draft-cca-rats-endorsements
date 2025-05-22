@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 21 November 2025                                         Linaro
-                                                             20 May 2025
+Expires: 23 November 2025                                         Linaro
+                                                             22 May 2025
 
 
 Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -126,9 +126,8 @@ Table of Contents
    Arm CCA platform endorsements are carried in one or more CoMIDs
    inside a CoRIM.
 
-   The profile attribute in the CoRIM MUST be present and MUST have a
-   single entry set to the uri tag:arm.com,2025:cca_platform#1.0.0 as
-   shown in Figure 1.
+   The profile attribute in the CoRIM MUST be present and set to the URI
+   tag:arm.com,2025:cca_platform#1.0.0 as shown in Figure 1.
 
    / corim-map / {
      / corim.profile / 3: [
@@ -494,9 +493,8 @@ Table of Contents
 
    Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.
 
-   The profile attribute in the CoRIM MUST be present and MUST have a
-   single entry set to the uri tag:arm.com,2025:cca_realm#1.0.0 as shown
-   in Figure 10.
+   The profile attribute in the CoRIM MUST be present and set to the URI
+   tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 10.
 
    / corim-map / {
      / corim.profile / 3: [
