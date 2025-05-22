@@ -1,5 +1,5 @@
 ---
-title: Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier Endorsements
+title: A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
 abbrev: Arm CCA Endorsements
 docname: draft-ydb-rats-cca-endorsements-latest
 date: {DATE}
@@ -42,49 +42,47 @@ contributor:
     email: Sergei.Trofimov@arm.com
 
 normative:
+  I-D.ietf-rats-corim: rats-corim
+  I-D.ffm-rats-cca-token: cca-token
+  RFC5280: pkix-x509
 
-  CoRIM: I-D.ietf-rats-corim
-
+informative:
+  RFC9334: rats-arch
   CCA-ARCH:
     author:
       org: Arm
     title: Learn the architecture - Introducing Arm Confidential Compute Architecture
-    target: https://developer.arm.com/documentation/den0125/0300
-    date: 09. May. 2023
+    target: https://developer.arm.com/documentation/den0125/0400
+    date: 19 March 2025
 
-informative:
-  RATS-ARCH: RFC9334
-
-  CCA-TOKEN:
-   target: https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/
-   title: Arm's Confidential Compute Architecture Reference Attestation Token
-   date: 2022
+entity:
+  SELF: "RFCthis"
 
 --- abstract
 
-Arm Confidential Computing Architecture (CCA) Endorsements comprise of reference values and cryptographic key material that a Verifier needs in order to appraise Attestation Evidence produced by an Arm CCA system.
+Arm Confidential Computing Architecture (CCA) Endorsements comprise reference values and cryptographic key material that a Verifier needs to appraise Attestation Evidence produced by an Arm CCA system.
+
+This memo defines CCA Endorsements as a profile of the CoRIM data model.
 
 --- middle
 
 # Introduction
 
-Arm CCA Endorsements include reference values and cryptographic key material
-information that a Verifier needs in order to appraise
-attestation Evidence produced by a CCA System {{CCA-TOKEN}}.  This memo defines
-such CCA Endorsements as a profile of the CoRIM data model {{CoRIM}}.
+Arm Confidential Computing Architecture (CCA) Endorsements comprise reference values and cryptographic key material that a Verifier needs to appraise Attestation Evidence produced by an Arm CCA system {{-cca-token}}.
+
+This memo defines CCA Endorsements as a profile of the CoRIM data model {{-rats-corim}}.
 
 # Conventions and Definitions
 
 {::boilerplate bcp14}
 
-The reader is assumed to be familiar with the terms defined in Section A7.2.1 of
-{{CCA-TOKEN}} and in Section 4 of {{RATS-ARCH}}.
+The reader is assumed to be familiar with the terms and concepts introduced in {{-cca-token}} and in {{Section 4 of -rats-arch}}.
 
 # Arm CCA Endorsements
 {: #sec-cca-endorsements }
 
-Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation & a Realm Attestation{{CCA-ARCH}}. Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.
-
+Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation & a Realm Attestation {{CCA-ARCH}}.
+Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.
 
 ## Arm CCA Platform Endorsements
 
@@ -108,9 +106,9 @@ set to the uri `http://arm.com/cca/ssd/1` as shown in {{ex-cca-platform-profile}
 ### Arm CCA Platform Endorsements linkage to CCA Platform
 {: #sec-cca-rot-id}
 
-Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Claim
+Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Key
 is associated with a unique CCA platform identifier. A CCA platform
-identifier known as CCA Platform Implementation ID (see Section A7.2.3.2.3 of {{CCA-TOKEN}})
+identifier known as CCA Platform Implementation ID (see {{Section 4.4.2 of -cca-token}})
 uniquely identifies a class of CCA platform to which the manufacturer/endorser links the supplied
 Endorsements (Reference Values & Attestation Verification Keys) for a CCA platform.
 
@@ -125,7 +123,7 @@ In order to support CCA Implementation IDs, the CoMID type
 Besides, a CCA Endorsement can be associated with a specific instance of a
 certain CCA Platform implementation - as is the case of Attestation Verification Claims.  A CCA
 Attestation Verification Claims are associated with a CCA platform instance by means of the Instance ID
-(see Section A7.2.3.2.4 of {{CCA-TOKEN}}) and its platform Implementation ID.
+(see Section 4.4.1 of -cca-token}}) and its platform Implementation ID.
 
 These identifiers are typically found in the subject of a CoMID triple, encoded in an `environment-map` as shown in {{ex-cca-platform-id}}.
 
@@ -149,8 +147,8 @@ Reference Values carry measurements and other metadata associated with the updat
 
 When appraising Evidence, the Verifier compares Reference Values against:
 
-* The values found in the Software Components of the CCA platform token (see Section A7.2.3.2.7 of {{CCA-TOKEN}}).
-* The value set in the platform configuration of the CCA platform token (see Section A7.2.3.2.5 of {{CCA-TOKEN}}).
+* The values found in the Software Components of the CCA platform token (see {{Section 4.6 of -cca-token}}).
+* The value set in the platform configuration of the CCA platform token (see {{Section 4.5.3 of -cca-token}}).
 
 Each measurement is encoded in a `measurement-map` of a CoMID
 `reference-triple-record`.  Since a `measurement-map` can encode one or more
@@ -166,7 +164,7 @@ For the Reference Values of CCA platform software components the identifier of a
 ~~~
 {: #ex-swcomp-id title="Example SW Component ID" }
 
-The semantics of the codepoints in the `arm-swcomp-id` map are equivalent to those in the `cca-platform-sw-component` map defined in Section A7.2.3.2.7 of {{CCA-TOKEN}}.  The `arm-swcomp-id` MUST uniquely identify a given software component within the CCA platform / product.
+The semantics of the codepoints in the `arm-swcomp-id` map are equivalent to those in the `cca-platform-sw-component` map defined in {{Section 4.6.1 of -cca-token}}.  The `arm-swcomp-id` MUST uniquely identify a given software component within the CCA platform / product.
 
 In order to support CCA Reference Value identifiers, the CoMID type
 `$measured-element-type-choice` is extended as follows{{ex-swcomp-id-ext}}:
@@ -191,7 +189,7 @@ $raw-value-type-choice /= tagged-bytes
 
 #### Complete Representation
 
-The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval-meas}} & {{ex-cca-platform-refval-cfg}}.
+The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval-meas}} and {{ex-cca-platform-refval-cfg}}.
 
 ~~~
 {::include examples/platform-refval-meas.diag}
@@ -216,7 +214,7 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 `attest-key-triple-record`.  Specifically:
 
 * The Instance and Implementation IDs are encoded in the environment-map as shown in {{ex-cca-platform-id}}
-* The IAK public key is set using `$crypto-key-type-choice` set to tagged-pkix-base64-key-type. The IAK public key is a PEM-encoded SubjectPublicKeyInfo {{!RFC5280}}. There MUST be only one key in an `attest-key-triple-record`;
+* The IAK public key is set using `$crypto-key-type-choice` set to tagged-pkix-base64-key-type. The IAK public key is a PEM-encoded SubjectPublicKeyInfo {{-pkix-x509}}. There MUST be only one key in an `attest-key-triple-record`;
 
 The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public IAK associated with Instance ID `4ca3...d296`.
 
@@ -274,7 +272,7 @@ Realm reference values comprise of:
 2. Realm Extended Measurements (REMs)
 3. Realm Personalization Value (RPV)
 
-RIM and REMs are encoded in a `measurement-values-map` (in a `measurement-map`) of a CoMID `reference-triple-record`. Inside `measurement-values-map` these measurements are carried as `integrity-registers` map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer {{CoRIM}} for details about Integrity Register map.
+RIM and REMs are encoded in a `measurement-values-map` (in a `measurement-map`) of a CoMID `reference-triple-record`. Inside `measurement-values-map` these measurements are carried as `integrity-registers` map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer to {{-rats-corim}} for details about Integrity Register map.
 
 All the measured objects in an Integrity Registers map are explicitly named. In the context of Realms, the measured objects are RIM and REMs. Inside Integrity Register map, RIM is uniquely identified by the name "rim", while REMs which is an array of measurements from 1..4 are uniquely identified by the coresponding name "rem0".."rem3".
 
@@ -302,8 +300,8 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 
 | Tag | Data Item | Semantics |
 |---
-| 600 | tagged bytes | CCA Implementation ID ({{sec-cca-rot-id}} of RFCTHIS) |
-| 601 | tagged map | CCA Software Component Identifier ({{sec-ref-values}} of RFCTHIS) |
+| 600 | tagged bytes | CCA Implementation ID ({{sec-cca-rot-id}} of {{&SELF}}) |
+| 601 | tagged map | CCA Software Component Identifier ({{sec-ref-values}} of {{&SELF}}) |
 {: #tbl-psa-cbor-tag title="CoRIM CBOR Tags"}
 
 # Acknowledgements
