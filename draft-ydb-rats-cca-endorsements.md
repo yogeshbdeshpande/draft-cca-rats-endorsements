@@ -1,5 +1,5 @@
 ---
-title: A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
+title: A CoRIM Profile for Arm's Confidential Computing Architecture (CCA) Endorsements
 abbrev: Arm CCA Endorsements
 docname: draft-ydb-rats-cca-endorsements-latest
 date: {DATE}
