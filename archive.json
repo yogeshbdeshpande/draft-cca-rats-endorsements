@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T00:41:32.087029+00:00",
+  "timestamp": "2025-05-25T00:46:35.153631+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOMSEE_M6SsK3r",
       "title": "Profile value update",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Note that as per DEN0137 1.0 Rel0 changes, the profile for CCA is modified to \"tag:arm.com,2023:cca_platform#1.0.0\" for the platform component. This release also introduced an (optional) profile for the realm component with value \"tag:arm.com,2023:realm#1.0.0\". ",
       "createdAt": "2024-08-12T13:43:46Z",
-      "updatedAt": "2024-08-12T13:43:46Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-22T11:52:20Z",
+      "closedAt": "2025-05-22T11:52:20Z",
       "comments": []
     },
     {
@@ -234,24 +234,26 @@
       "id": "PR_kwDOMSEE_M6W7wf6",
       "title": "Align Endorsement profile values",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/8",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Fixes #1",
       "createdAt": "2025-05-20T17:54:20Z",
-      "updatedAt": "2025-05-20T18:00:15Z",
+      "updatedAt": "2025-05-22T11:52:22Z",
       "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "baseRefName": "main",
       "baseRefOid": "79e6c891ea873a02c9d02f3539d714f220f37115",
       "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "headRefName": "tag-edits",
-      "headRefOid": "fd6f426813f01bfefee99cc36b9fcda8d048adc3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0c366fb6e828467a039d5044c388ef82bbe5efdf",
+      "closedAt": "2025-05-22T11:52:19Z",
+      "mergedAt": "2025-05-22T11:52:19Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "eff1778a752d68f23dfa20335fa77ef3a6021da8"
+      },
       "comments": [
         {
           "author": "yogeshbdeshpande",
@@ -261,7 +263,383 @@
           "updatedAt": "2025-05-20T18:00:15Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMSEE_M6qcrFE",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T03:12:59Z",
+          "updatedAt": "2025-05-22T03:15:28Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "* s/uri/URI/\r\n* the profile attribute is not multi-valued anymore\r\n\r\nI suggest:\r\n\r\n> The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0` as shown in {{ex-cca-platform-profile}}.",
+              "createdAt": "2025-05-22T03:12:59Z",
+              "updatedAt": "2025-05-22T03:15:28Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "ditto\r\n\r\nPlus, it\u2019s `tag:arm.com,2023:realm#1.0.0` in CCA token, why diverge?",
+              "createdAt": "2025-05-22T03:13:20Z",
+              "updatedAt": "2025-05-22T03:15:28Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "ditto",
+              "createdAt": "2025-05-22T03:15:17Z",
+              "updatedAt": "2025-05-22T03:15:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qe0qM",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T08:03:26Z",
+          "updatedAt": "2025-05-22T08:03:27Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "No we have not introduced it in 2023, but now we are introducing it in 2025, so I think, it is more correct to state the year, we introduced this...",
+              "createdAt": "2025-05-22T08:03:26Z",
+              "updatedAt": "2025-05-22T08:03:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgWlT",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:03:11Z",
+          "updatedAt": "2025-05-22T10:03:12Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "What I am asking is: why do we need to define similar but different profiles than the ones defined in the CCA token I-D?\r\n\r\nIMO, if there are no compelling reasons, we should fully align.",
+              "createdAt": "2025-05-22T10:03:11Z",
+              "updatedAt": "2025-05-22T10:03:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgeql",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:12:35Z",
+          "updatedAt": "2025-05-22T10:12:35Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Remember the one in this draft are Endorsement profiles and not Evidence Profiles. They can be different in names, format and year of introduction. While if you see, semantically they are `aligned`, its just the year of introduction is different.",
+              "createdAt": "2025-05-22T10:12:35Z",
+              "updatedAt": "2025-05-22T10:12:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgoiJ",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:22:53Z",
+          "updatedAt": "2025-05-22T10:22:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I have made the valid suggestions, thanks for these!",
+              "createdAt": "2025-05-22T10:22:53Z",
+              "updatedAt": "2025-05-22T10:22:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgpj4",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:24:29Z",
+          "updatedAt": "2025-05-22T10:24:29Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "They are the same but for a single digit.  I bet this is going to become a neverending source of confusion.",
+              "createdAt": "2025-05-22T10:24:29Z",
+              "updatedAt": "2025-05-22T10:24:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgrHZ",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:26:53Z",
+          "updatedAt": "2025-05-22T10:26:53Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "If we really want to distinguish from the EAT profile URIs, they should be changed in more meaningful ways than just the date.  Remember that the EAT profiles could also change in the future.",
+              "createdAt": "2025-05-22T10:26:53Z",
+              "updatedAt": "2025-05-22T10:26:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgsIT",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:28:32Z",
+          "updatedAt": "2025-05-22T10:28:32Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "In fact, I would make them separate, to state that this is a profile for CCA Platform endorsement, while the one in the `CCA token draft` is a profile for platform evidence! Same for Realm!\r\n",
+              "createdAt": "2025-05-22T10:28:32Z",
+              "updatedAt": "2025-05-22T10:28:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgsyY",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:29:37Z",
+          "updatedAt": "2025-05-22T10:29:37Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "As the profile tag here (in this draft) and the profile tag in cca token draft has different interpretation/meaning!",
+              "createdAt": "2025-05-22T10:29:37Z",
+              "updatedAt": "2025-05-22T10:29:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qguIA",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T10:31:12Z",
+          "updatedAt": "2025-05-22T10:31:12Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "How about:\r\n`tag:arm.com,2025:cca_platform_endorsements#1.0.0`\r\n\r\n`tag:arm.com,2025:cca_realm_endorsements#1.0.0`",
+              "createdAt": "2025-05-22T10:31:12Z",
+              "updatedAt": "2025-05-22T10:31:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qhFYx",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T11:05:36Z",
+          "updatedAt": "2025-05-22T11:05:37Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "That\u2019s slightly better, but I still don\u2019t understand the need for duplication.  The evidence and endorsements profiles should go hand in hand, there is no reason for one to differ from the other.",
+              "createdAt": "2025-05-22T11:05:36Z",
+              "updatedAt": "2025-05-22T11:05:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qhIDv",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T11:09:58Z",
+          "updatedAt": "2025-05-22T11:09:58Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Here is my take: Each URI tag is Unique and it should have a precise meaning.\r\n\r\nSo if `tag:arm.com,2025:cca_platform_endorsements#1.0.0` is understood that should reflect precisely that it is conveying CoRIM CCA Endorsement Profile and nothing about CCA Evidence.\r\n\r\nIf we use clashing names, it creates confusion, to what the meaning of tag implies !",
+              "createdAt": "2025-05-22T11:09:58Z",
+              "updatedAt": "2025-05-22T11:09:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qhkb2",
+          "commit": {
+            "abbreviatedOid": "fd6f426"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T11:51:25Z",
+          "updatedAt": "2025-05-22T11:51:26Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "OK, we agree to disagree.\r\n\r\nI\u2019ll drop my point.  Let\u2019s move on.",
+              "createdAt": "2025-05-22T11:51:25Z",
+              "updatedAt": "2025-05-22T11:51:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qhk9Z",
+          "commit": {
+            "abbreviatedOid": "0c366fb"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-22T11:52:13Z",
+          "updatedAt": "2025-05-22T11:52:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOMSEE_M6XLrxx",
+      "title": "cleanup",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/9",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* align title with PSA\r\n* minor grammar fixes\r\n* clean up references\r\n\r\n(not exhaustive, just a start)",
+      "createdAt": "2025-05-22T08:25:16Z",
+      "updatedAt": "2025-05-22T10:00:15Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "79e6c891ea873a02c9d02f3539d714f220f37115",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "title-abstract-intro",
+      "headRefOid": "615adc7c6ecf1d216647f3839e702c36df0207f7",
+      "closedAt": "2025-05-22T09:49:31Z",
+      "mergedAt": "2025-05-22T09:49:31Z",
+      "mergedBy": "yogeshbdeshpande",
+      "mergeCommit": {
+        "oid": "a16e2220c086a507070417ffa521b5ab32ba9eef"
+      },
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "body": "@thomas-fossati Thanks for the changes: Most of them I agree and so would Approve the PR!",
+          "createdAt": "2025-05-22T09:39:29Z",
+          "updatedAt": "2025-05-22T09:39:29Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMSEE_M6qgBQQ",
+          "commit": {
+            "abbreviatedOid": "60399e9"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T09:37:49Z",
+          "updatedAt": "2025-05-22T09:37:49Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "```suggestion\r\ntitle: A CoRIM Profile for Arm's Confidential Computing Architecture (CCA) Endorsements\r\n```",
+              "createdAt": "2025-05-22T09:37:49Z",
+              "updatedAt": "2025-05-22T09:37:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgB9K",
+          "commit": {
+            "abbreviatedOid": "60399e9"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T09:38:43Z",
+          "updatedAt": "2025-05-22T09:38:43Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "@thomas-fossati Now that CoRIM is widely used for many purposes, Concise Evidence and others it is very important to use the word Endorsements to highlight it is a CoRIM profile for Endorsements",
+              "createdAt": "2025-05-22T09:38:43Z",
+              "updatedAt": "2025-05-22T09:38:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6qgKkO",
+          "commit": {
+            "abbreviatedOid": "615adc7"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2025-05-22T09:49:23Z",
+          "updatedAt": "2025-05-22T09:49:23Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
