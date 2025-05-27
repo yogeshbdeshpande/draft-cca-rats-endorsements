@@ -81,64 +81,79 @@ The reader is assumed to be familiar with the terms and concepts introduced in {
 # Arm CCA Endorsements
 {: #sec-cca-endorsements }
 
-Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation & a Realm Attestation {{CCA-ARCH}}.
-Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.
+The Arm CCA Attester is a layered Attester comprising separate yet linked Platform and Realm Attesters.
+For the details, see {{Section 3 of -cca-token}}.
+Appraising Arm CCA Evidence requires endorsements for both the Platform and Realm.
+This document outlines the Platform and Realm endorsements in {{sec-platform-endorsements}} and {{realm-endorsements}}, respectively.
 
-## Arm CCA Platform Endorsements
+## Arm CCA Platform Endorsements {#sec-platform-endorsements}
 
 There are two types of CCA Platform Endorsements:
 
 * Reference Values ({{sec-ref-values}}), i.e., measurements of the CCA Platform firmware.
-* Attestation Verification Claims ({{sec-keys}}), i.e., cryptographic keys that can be used to verify signed attestation token produced by the CCA platform, along with the identifiers that bind the keys to their platform instances.
+* Attestation Verification Keys ({{sec-keys}}), i.e., cryptographic keys that can be used to verify Evidence produced by the CCA Platform, along with the identifiers that link the keys to their platform instances.
 
 ### Arm CCA Platform Endorsement Profile
 
-Arm CCA platform endorsements are carried in one or more CoMIDs inside a CoRIM.
-
-The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0` as shown in {{ex-cca-platform-profile}}.
+Arm CCA Platform endorsements are carried in one or more CoMIDs inside a CoRIM.
+The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0`, as shown in {{ex-cca-platform-profile}}.
 
 ~~~
 {::include examples/platform-profile.diag}
 ~~~
-{: #ex-cca-platform-profile title="CCA platform profile version 1, CoRIM profile" }
+{: #ex-cca-platform-profile title="CCA Platform profile version 1, CoRIM profile" }
 
-### Arm CCA Platform Endorsements linkage to CCA Platform
-{: #sec-cca-rot-id}
+### Arm CCA Platform Endorsements linkage to CCA Platform {#sec-cca-rot-id}
 
-Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Key
-is associated with a unique CCA platform identifier. A CCA platform
-identifier known as CCA Platform Implementation ID (see {{Section 4.4.2 of -cca-token}})
-uniquely identifies a class of CCA platform to which the manufacturer/endorser links the supplied
-Endorsements (Reference Values & Attestation Verification Keys) for a CCA platform.
+Each CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique CCA Platform identifier known as Implementation ID (see {{Section 4.4.2 of -cca-token}}).
+The Implementation ID uniquely identifies a given implementation of a CCA Platform and it used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.
 
-In order to support CCA Implementation IDs, the CoMID type
-`$class-id-type-choice` is extended as follows {{ex-cca-platform-impl-id}}:
+To encode an Implementation ID, the `tagged-bytes` variant of the `$class-id-type-choice` is used, as described in {{cddl-impl-id}}.
+The length of the byte string MUST be exactly 32.
 
+~~~ cddl
+impl-id-tagged-bytes = #6.560(arm-platform-implementation-id-type)
+
+arm-platform-implementation-id-type = bytes .size 32
 ~~~
-{::include cca-ext/tagged-cca-impl-id.cddl}
+{: #cddl-impl-id title="CCA Platform Implementation ID encoding"}
+
+Besides, a CCA Endorsement can be associated with a specific *instance* of a certain CCA Platform implementation - as is the case of Attestation Verification Keys.
+The Instance ID (see {{Section 4.4.1 of -cca-token}}) provides a unique identifier for a given CCA Platform instance.
+
+To encode an Instance ID, the `tagged-ueid-type` variant of the `$instance-id-type-choice` is used, as described in {{cddl-inst-id}}.
+The first byte MUST be 0x01 (RAND) followed by the 32-byte unique instance identifier.
+
+~~~ cddl
+inst-id-tagged-ueid = #6.550(eat-ueid-rand-type)
+
+eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+
+eat-ueid-rand-fmt = [
+  ; the type byte is 0x01
+  ueid-rand-typ
+  bytes .size 32
+]
+
+ueid-rand-typ = h'01'
 ~~~
-{: #ex-cca-platform-impl-id title="Example CCA Platform Implementation ID" }
+{: #cddl-inst-id title="CCA Platform Instance ID encoding"}
 
-Besides, a CCA Endorsement can be associated with a specific instance of a
-certain CCA Platform implementation - as is the case of Attestation Verification Claims.  A CCA
-Attestation Verification Claims are associated with a CCA platform instance by means of the Instance ID
-(see Section 4.4.1 of -cca-token}}) and its platform Implementation ID.
-
+CCA Attestation Verification Keys are associated with a CCA Platform instance by means of the Instance ID and the corresponding Implementation ID.
 These identifiers are typically found in the subject of a CoMID triple, encoded in an `environment-map` as shown in {{ex-cca-platform-id}}.
 
-~~~
+~~~ cbor-diag
 {::include examples/platform-identification.diag}
 ~~~
 {: #ex-cca-platform-id title="Example CCA Platform Identification" }
 
-Optional `vendor` and `model` can be specified as well. Together, they are
-interpreted as a unique identifier of the CCA platform.
-Consistently providing a product identifier is RECOMMENDED.
+Together, they are interpreted as a unique identifier of the CCA Platform.
 
-### Reference Values
-{: #sec-ref-values}
+### Reference Values {#sec-ref-values}
 
-Reference Values carry measurements and other metadata associated with the updatable firmware of CCA platform. The CCA platform is a collective term used to identify all the hardware and firmware components that comprise a CCA system. Specifically these include the following:
+Reference Values carry measurements and other metadata associated with the updatable firmware of the CCA Platform.
+CCA Platform is a collective term used to identify all the hardware and firmware components that comprise a CCA system.
+Specifically these include the following:
 
 - CCA system security domain
 - Monitor security domain
@@ -146,83 +161,143 @@ Reference Values carry measurements and other metadata associated with the updat
 
 When appraising Evidence, the Verifier compares Reference Values against:
 
-* The values found in the Software Components of the CCA platform token (see {{Section 4.6 of -cca-token}}).
-* The value set in the platform configuration of the CCA platform token (see {{Section 4.5.3 of -cca-token}}).
+* The values found in the Software Components of the CCA Platform token (see {{Section 4.6 of -cca-token}}).
+* The value set in the platform configuration of the CCA Platform token (see {{Section 4.5.3 of -cca-token}}).
 
-Each measurement is encoded in a `measurement-map` of a CoMID
-`reference-triple-record`.  Since a `measurement-map` can encode one or more
-measurements, a single `reference-triple-record` can carry as many measurements as needed, provided they belong to the same CCA platform identified in the subject of
-the "reference value" triple.  A single `reference-triple-record` SHALL
-completely describe the CCA platform measurements.
+Each measurement is encoded in a `measurement-map` of a CoMID `reference-triple-record`.
+Since a `measurement-map` can encode one or more measurements, a single `reference-triple-record` can carry as many measurements as needed, provided they belong to the same CCA Platform identified in the subject of the triple.
+A single `reference-triple-record` MUST completely describe the CCA Platform measurements.
 
 #### CCA Platform Software Components
-For the Reference Values of CCA platform software components the identifier of a measured software component is encoded in a `arm-swcomp-id` object as follows {{ex-swcomp-id}}:
 
+Each CCA Platform software component is encoded in a `measurement-values-map` as defined in {{cddl-swcomp-mvm}}.
+
+~~~ cddl
+cca-swcomp-measurement-values-map = {
+  ? &(version: 0) => cca-swcomp-version-map
+  &(digests: 2) => cca-swcomp-digests-type
+  ? &(name: 11) => cca-swcomp-name
+  &(cryptokeys: 13) => [ cca-swcomp-signer-id ]
+}
+
+cca-swcomp-version-map = {
+  &(version: 0) => text
+}
+
+cca-swcomp-signer-id = #6.560(cca-hash-type)
+
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+
+cca-digest = [
+  alg: text
+  val: cca-hash-type
+]
+
+cca-swcomp-digests-type = [ + cca-digest ]
+
+cca-swcomp-name = text
 ~~~
-{::include cca-ext/swcomp-id.cddl}
+{: #cddl-swcomp-mvm title="CCA Platform Software Component encoding"}
+
+version (key 0):
+: A `version-map` with its `version` field containing the version (key 4) of the `arm-platform-sw-component`.
+The `version-scheme` field of the `version-map` MUST NOT be present.
+This field is optional.
+
+digests (key 2):
+: Each array element encodes the "measurement value" (key 2) and "hash algorithm identifier" (key 6) of the `arm-platform-sw-component` in the `val` and `alg` entries, respectively.
+The `alg` entry MUST use the text encoding.
+The digests array MUST contain at least one entry and MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist.
+If multiple entries exist, they MUST have different `alg` values.
+This field is mandatory.
+
+name (key 11):
+: A text value containing the "component type" (key 1) of the `arm-platform-sw-component`.
+This field is optional.
+
+cryptokeys (key 13):
+: An array with only one entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
+The entry contains the "signer id" (key 5) of the `arm-platform-sw-component`.
+This field is mandatory.
+
+Each `measurement-values-map` for a CCA Platform software component is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
+The value of the `mkey` MUST be "cca.software-component".
+The `authorized-by` field of the `measurement-map` MUST NOT be present.
+Find the related CDDL definitions in {{cddl-swcomp-mm}}.
+
+~~~ cddl
+cca-swcomp-measurement-map = {
+  &(mkey: 0) => "cca.software-component"
+  &(mval: 1) => cca-swcomp-measurement-values-map
+}
 ~~~
-{: #ex-swcomp-id title="Example SW Component ID" }
-
-The semantics of the codepoints in the `arm-swcomp-id` map are equivalent to those in the `cca-platform-sw-component` map defined in {{Section 4.6.1 of -cca-token}}.  The `arm-swcomp-id` MUST uniquely identify a given software component within the CCA platform / product.
-
-In order to support CCA Reference Value identifiers, the CoMID type
-`$measured-element-type-choice` is extended as follows{{ex-swcomp-id-ext}}:
-
-~~~
-{::include cca-ext/swcomp-id-ext.cddl}
-~~~
-{: #ex-swcomp-id-ext title="Example SW Component ID Extension" }
-
-and automatically bound to the `comid.mkey` in the `measurement-map`.
-
-The raw measurement is encoded in a `digests-type` object in the
-`measurement-values-map`.  The `digests-type` array MUST contain at least one entry. The `digests-type` array MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist. Refer below {{ex-cca-platform-refval-meas}}.
+{: #cddl-swcomp-mm title="CCA Platform Software Component measurement-map"}
 
 #### CCA Platform Configuration
 
-A Reference value for CCA platform configuration describes the set of chosen implementation options of the CCA platform. As an example, these may include a description of the level of physical memory protection which is provided.
+The CCA Platform configuration describes the set of chosen implementation options of the CCA Platform.
+For example, this may include a description of the level of physical memory protection provided.
 
-CCA platform configuration reference value represent vendor specific variable length data. As a result, in the CCA platform CoRIM profile, it is represented in a `measurement-values-map` using `raw-values` set to `tagged-bytes` to express a variable length byte string, representing platform configuration data.
+CCA Platform configuration is vendor-specific variable-length data.
+Only some of the data may be security-relevant.
+For these reasons, it is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
 
-$raw-value-type-choice /= tagged-bytes
+~~~ cddl
+cca-config-measurement-values-map = {
+  &(raw-value: 4) => cca-tagged-masked-raw-value
+}
 
-#### Complete Representation
-
-The complete representation of CCA Platform Reference Values is given in {{ex-cca-platform-refval-meas}} and {{ex-cca-platform-refval-cfg}}.
-
+cca-config-tagged-masked-raw-value = #6.563([
+  value: bytes
+  mask: bytes
+])
 ~~~
+{: #cddl-config-mvm title="CCA Platform Configuration measurement-map"}
+
+The `measurement-values-map` for a CCA Platform configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
+The value of the `mkey` MUST be "cca.platform-config".
+The `authorized-by` field of the `measurement-map` MUST NOT be present.
+Find the related CDDL definitions in {{cddl-config-mm}}.
+
+~~~ cddl
+cca-config-measurement-map = {
+  &(mkey: 0) => "cca.platform-config"
+  &(mval: 1) => cca-config-measurement-values-map
+}
+~~~
+{: #cddl-config-mm title="CCA Platform Software Component measurement-map"}
+
+#### CoMID Example
+
+An example CoMID containing one Reference Values triple containing expected values for both software components and platform configuration is given in {{ex-cca-platform-refval}}.
+
+~~~ cbor-diag
 {::include examples/platform-refval-meas.diag}
 ~~~
-{: #ex-cca-platform-refval-meas title="Example CCA SW Component Reference Value" }
+{: #ex-cca-platform-refval title="Example CCA Platform Reference Values" }
 
-~~~
-{::include examples/platform-refval-cfg.diag}
-~~~
-{: #ex-cca-platform-refval-cfg title="Example CCA Platform Configuration Reference Values" }
+### Attestation Verification Keys {#sec-keys}
 
-### Attestation Verification Claims
-{: #sec-keys}
+An Attestation Verification Key contains the public key associated with the CCA Platform Attestation Key (CPAK).
+When appraising Platform Evidence, the Verifier uses the Implementation ID and Instance ID claims found in the Platform Token to identify the key that it shall use to verify the signature on the CCA Platform token.
+This allows the Verifier to prove (or disprove) the Attester's claimed identity.
 
-Attestation Verification Claim carries the verification key associated with
-the Initial Attestation Key (IAK) of a CCA platform. When appraising Evidence,
-the Verifier uses the Implementation ID and Instance ID claims (see
-{{sec-cca-rot-id}}) to retrieve the verification key that it SHALL use to check the signature on the CCA platform token.  This allows the Verifier to prove (or disprove) the Attester's claimed identity.
+Each verification key is provided with the corresponding CCA Platform Instance and Implementation IDs in an `attest-key-triple-record`.
+Specifically:
 
-Each verification key is provided alongside the corresponding CCA platform Instance
-and Implementation IDs (and, possibly, a CCA platform product identifier) in an
-`attest-key-triple-record`.  Specifically:
+* The Instance and Implementation IDs are encoded in the `environment-map` as described in {{sec-cca-rot-id}};
+* The CPAK public key uses the `tagged-pkix-base64-key-type` variant of the `$crypto-key-type-choice`.
+The CPAK public key is a PEM-encoded SubjectPublicKeyInfo {{-pkix-x509}}.
+There MUST be only one key in an `attest-key-triple-record`.
 
-* The Instance and Implementation IDs are encoded in the environment-map as shown in {{ex-cca-platform-id}}
-* The IAK public key is set using `$crypto-key-type-choice` set to tagged-pkix-base64-key-type. The IAK public key is a PEM-encoded SubjectPublicKeyInfo {{-pkix-x509}}. There MUST be only one key in an `attest-key-triple-record`;
-
-The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public IAK associated with Instance ID `4ca3...d296`.
+The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public CPAK associated with Instance ID `4ca3...d296`.
 
 ~~~
 {::include examples/platform-iak.diag}
 ~~~
 {: #ex-cca-platform-iak title="Example CCA Platform Attestation Verification Key" }
 
-## Arm CCA Realm Endorsements
+## Arm CCA Realm Endorsements {#realm-endorsements}
 
 Arm CCA Realm provides a protected execution environment for applications executing within a Realm. A Realm Endorsements comprise of:
 
