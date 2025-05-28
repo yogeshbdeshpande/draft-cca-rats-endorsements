@@ -11,9 +11,7 @@
               / tagged-impl-id-type / 600(
                 h'61636d652d696d706c656d656e746174
                   696f6e2d69642d303030303030303031'
-              ),
-              / comid.vendor / 1 : "ACME Ltd.",
-              / comid.model /  2 : "Roadrunner 1.0"
+              )
           }
         },
         [

@@ -6,68 +6,78 @@
     / comid.reference-triples / 0 : [
       [
         / environment-map / {
-            / comid.class / 0 : {
-                / comid.class-id / 0 :
-                    / tagged-uuid-type / 37(
-                        h'67b28b6c34cc40a19117ab5b05911e37'
-                        ),
-                / comid.vendor / 1 : "Workload Client Ltd"
-              },
-            / comid.instance / 1 :
-                / tagged-bytes / 560(
-                    h'67b28b6c39cc40a19117ab5b05911e37'
-                    )
-           },
+          / comid.class / 0 : {
+            / comid.class-id / 0 :
+              / RIM as tagged-bytes / 560(
+                h'311314ab73620350cf758834ae5c65d9
+                  e8c2dc7febe6e7d9654bbe864e300d49'
+              )
+          }
+        },
+        / Realm measurements /
         [
-        / measurement-map / {
+          / measurement-map (RIM) / {
+            / comid.mkey / 0 : "cca.rim",
             / comid.mval / 1 : {
-              / comid.raw-value / 4 : {
-                / tagged-bytes / 560(
-                    h'ABABABABABABABABABABABABABABABABABABABABABABABABA
-                      BABABABABABABABABABABABABABABABABABABABABABABABAB
-                      ABABABABABABABABABABABABABABAB',
-                  ) 
-              },
-              / comid.integrity-registers / 14 : {
-                "rim": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'44aa336af4cb14a879432e53dd6571c7
-                                   fa9bccafb75f488259262d6ea3a4d91b'
-                ]
-              ],
-                "rem0": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e58dd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem1": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e59dd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem2": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e5add6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem3": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e5bdd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
+              / comid.digests / 2 : [
+                "sha-256",
+                h'311314ab73620350cf758834ae5c65d9
+                  e8c2dc7febe6e7d9654bbe864e300d49'
               ]
             }
+          },
+          / measurement-map (REM[0]) / {
+            / comid.mkey / 0 : "cca.rem0",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'24d5b0a296cc05cbd8068c5067c5bd47
+                  3b770dda6ae082fe3ba30abe3f9a6ab1'
+              ]
+            }
+          },
+          / measurement-map (REM[1]) / {
+            / comid.mkey / 0 : "cca.rem1",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'788fc090bfc6b8ed903152ba8414e73d
+                  af5b8c7bb1e79ad502ab0699b659ed16'
+              ]
+            }
+          },
+          / measurement-map (REM[2]) / {
+            / comid.mkey / 0 : "cca.rem2",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'dac46a58415dc3a00d7a741852008e9c
+                  ae64f52d03b9f76d76f4b3644fefc416'
+              ]
+            }
+          },
+          / measurement-map (REM[3]) / {
+            / comid.mkey / 0 : "cca.rem3",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'32c6afc627e55585c03155359f331a0e
+                  225f6840db947dd96efab81be2671939'
+              ]
+            }
+          },
+          / measurement-map (RPV) / {
+            / comid.mkey / 0 : "cca.rpv",
+            / comid.mval / 1 : {
+              / comid.raw-value / 4 : 560(
+                h'54686520717569636b2062726f776e20
+                  666f78206a756d7073206f7665722031
+                  33206c617a7920646f67732e54686520
+                  717569636b2062726f776e20666f7820'
+              )
+            }
           }
-        }
-       ]
+        ]
       ]
     ]
   }
