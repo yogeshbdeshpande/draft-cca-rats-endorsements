@@ -544,8 +544,9 @@ Table of Contents
    3.  Realm Personalization Value (RPV)
 
    All Realm Reference Values are carried in a reference-triple-record
-   whose environment-map is as described in Section 3.2.1 and as many
-   measurement-maps as needed to fully describe the Realm.
+   whose environment-map is as described in Section 3.2.1 The triple
+   includes as many measurement-maps as needed to fully describe the
+   Realm.
 
    The measurement-map contents depend on the type of Reference Value.
    For all, the mkey uses the text variant of the $measured-element-
