@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-25T00:46:35.153631+00:00",
+  "timestamp": "2025-05-29T00:42:04.371934+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -119,16 +119,18 @@
       "state": "OPEN",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "The Realm Class Variables namely:\n1. Realm Class ID\n2. Realm Vendor ID \nneeds to be removed, as they do not appear in the CCA Realm Evidence Token.\n\nHence they are of no use in Evidence to Reference Value matching phase in CoRIM Verifier and as such cannot be part of the CCA Endorsement story!",
       "createdAt": "2025-05-19T11:04:15Z",
-      "updatedAt": "2025-05-19T11:51:27Z",
+      "updatedAt": "2025-05-28T07:55:39Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "> Hence they are of no use in Evidence to Reference Value matching phase in CoRIM Verifier and as such cannot be part of the CCA Endorsement story!\n\nVendor *can* be part of the CCA endorsement story, but as an explicit \"endorsed value\u201d rather than piggybacked on the `environment-map`.\n\nThis would require adding a new `vendor` attribute to CoRIM's `measurement-values-map`, which is not available in corim-07.\n\n",
           "createdAt": "2025-05-19T11:50:17Z",
           "updatedAt": "2025-05-19T11:51:27Z"
@@ -167,16 +169,18 @@
       "state": "OPEN",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "The current CCA Endorsement Draft 01, uses `cca-platform-sw-component`, which is a profile specific representation.\n\nHowever  [CoRIM specification Draft 07 ](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/) has enough measurement map semantics to express the CCA Platform Software Components to be expressed using the base types.\n\nThis issue tracks the changes needed in the spec to represent `cca-platform-sw-component` using base CoRIM types!",
       "createdAt": "2025-05-19T11:18:45Z",
-      "updatedAt": "2025-05-19T11:34:21Z",
+      "updatedAt": "2025-05-27T13:03:33Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "The mapping is as follows:\n\n| [`arm-platform-sw-component`](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-01.html#section-4.6.1) field  | CoRIM's [`measurement-values-map`](https://www.ietf.org/archive/id/draft-ietf-rats-corim-07.html#section-5.1.4.1.4.2) field |\n|---|---|\n| component type | `name` |\n| version | `version` (without optional version scheme) |\n| signer id | `cryptokeys` of type `tagged-bytes` |\n| measurement value & hash algorithm identifier | `digests` |\n\nAlternatively, an `mkey` of type `tstr` could be used to encode the component name.",
           "createdAt": "2025-05-19T11:34:20Z",
           "updatedAt": "2025-05-19T11:34:20Z"
@@ -196,6 +200,22 @@
       "body": "1. We need to decide which, among PSA and CCA, defines 600 (i.e., Implementation ID)\n2. We need to remove 601 as part of #6",
       "createdAt": "2025-05-19T12:04:37Z",
       "updatedAt": "2025-05-19T12:04:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOMSEE_M64lvOj",
+      "title": "Describe CCA evidence transformation",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/12",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a section that describes how evidence in CCA token format is transformed into CoRIM internal representation.",
+      "createdAt": "2025-05-28T10:43:11Z",
+      "updatedAt": "2025-05-28T10:43:11Z",
       "closedAt": null,
       "comments": []
     }
@@ -640,6 +660,66 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOMSEE_M6Xy4cu",
+      "title": "Platform endorsements revamp",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/10",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per face-to-face discussion in Lisbon.\r\n\r\nFix #2\r\nFix #6",
+      "createdAt": "2025-05-27T14:31:52Z",
+      "updatedAt": "2025-05-27T14:31:52Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "eff1778a752d68f23dfa20335fa77ef3a6021da8",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "lis-platform",
+      "headRefOid": "f733e734ebe72546887cf2814980b7f728ea7aed",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOMSEE_M6X7-Fs",
+      "title": "Realm endorsements revamp",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/11",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per face-to-face discussion in Lisbon.\r\n\r\nFix #4\r\nFix #5\r\nFix #7\r\n\r\nNOTE: this PR is on top of #10\r\n\r\nRendered [here](https://yogeshbdeshpande.github.io/draft-cca-rats-endorsements/lis-realm/draft-ydb-rats-cca-endorsements.html).\r\n",
+      "createdAt": "2025-05-28T10:22:43Z",
+      "updatedAt": "2025-05-28T12:26:41Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "eff1778a752d68f23dfa20335fa77ef3a6021da8",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "lis-realm",
+      "headRefOid": "09b183d33bcad93d8be1357cfd5600ed3a2bbe94",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @setrofim",
+          "createdAt": "2025-05-28T10:22:53Z",
+          "updatedAt": "2025-05-28T10:22:53Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
