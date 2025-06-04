@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 28 November 2025                                         Linaro
-                                                             27 May 2025
+Expires: 6 December 2025                                          Linaro
+                                                             4 June 2025
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2025.
+   This Internet-Draft will expire on 6 December 2025.
 
 Copyright Notice
 
@@ -145,8 +145,8 @@ Table of Contents
 3.1.2.  Arm CCA Platform Endorsements linkage to CCA Platform
 
    Each CCA Platform Endorsement, be it a Reference Value or an
-   Attestation Verification Key, is associated with a unique CCA
-   Platform identifier known as Implementation ID (see Section 4.4.2 of
+   Attestation Verification Key, is associated with a unique identifier
+   known as CCA Platform Implementation ID (see Section 4.4.2 of
    [I-D.ffm-rats-cca-token]).  The Implementation ID uniquely identifies
    a given implementation of a CCA Platform and it used by the Endorser
    or Reference Value Provider as an anchor to which Reference Values
