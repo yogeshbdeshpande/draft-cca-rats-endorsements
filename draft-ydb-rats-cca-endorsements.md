@@ -83,8 +83,8 @@ The reader is assumed to be familiar with the terms and concepts introduced in {
 
 The Arm CCA Attester is a layered Attester comprising separate yet linked Platform and Realm Attesters.
 For the details, see {{Section 3 of -cca-token}}.
-Appraising Arm CCA Evidence requires endorsements for both the Platform and Realm.
-This document outlines the Platform and Realm endorsements in {{sec-platform-endorsements}} and {{realm-endorsements}}, respectively.
+Appraising Arm CCA Evidence requires Endorsements for both the Platform and Realm.
+This document outlines the Platform and Realm Endorsements in {{sec-platform-endorsements}} and {{realm-endorsements}}, respectively.
 
 ## Arm CCA Platform Endorsements {#sec-platform-endorsements}
 
@@ -95,13 +95,14 @@ There are two types of CCA Platform Endorsements:
 
 ### Arm CCA Platform Endorsement Profile
 
-Arm CCA Platform endorsements are carried in one or more CoMIDs inside a CoRIM.
+Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM.
+
 The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0`, as shown in {{ex-cca-platform-profile}}.
 
 ~~~
 {::include examples/platform-profile.diag}
 ~~~
-{: #ex-cca-platform-profile title="CCA Platform profile version 1, CoRIM profile" }
+{: #ex-cca-platform-profile title="CoRIM profile for CCA Platform Endorsements version 1.0.0" }
 
 ### Arm CCA Platform Endorsements linkage to CCA Platform {#sec-cca-rot-id}
 
@@ -272,7 +273,7 @@ cca-config-measurement-map = {
 
 #### CoMID Example
 
-An example CoMID containing one Reference Values triple containing expected values for both software components and platform configuration is given in {{ex-cca-platform-refval}}.
+An example CoMID containing one Reference Values triple with the expected values for both software components and platform configuration is given in {{ex-cca-platform-refval}}.
 
 ~~~ cbor-diag
 {::include examples/platform-refval-meas.diag}
@@ -302,61 +303,70 @@ The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attesta
 
 ## Arm CCA Realm Endorsements {#realm-endorsements}
 
-Arm CCA Realm provides a protected execution environment for applications executing within a Realm. A Realm Endorsements comprise of:
+Arm CCA provides confidential computing environments, known as Realms, that enable application workloads requiring confidential execution to operate in isolation from the host hypervisor and any other concurrent workload.
+Arm CCA allows the initial and run-time state of a Realm to be attested ({{Section 4.8 of -cca-token}}).
 
-* Reference Values ({{sec-realm-ref-values}}), i.e., measurements of the configuration and contents of a Realm at the time of its activation along with measurements of software running inside Realm, which can be extended during the lifetime of a Realm.
+Realm Endorsements consist of Reference Values ({{sec-realm-ref-values}}), which are measurements of the configuration and contents of a Realm at the time of its activation, along with measurements of the software operating within the Realm, which can be extended throughout the Realm's lifetime.
 
-Please note that there are no Realm Trust Anchor Endorsements needed from supply chain as they are present inline in the Attestation Evidence.
+Unlike the Platform, Realm Attestation Verification Key Endorsements are not necessary as the key material needed to verify the Realm Evidence is inline in the CCA Token ({{Section 3.2 of -cca-token}}).
 
-### Realm Endorsements linkage to Realm
+### Realm Endorsements linkage to Realm {#realm-id}
 
-Each Realm has a unique execution context and hence a unique Realm instance. Each Realm is uniquely identified in the Arm CCA system. For a Realm its Endorsements are associated to this unique instance. The Realm instance is a vendor defined variable length identifier. Hence in this profile, it is represented in a CoMID inside an `environment-map` with `$instance-id-type-choice` set to `tagged-bytes`, i.e. an opaque, variable-length byte string. In this profile of CCA Endorsements, the Realm Initial Measurements are set in `tagged-bytes` to represent Realm instance.
+Realms do not have *explicit* class or instance identifiers.
+However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
+Therefore, this profile employs an `environment map` with a class identifier that uses the `tagged bytes` variant of the `$class-id-type-choice` to encode the RIM value ({{ex-cca-realm-identifiers}}).
 
-When supplying Realm Endorsements, a supplier of one or more Realms may wish to identify itself. Hence the following class related elements in the `environment-map` of a  `comid` can be used. See {{ex-cca-realm-identifiers}}
-
-In the `class-map` select `vendor` name and/or `class-id` set as `UUID` representing unique identity of the Realm owner.
-
-$class-id-type-choice /= tagged-uuid-type
-
-vendor => `tstr` to represent vendor name
-
+~~~ cbor-diag
+/ environment-map / {
+  / comid.class / 0 : {
+    / comid.class-id / 0 :
+      / RIM as tagged-bytes / 560(
+        h'311314ab73620350cf758834ae5c65d9
+          e8c2dc7febe6e7d9654bbe864e300d49'
+      )
+  }
+}
 ~~~
-{::include examples/realm-identification.diag}
-~~~
-{: #ex-cca-realm-identifiers title="CCA realm identifiers" }
+{: #ex-cca-realm-identifiers title="CCA Realm Identification" }
 
 ### Arm CCA Realm Endorsement Profile
 
-Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.
+Arm CCA Realm endorsements are carried in a CoMID within a CoRIM.
 
 The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
 
-~~~
+~~~ cbor-diag
 {::include examples/realm-profile.diag}
 ~~~
-{: #ex-cca-realm-profile title="CCA realm profile version 1, CoRIM profile" }
+{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm endorsements version 1.0.0" }
 
-### Reference Values
-{: #sec-realm-ref-values}
+### Reference Values {#sec-realm-ref-values}
 
-Reference Values carry measurements and other metadata associated with the
-CCA Realm.
+Reference Values carry measurements and other metadata associated with the CCA Realm.
 
-Realm reference values comprise of:
+Realm Reference Values comprise:
 
 1. Realm Initial Measurements (RIM)
 2. Realm Extended Measurements (REMs)
 3. Realm Personalization Value (RPV)
 
-RIM and REMs are encoded in a `measurement-values-map` (in a `measurement-map`) of a CoMID `reference-triple-record`. Inside `measurement-values-map` these measurements are carried as `integrity-registers` map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer to {{-rats-corim}} for details about Integrity Register map.
+All Realm Reference Values are carried in a `reference-triple-record` whose `environment-map` is as described in {{realm-id}}
+The triple includes as many `measurement-map`s as needed to fully describe the Realm.
 
-All the measured objects in an Integrity Registers map are explicitly named. In the context of Realms, the measured objects are RIM and REMs. Inside Integrity Register map, RIM is uniquely identified by the name "rim", while REMs which is an array of measurements from 1..4 are uniquely identified by the coresponding name "rem0".."rem3".
+The `measurement-map` contents depend on the type of Reference Value.
+For all, the `mkey` uses the text variant of the `$measured-element-type-choice`.
+The value of the `mkey` MUST be "cca.rim" for the RIM measurement, "cca.rpv" for the RPV measurement, and "cca.rem0".."cca.rem3" for the REM measurements.
+The `authorized-by` field of the `measurement-map` MUST NOT be present.
 
-Realm Personalization Value, (RPV) is an optional identity used by a Realm endorser to uniquely identify multiple Realms which all have the same RIM. RPV if provided is a fixed length 64 bytes identifier. In this profile, RPV is represented using Raw Value Measurements in a `measurement-values-map`, with raw value type choice set to `tagged-bytes`. See {{ex-cca-realm-refval}}
+RIM and REMs are encoded as `digests` (key 2).
 
-$raw-value-type-choice /= tagged-bytes
+RPV is encoded using a `raw-value` (key 4) using the `tagged bytes` variant of the `$raw-value-type-choice`.
 
-Given below is the complete example of a Realm Endorsements.
+All the Realm Reference Values are optional except RIM, which is mandatory.
+
+#### CoMID Example
+
+An example CoMID containing one Reference Values triple with the expected values for a Realm is given in {{ex-cca-realm-refval}}.
 
 ~~~
 {::include examples/realm-refval.diag}
@@ -365,22 +375,15 @@ Given below is the complete example of a Realm Endorsements.
 
 # Security Considerations
 
-<cref>TODO</cref>
+[^todo]
 
 # IANA Considerations
 
-## CBOR Tag Registrations
 
-IANA is requested to allocate the following tags in the "CBOR Tags" registry
-{{!IANA.cbor-tags}}, preferably with the specified value:
-
-| Tag | Data Item | Semantics |
-|---
-| 600 | tagged bytes | CCA Implementation ID ({{sec-cca-rot-id}} of {{&SELF}}) |
-| 601 | tagged map | CCA Software Component Identifier ({{sec-ref-values}} of {{&SELF}}) |
-{: #tbl-psa-cbor-tag title="CoRIM CBOR Tags"}
+This document makes no requests to IANA.
 
 # Acknowledgements
 
+[^todo]
 
-<cref>TODO</cref>
+[^todo]: TODO
