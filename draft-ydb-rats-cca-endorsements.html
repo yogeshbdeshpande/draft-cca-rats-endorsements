@@ -1190,11 +1190,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-cbor-tag-registrations" class="internal xref">CBOR Tag Registrations</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
@@ -1249,8 +1244,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <p id="section-3-1">The Arm CCA Attester is a layered Attester comprising separate yet linked Platform and Realm Attesters.
 For the details, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>.
-Appraising Arm CCA Evidence requires endorsements for both the Platform and Realm.
-This document outlines the Platform and Realm endorsements in <a href="#sec-platform-endorsements" class="auto internal xref">Section 3.1</a> and <a href="#realm-endorsements" class="auto internal xref">Section 3.2</a>, respectively.<a href="#section-3-1" class="pilcrow">¶</a></p>
+Appraising Arm CCA Evidence requires Endorsements for both the Platform and Realm.
+This document outlines the Platform and Realm Endorsements in <a href="#sec-platform-endorsements" class="auto internal xref">Section 3.1</a> and <a href="#realm-endorsements" class="auto internal xref">Section 3.2</a>, respectively.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="sec-platform-endorsements">
 <section id="section-3.1">
         <h3 id="name-arm-cca-platform-endorsemen">
@@ -1270,22 +1265,20 @@ This document outlines the Platform and Realm endorsements in <a href="#sec-plat
           <h4 id="name-arm-cca-platform-endorsement">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-arm-cca-platform-endorsement" class="section-name selfRef">Arm CCA Platform Endorsement Profile</a>
           </h4>
-<p id="section-3.1.1-1">Arm CCA Platform endorsements are carried in one or more CoMIDs inside a CoRIM.
-The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_platform#1.0.0</code>, as shown in <a href="#ex-cca-platform-profile" class="auto internal xref">Figure 1</a>.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<span id="name-cca-platform-profile-versio"></span><div id="ex-cca-platform-profile">
+<p id="section-3.1.1-1">Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_platform#1.0.0</code>, as shown in <a href="#ex-cca-platform-profile" class="auto internal xref">Figure 1</a>.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<span id="name-corim-profile-for-cca-platf"></span><div id="ex-cca-platform-profile">
 <figure id="figure-1">
-            <div class="alignLeft art-text artwork" id="section-3.1.1-2.1">
+            <div class="alignLeft art-text artwork" id="section-3.1.1-3.1">
 <pre>
 / corim-map / {
-  / corim.profile / 3: [
-    32("tag:arm.com,2025:cca_platform#1.0.0")
-  ]
+  / corim.profile / 3 : 32("tag:arm.com,2025:cca_platform#1.0.0")
   / ... /
 }
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-cca-platform-profile-versio" class="selfRef">CCA Platform profile version 1, CoRIM profile</a>
+<a href="#name-corim-profile-for-cca-platf" class="selfRef">CoRIM profile for CCA Platform Endorsements version 1.0.0</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1543,7 +1536,7 @@ cca-config-measurement-map = {
             <h5 id="name-comid-example">
 <a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-comid-example" class="section-name selfRef">CoMID Example</a>
             </h5>
-<p id="section-3.1.3.3-1">An example CoMID containing one Reference Values triple containing expected values for both software components and platform configuration is given in <a href="#ex-cca-platform-refval" class="auto internal xref">Figure 9</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.3-1">An example CoMID containing one Reference Values triple with the expected values for both software components and platform configuration is given in <a href="#ex-cca-platform-refval" class="auto internal xref">Figure 9</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-cca-platform-refere"></span><div id="ex-cca-platform-refval">
 <figure id="figure-9">
               <div class="breakable lang-cbor-diag sourcecode" id="section-3.1.3.3-2.1">
@@ -1691,44 +1684,35 @@ There MUST be only one key in an <code>attest-key-triple-record</code>.<a href="
         <h3 id="name-arm-cca-realm-endorsements">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-arm-cca-realm-endorsements" class="section-name selfRef">Arm CCA Realm Endorsements</a>
         </h3>
-<p id="section-3.2-1">Arm CCA Realm provides a protected execution environment for applications executing within a Realm. A Realm Endorsements comprise of:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.2-2.1">
-            <p id="section-3.2-2.1.1">Reference Values (<a href="#sec-realm-ref-values" class="auto internal xref">Section 3.2.3</a>), i.e., measurements of the configuration and contents of a Realm at the time of its activation along with measurements of software running inside Realm, which can be extended during the lifetime of a Realm.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-3.2-3">Please note that there are no Realm Trust Anchor Endorsements needed from supply chain as they are present inline in the Attestation Evidence.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<div id="realm-endorsements-linkage-to-realm">
+<p id="section-3.2-1">Arm CCA provides confidential computing environments, known as Realms, that enable application workloads requiring confidential execution to operate in isolation from the host hypervisor and any other concurrent workload.
+Arm CCA allows the initial and run-time state of a Realm to be attested (<span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.8" class="relref">Section 4.8</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Realm Endorsements consist of Reference Values (<a href="#sec-realm-ref-values" class="auto internal xref">Section 3.2.3</a>), which are measurements of the configuration and contents of a Realm at the time of its activation, along with measurements of the software operating within the Realm, which can be extended throughout the Realm's lifetime.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Unlike the Platform, Realm Attestation Verification Key Endorsements are not necessary as the key material needed to verify the Realm Evidence is inline in the CCA Token (<span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-3.2" class="relref">Section 3.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<div id="realm-id">
 <section id="section-3.2.1">
           <h4 id="name-realm-endorsements-linkage-">
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-realm-endorsements-linkage-" class="section-name selfRef">Realm Endorsements linkage to Realm</a>
           </h4>
-<p id="section-3.2.1-1">Each Realm has a unique execution context and hence a unique Realm instance. Each Realm is uniquely identified in the Arm CCA system. For a Realm its Endorsements are associated to this unique instance. The Realm instance is a vendor defined variable length identifier. Hence in this profile, it is represented in a CoMID inside an <code>environment-map</code> with <code>$instance-id-type-choice</code> set to <code>tagged-bytes</code>, i.e. an opaque, variable-length byte string. In this profile of CCA Endorsements, the Realm Initial Measurements are set in <code>tagged-bytes</code> to represent Realm instance.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">When supplying Realm Endorsements, a supplier of one or more Realms may wish to identify itself. Hence the following class related elements in the <code>environment-map</code> of a  <code>comid</code> can be used. See <a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 11</a><a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-3">In the <code>class-map</code> select <code>vendor</code> name and/or <code>class-id</code> set as <code>UUID</code> representing unique identity of the Realm owner.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-4">$class-id-type-choice /= tagged-uuid-type<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-5">vendor =&gt; <code>tstr</code> to represent vendor name<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
-<span id="name-cca-realm-identifiers"></span><div id="ex-cca-realm-identifiers">
+<p id="section-3.2.1-1">Realms do not have <em>explicit</em> class or instance identifiers.
+However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
+Therefore, this profile employs an <code>environment map</code> with a class identifier that uses the <code>tagged bytes</code> variant of the <code>$class-id-type-choice</code> to encode the RIM value (<a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 11</a>).<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<span id="name-cca-realm-identification"></span><div id="ex-cca-realm-identifiers">
 <figure id="figure-11">
-            <div class="alignLeft art-text artwork" id="section-3.2.1-6.1">
+            <div class="lang-cbor-diag sourcecode" id="section-3.2.1-2.1">
 <pre>
 / environment-map / {
   / comid.class / 0 : {
     / comid.class-id / 0 :
-        / tagged-uuid-type / 37(
-            h'67b28b6c34cc40a19117ab5b05911e37'
-            ),
-        / comid.vendor / 1 : "Workload Client Ltd",
-  },
-  / comid.instance / 1 :
-    / tagged-bytes / 560(
-          h'67b28b6c39cc40a19117ab5b05911e37'
-          )
+      / RIM as tagged-bytes / 560(
+        h'311314ab73620350cf758834ae5c65d9
+          e8c2dc7febe6e7d9654bbe864e300d49'
+      )
+  }
 }
 </pre>
 </div>
 <figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
-<a href="#name-cca-realm-identifiers" class="selfRef">CCA realm identifiers</a>
+<a href="#name-cca-realm-identification" class="selfRef">CCA Realm Identification</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1738,22 +1722,20 @@ There MUST be only one key in an <code>attest-key-triple-record</code>.<a href="
           <h4 id="name-arm-cca-realm-endorsement-p">
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-arm-cca-realm-endorsement-p" class="section-name selfRef">Arm CCA Realm Endorsement Profile</a>
           </h4>
-<p id="section-3.2.2-1">Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-1">Arm CCA Realm endorsements are carried in a CoMID within a CoRIM.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_realm#1.0.0</code> as shown in <a href="#ex-cca-realm-profile" class="auto internal xref">Figure 12</a>.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
-<span id="name-cca-realm-profile-version-1"></span><div id="ex-cca-realm-profile">
+<span id="name-corim-profile-for-cca-realm"></span><div id="ex-cca-realm-profile">
 <figure id="figure-12">
-            <div class="alignLeft art-text artwork" id="section-3.2.2-3.1">
+            <div class="lang-cbor-diag sourcecode" id="section-3.2.2-3.1">
 <pre>
 / corim-map / {
-  / corim.profile / 3: [
-    32("tag:arm.com,2025:cca_realm#1.0.0")
-  ]
+  / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
   / ... /
 }
 </pre>
 </div>
 <figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
-<a href="#name-cca-realm-profile-version-1" class="selfRef">CCA realm profile version 1, CoRIM profile</a>
+<a href="#name-corim-profile-for-cca-realm" class="selfRef">CoRIM profile for CCA Realm endorsements version 1.0.0</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1763,9 +1745,8 @@ There MUST be only one key in an <code>attest-key-triple-record</code>.<a href="
           <h4 id="name-reference-values-2">
 <a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-reference-values-2" class="section-name selfRef">Reference Values</a>
           </h4>
-<p id="section-3.2.3-1">Reference Values carry measurements and other metadata associated with the
-CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-2">Realm reference values comprise of:<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-1">Reference Values carry measurements and other metadata associated with the CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-2">Realm Reference Values comprise:<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2.3-3">
 <li id="section-3.2.3-3.1">
               <p id="section-3.2.3-3.1.1">Realm Initial Measurements (RIM)<a href="#section-3.2.3-3.1.1" class="pilcrow">¶</a></p>
@@ -1777,14 +1758,24 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
               <p id="section-3.2.3-3.3.1">Realm Personalization Value (RPV)<a href="#section-3.2.3-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-3.2.3-4">RIM and REMs are encoded in a <code>measurement-values-map</code> (in a <code>measurement-map</code>) of a CoMID <code>reference-triple-record</code>. Inside <code>measurement-values-map</code> these measurements are carried as <code>integrity-registers</code> map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer to <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for details about Integrity Register map.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-5">All the measured objects in an Integrity Registers map are explicitly named. In the context of Realms, the measured objects are RIM and REMs. Inside Integrity Register map, RIM is uniquely identified by the name "rim", while REMs which is an array of measurements from 1..4 are uniquely identified by the coresponding name "rem0".."rem3".<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-6">Realm Personalization Value, (RPV) is an optional identity used by a Realm endorser to uniquely identify multiple Realms which all have the same RIM. RPV if provided is a fixed length 64 bytes identifier. In this profile, RPV is represented using Raw Value Measurements in a <code>measurement-values-map</code>, with raw value type choice set to <code>tagged-bytes</code>. See <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 13</a><a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-7">$raw-value-type-choice /= tagged-bytes<a href="#section-3.2.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-8">Given below is the complete example of a Realm Endorsements.<a href="#section-3.2.3-8" class="pilcrow">¶</a></p>
-<span id="name-cca-realm-identifiers-2"></span><div id="ex-cca-realm-refval">
+<p id="section-3.2.3-4">All Realm Reference Values are carried in a <code>reference-triple-record</code> whose <code>environment-map</code> is as described in <a href="#realm-id" class="auto internal xref">Section 3.2.1</a>
+The triple includes as many <code>measurement-map</code>s as needed to fully describe the Realm.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-5">The <code>measurement-map</code> contents depend on the type of Reference Value.
+For all, the <code>mkey</code> uses the text variant of the <code>$measured-element-type-choice</code>.
+The value of the <code>mkey</code> MUST be "cca.rim" for the RIM measurement, "cca.rpv" for the RPV measurement, and "cca.rem0".."cca.rem3" for the REM measurements.
+The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-6">RIM and REMs are encoded as <code>digests</code> (key 2).<a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-7">RPV is encoded using a <code>raw-value</code> (key 4) using the <code>tagged bytes</code> variant of the <code>$raw-value-type-choice</code>.<a href="#section-3.2.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-8">All the Realm Reference Values are optional except RIM, which is mandatory.<a href="#section-3.2.3-8" class="pilcrow">¶</a></p>
+<div id="comid-example-1">
+<section id="section-3.2.3.1">
+            <h5 id="name-comid-example-2">
+<a href="#section-3.2.3.1" class="section-number selfRef">3.2.3.1. </a><a href="#name-comid-example-2" class="section-name selfRef">CoMID Example</a>
+            </h5>
+<p id="section-3.2.3.1-1">An example CoMID containing one Reference Values triple with the expected values for a Realm is given in <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 13</a>.<a href="#section-3.2.3.1-1" class="pilcrow">¶</a></p>
+<span id="name-cca-realm-identifiers"></span><div id="ex-cca-realm-refval">
 <figure id="figure-13">
-            <div class="alignLeft art-text artwork" id="section-3.2.3-9.1">
+              <div class="alignLeft art-text artwork" id="section-3.2.3.1-2.1">
 <pre>
 / concise-mid-tag / {
   / comid.tag-identity / 1 : {
@@ -1794,68 +1785,78 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
     / comid.reference-triples / 0 : [
       [
         / environment-map / {
-            / comid.class / 0 : {
-                / comid.class-id / 0 :
-                    / tagged-uuid-type / 37(
-                        h'67b28b6c34cc40a19117ab5b05911e37'
-                        ),
-                / comid.vendor / 1 : "Workload Client Ltd"
-              },
-            / comid.instance / 1 :
-                / tagged-bytes / 560(
-                    h'67b28b6c39cc40a19117ab5b05911e37'
-                    )
-           },
+          / comid.class / 0 : {
+            / comid.class-id / 0 :
+              / RIM as tagged-bytes / 560(
+                h'311314ab73620350cf758834ae5c65d9
+                  e8c2dc7febe6e7d9654bbe864e300d49'
+              )
+          }
+        },
+        / Realm measurements /
         [
-        / measurement-map / {
+          / measurement-map (RIM) / {
+            / comid.mkey / 0 : "cca.rim",
             / comid.mval / 1 : {
-              / comid.raw-value / 4 : {
-                / tagged-bytes / 560(
-                    h'ABABABABABABABABABABABABABABABABABABABABABABABABA
-                      BABABABABABABABABABABABABABABABABABABABABABABABAB
-                      ABABABABABABABABABABABABABABAB',
-                  )
-              },
-              / comid.integrity-registers / 14 : {
-                "rim": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'44aa336af4cb14a879432e53dd6571c7
-                                   fa9bccafb75f488259262d6ea3a4d91b'
-                ]
-              ],
-                "rem0": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e58dd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem1": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e59dd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem2": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e5add6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
-              ],
-                "rem3": [
-                [
-                  / hash-alg-id / 1, / sha256 /
-                  / hash-value / h'50aa341af9cb20a879440e5bdd6581c1
-                                   4fa14bccafb75f488259262d6ea3a4d9'
-                ]
+              / comid.digests / 2 : [
+                "sha-256",
+                h'311314ab73620350cf758834ae5c65d9
+                  e8c2dc7febe6e7d9654bbe864e300d49'
               ]
             }
+          },
+          / measurement-map (REM[0]) / {
+            / comid.mkey / 0 : "cca.rem0",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'24d5b0a296cc05cbd8068c5067c5bd47
+                  3b770dda6ae082fe3ba30abe3f9a6ab1'
+              ]
+            }
+          },
+          / measurement-map (REM[1]) / {
+            / comid.mkey / 0 : "cca.rem1",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'788fc090bfc6b8ed903152ba8414e73d
+                  af5b8c7bb1e79ad502ab0699b659ed16'
+              ]
+            }
+          },
+          / measurement-map (REM[2]) / {
+            / comid.mkey / 0 : "cca.rem2",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'dac46a58415dc3a00d7a741852008e9c
+                  ae64f52d03b9f76d76f4b3644fefc416'
+              ]
+            }
+          },
+          / measurement-map (REM[3]) / {
+            / comid.mkey / 0 : "cca.rem3",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                "sha-256",
+                h'32c6afc627e55585c03155359f331a0e
+                  225f6840db947dd96efab81be2671939'
+              ]
+            }
+          },
+          / measurement-map (RPV) / {
+            / comid.mkey / 0 : "cca.rpv",
+            / comid.mval / 1 : {
+              / comid.raw-value / 4 : 560(
+                h'54686520717569636b2062726f776e20
+                  666f78206a756d7073206f7665722031
+                  33206c617a7920646f67732e54686520
+                  717569636b2062726f776e20666f7820'
+              )
+            }
           }
-        }
-       ]
+        ]
       ]
     ]
   }
@@ -1863,8 +1864,10 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 </pre>
 </div>
 <figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
-<a href="#name-cca-realm-identifiers-2" class="selfRef">CCA realm identifiers</a>
-            </figcaption></figure>
+<a href="#name-cca-realm-identifiers" class="selfRef">CCA realm identifiers</a>
+              </figcaption></figure>
+</div>
+</section>
 </div>
 </section>
 </div>
@@ -1877,7 +1880,7 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1"><span class="cref">TODO</span><a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1"><span class="cref" id="todo">TODO</span><a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1885,42 +1888,7 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<div id="cbor-tag-registrations">
-<section id="section-5.1">
-        <h3 id="name-cbor-tag-registrations">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-cbor-tag-registrations" class="section-name selfRef">CBOR Tag Registrations</a>
-        </h3>
-<p id="section-5.1-1">IANA is requested to allocate the following tags in the "CBOR Tags" registry
-<span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>, preferably with the specified value:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<span id="name-corim-cbor-tags"></span><div id="tbl-psa-cbor-tag">
-<table class="center" id="table-1">
-          <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-corim-cbor-tags" class="selfRef">CoRIM CBOR Tags</a>
-          </caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Tag</th>
-              <th class="text-left" rowspan="1" colspan="1">Data Item</th>
-              <th class="text-left" rowspan="1" colspan="1">Semantics</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">600</td>
-              <td class="text-left" rowspan="1" colspan="1">tagged bytes</td>
-              <td class="text-left" rowspan="1" colspan="1">CCA Implementation ID (<a href="#sec-cca-rot-id" class="auto internal xref">Section 3.1.2</a> of RFCthis)</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">601</td>
-              <td class="text-left" rowspan="1" colspan="1">tagged map</td>
-              <td class="text-left" rowspan="1" colspan="1">CCA Software Component Identifier (<a href="#sec-ref-values" class="auto internal xref">Section 3.1.3</a> of RFCthis)</td>
-            </tr>
-          </tbody>
-        </table>
-</div>
-</section>
-</div>
+<p id="section-5-1">This document makes no requests to IANA.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgements">
@@ -1928,7 +1896,7 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgements">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-6-1"><span class="cref">TODO</span><a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1"><span class="cref" id="todo_1">TODO</span><a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1949,10 +1917,6 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-07</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
-        <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cbor-tags">https://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>

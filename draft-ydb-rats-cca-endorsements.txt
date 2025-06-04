@@ -76,7 +76,6 @@ Table of Contents
        3.2.3.  Reference Values
    4.  Security Considerations
    5.  IANA Considerations
-     5.1.  CBOR Tag Registrations
    6.  Acknowledgements
    7.  References
      7.1.  Normative References
@@ -110,8 +109,8 @@ Table of Contents
    The Arm CCA Attester is a layered Attester comprising separate yet
    linked Platform and Realm Attesters.  For the details, see Section 3
    of [I-D.ffm-rats-cca-token].  Appraising Arm CCA Evidence requires
-   endorsements for both the Platform and Realm.  This document outlines
-   the Platform and Realm endorsements in Section 3.1 and Section 3.2,
+   Endorsements for both the Platform and Realm.  This document outlines
+   the Platform and Realm Endorsements in Section 3.1 and Section 3.2,
    respectively.
 
 3.1.  Arm CCA Platform Endorsements
@@ -128,19 +127,17 @@ Table of Contents
 
 3.1.1.  Arm CCA Platform Endorsement Profile
 
-   Arm CCA Platform endorsements are carried in one or more CoMIDs
-   inside a CoRIM.  The profile attribute in the CoRIM MUST be present
-   and MUST be the URI tag:arm.com,2025:cca_platform#1.0.0, as shown in
-   Figure 1.
+   Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM.
+
+   The profile attribute in the CoRIM MUST be present and MUST be the
+   URI tag:arm.com,2025:cca_platform#1.0.0, as shown in Figure 1.
 
    / corim-map / {
-     / corim.profile / 3: [
-       32("tag:arm.com,2025:cca_platform#1.0.0")
-     ]
+     / corim.profile / 3 : 32("tag:arm.com,2025:cca_platform#1.0.0")
      / ... /
    }
 
-          Figure 1: CCA Platform profile version 1, CoRIM profile
+    Figure 1: CoRIM profile for CCA Platform Endorsements version 1.0.0
 
 3.1.2.  Arm CCA Platform Endorsements linkage to CCA Platform
 
@@ -356,7 +353,7 @@ Table of Contents
 
 3.1.3.3.  CoMID Example
 
-   An example CoMID containing one Reference Values triple containing
+   An example CoMID containing one Reference Values triple with the
    expected values for both software components and platform
    configuration is given in Figure 9.
 
@@ -487,81 +484,65 @@ Table of Contents
 
 3.2.  Arm CCA Realm Endorsements
 
-   Arm CCA Realm provides a protected execution environment for
-   applications executing within a Realm.  A Realm Endorsements comprise
-   of:
+   Arm CCA provides confidential computing environments, known as
+   Realms, that enable application workloads requiring confidential
+   execution to operate in isolation from the host hypervisor and any
+   other concurrent workload.  Arm CCA allows the initial and run-time
+   state of a Realm to be attested (Section 4.8 of
+   [I-D.ffm-rats-cca-token]).
 
-   *  Reference Values (Section 3.2.3), i.e., measurements of the
-      configuration and contents of a Realm at the time of its
-      activation along with measurements of software running inside
-      Realm, which can be extended during the lifetime of a Realm.
+   Realm Endorsements consist of Reference Values (Section 3.2.3), which
+   are measurements of the configuration and contents of a Realm at the
+   time of its activation, along with measurements of the software
+   operating within the Realm, which can be extended throughout the
+   Realm's lifetime.
 
-   Please note that there are no Realm Trust Anchor Endorsements needed
-   from supply chain as they are present inline in the Attestation
-   Evidence.
+   Unlike the Platform, Realm Attestation Verification Key Endorsements
+   are not necessary as the key material needed to verify the Realm
+   Evidence is inline in the CCA Token (Section 3.2 of
+   [I-D.ffm-rats-cca-token]).
 
 3.2.1.  Realm Endorsements linkage to Realm
 
-   Each Realm has a unique execution context and hence a unique Realm
-   instance.  Each Realm is uniquely identified in the Arm CCA system.
-   For a Realm its Endorsements are associated to this unique instance.
-   The Realm instance is a vendor defined variable length identifier.
-   Hence in this profile, it is represented in a CoMID inside an
-   environment-map with $instance-id-type-choice set to tagged-bytes,
-   i.e. an opaque, variable-length byte string.  In this profile of CCA
-   Endorsements, the Realm Initial Measurements are set in tagged-bytes
-   to represent Realm instance.
-
-   When supplying Realm Endorsements, a supplier of one or more Realms
-   may wish to identify itself.  Hence the following class related
-   elements in the environment-map of a comid can be used.  See
-   Figure 11
-
-   In the class-map select vendor name and/or class-id set as UUID
-   representing unique identity of the Realm owner.
-
-   $class-id-type-choice /= tagged-uuid-type
-
-   vendor => tstr to represent vendor name
+   Realms do not have _explicit_ class or instance identifiers.
+   However, the Realm Initial Measurement (RIM) is unique and stable
+   enough to serve as an identifier for the Realm Target Environment.
+   Therefore, this profile employs an environment map with a class
+   identifier that uses the tagged bytes variant of the $class-id-type-
+   choice to encode the RIM value (Figure 11).
 
    / environment-map / {
      / comid.class / 0 : {
        / comid.class-id / 0 :
-           / tagged-uuid-type / 37(
-               h'67b28b6c34cc40a19117ab5b05911e37'
-               ),
-           / comid.vendor / 1 : "Workload Client Ltd",
-     },
-     / comid.instance / 1 :
-       / tagged-bytes / 560(
-             h'67b28b6c39cc40a19117ab5b05911e37'
-             )
+         / RIM as tagged-bytes / 560(
+           h'311314ab73620350cf758834ae5c65d9
+             e8c2dc7febe6e7d9654bbe864e300d49'
+         )
+     }
    }
 
-                      Figure 11: CCA realm identifiers
+                    Figure 11: CCA Realm Identification
 
 3.2.2.  Arm CCA Realm Endorsement Profile
 
-   Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.
+   Arm CCA Realm endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
    URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 12.
 
    / corim-map / {
-     / corim.profile / 3: [
-       32("tag:arm.com,2025:cca_realm#1.0.0")
-     ]
+     / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
      / ... /
    }
 
-           Figure 12: CCA realm profile version 1, CoRIM profile
+     Figure 12: CoRIM profile for CCA Realm endorsements version 1.0.0
 
 3.2.3.  Reference Values
 
    Reference Values carry measurements and other metadata associated
    with the CCA Realm.
 
-   Realm reference values comprise of:
+   Realm Reference Values comprise:
 
    1.  Realm Initial Measurements (RIM)
 
@@ -569,106 +550,117 @@ Table of Contents
 
    3.  Realm Personalization Value (RPV)
 
-   RIM and REMs are encoded in a measurement-values-map (in a
-   measurement-map) of a CoMID reference-triple-record.  Inside
-   measurement-values-map these measurements are carried as integrity-
-   registers map.  Integrity Registers map is used to group together one
-   or more measured objects pertaining to an environment.  Please refer
-   to [I-D.ietf-rats-corim] for details about Integrity Register map.
+   All Realm Reference Values are carried in a reference-triple-record
+   whose environment-map is as described in Section 3.2.1 The triple
+   includes as many measurement-maps as needed to fully describe the
+   Realm.
 
-   All the measured objects in an Integrity Registers map are explicitly
-   named.  In the context of Realms, the measured objects are RIM and
-   REMs.  Inside Integrity Register map, RIM is uniquely identified by
-   the name "rim", while REMs which is an array of measurements from
-   1..4 are uniquely identified by the coresponding name "rem0".."rem3".
+   The measurement-map contents depend on the type of Reference Value.
+   For all, the mkey uses the text variant of the $measured-element-
+   type-choice.  The value of the mkey MUST be "cca.rim" for the RIM
+   measurement, "cca.rpv" for the RPV measurement, and
+   "cca.rem0".."cca.rem3" for the REM measurements.  The authorized-by
+   field of the measurement-map MUST NOT be present.
 
-   Realm Personalization Value, (RPV) is an optional identity used by a
-   Realm endorser to uniquely identify multiple Realms which all have
-   the same RIM.  RPV if provided is a fixed length 64 bytes identifier.
-   In this profile, RPV is represented using Raw Value Measurements in a
-   measurement-values-map, with raw value type choice set to tagged-
-   bytes.  See Figure 13
+   RIM and REMs are encoded as digests (key 2).
 
-   $raw-value-type-choice /= tagged-bytes
+   RPV is encoded using a raw-value (key 4) using the tagged bytes
+   variant of the $raw-value-type-choice.
 
-   Given below is the complete example of a Realm Endorsements.
+   All the Realm Reference Values are optional except RIM, which is
+   mandatory.
 
- / concise-mid-tag / {
-   / comid.tag-identity / 1 : {
-     / comid.tag-id / 0 : h'3f06af63a93c11e4979700505690773f'
-   },
-   / comid.triples / 4 : {
-     / comid.reference-triples / 0 : [
-       [
-         / environment-map / {
-             / comid.class / 0 : {
-                 / comid.class-id / 0 :
-                     / tagged-uuid-type / 37(
-                         h'67b28b6c34cc40a19117ab5b05911e37'
-                         ),
-                 / comid.vendor / 1 : "Workload Client Ltd"
-               },
-             / comid.instance / 1 :
-                 / tagged-bytes / 560(
-                     h'67b28b6c39cc40a19117ab5b05911e37'
-                     )
-            },
+3.2.3.1.  CoMID Example
+
+   An example CoMID containing one Reference Values triple with the
+   expected values for a Realm is given in Figure 13.
+
+   / concise-mid-tag / {
+     / comid.tag-identity / 1 : {
+       / comid.tag-id / 0 : h'3f06af63a93c11e4979700505690773f'
+     },
+     / comid.triples / 4 : {
+       / comid.reference-triples / 0 : [
          [
-         / measurement-map / {
-             / comid.mval / 1 : {
-               / comid.raw-value / 4 : {
-                 / tagged-bytes / 560(
-                     h'ABABABABABABABABABABABABABABABABABABABABABABABABA
-                       BABABABABABABABABABABABABABABABABABABABABABABABAB
-                       ABABABABABABABABABABABABABABAB',
-                   )
-               },
-               / comid.integrity-registers / 14 : {
-                 "rim": [
-                 [
-                   / hash-alg-id / 1, / sha256 /
-                   / hash-value / h'44aa336af4cb14a879432e53dd6571c7
-                                    fa9bccafb75f488259262d6ea3a4d91b'
-                 ]
-               ],
-                 "rem0": [
-                 [
-                   / hash-alg-id / 1, / sha256 /
-                   / hash-value / h'50aa341af9cb20a879440e58dd6581c1
-                                    4fa14bccafb75f488259262d6ea3a4d9'
-                 ]
-               ],
-                 "rem1": [
-                 [
-                   / hash-alg-id / 1, / sha256 /
-                   / hash-value / h'50aa341af9cb20a879440e59dd6581c1
-                                    4fa14bccafb75f488259262d6ea3a4d9'
-                 ]
-               ],
-                 "rem2": [
-                 [
-                   / hash-alg-id / 1, / sha256 /
-                   / hash-value / h'50aa341af9cb20a879440e5add6581c1
-                                    4fa14bccafb75f488259262d6ea3a4d9'
-                 ]
-               ],
-                 "rem3": [
-                 [
-                   / hash-alg-id / 1, / sha256 /
-                   / hash-value / h'50aa341af9cb20a879440e5bdd6581c1
-                                    4fa14bccafb75f488259262d6ea3a4d9'
-                 ]
-               ]
+           / environment-map / {
+             / comid.class / 0 : {
+               / comid.class-id / 0 :
+                 / RIM as tagged-bytes / 560(
+                   h'311314ab73620350cf758834ae5c65d9
+                     e8c2dc7febe6e7d9654bbe864e300d49'
+                 )
              }
-           }
-         }
-        ]
+           },
+           / Realm measurements /
+           [
+             / measurement-map (RIM) / {
+               / comid.mkey / 0 : "cca.rim",
+               / comid.mval / 1 : {
+                 / comid.digests / 2 : [
+                   "sha-256",
+                   h'311314ab73620350cf758834ae5c65d9
+                     e8c2dc7febe6e7d9654bbe864e300d49'
+                 ]
+               }
+             },
+             / measurement-map (REM[0]) / {
+               / comid.mkey / 0 : "cca.rem0",
+               / comid.mval / 1 : {
+                 / comid.digests / 2 : [
+                   "sha-256",
+                   h'24d5b0a296cc05cbd8068c5067c5bd47
+                     3b770dda6ae082fe3ba30abe3f9a6ab1'
+                 ]
+               }
+             },
+             / measurement-map (REM[1]) / {
+               / comid.mkey / 0 : "cca.rem1",
+               / comid.mval / 1 : {
+                 / comid.digests / 2 : [
+                   "sha-256",
+                   h'788fc090bfc6b8ed903152ba8414e73d
+                     af5b8c7bb1e79ad502ab0699b659ed16'
+                 ]
+               }
+             },
+             / measurement-map (REM[2]) / {
+               / comid.mkey / 0 : "cca.rem2",
+               / comid.mval / 1 : {
+                 / comid.digests / 2 : [
+                   "sha-256",
+                   h'dac46a58415dc3a00d7a741852008e9c
+                     ae64f52d03b9f76d76f4b3644fefc416'
+                 ]
+               }
+             },
+             / measurement-map (REM[3]) / {
+               / comid.mkey / 0 : "cca.rem3",
+               / comid.mval / 1 : {
+                 / comid.digests / 2 : [
+                   "sha-256",
+                   h'32c6afc627e55585c03155359f331a0e
+                     225f6840db947dd96efab81be2671939'
+                 ]
+               }
+             },
+             / measurement-map (RPV) / {
+               / comid.mkey / 0 : "cca.rpv",
+               / comid.mval / 1 : {
+                 / comid.raw-value / 4 : 560(
+                   h'54686520717569636b2062726f776e20
+                     666f78206a756d7073206f7665722031
+                     33206c617a7920646f67732e54686520
+                     717569636b2062726f776e20666f7820'
+                 )
+               }
+             }
+           ]
+         ]
        ]
-     ]
+     }
    }
- }
 
-                    Figure 13: CCA realm identifiers
+                      Figure 13: CCA realm identifiers
 
 4.  Security Considerations
 
@@ -677,22 +669,7 @@ Table of Contents
 
 5.  IANA Considerations
 
-5.1.  CBOR Tag Registrations
-
-   IANA is requested to allocate the following tags in the "CBOR Tags"
-   registry [IANA.cbor-tags], preferably with the specified value:
-
-        +=====+==============+===================================+
-        | Tag | Data Item    | Semantics                         |
-        +=====+==============+===================================+
-        | 600 | tagged bytes | CCA Implementation ID             |
-        |     |              | (Section 3.1.2 of RFCthis)        |
-        +-----+--------------+-----------------------------------+
-        | 601 | tagged map   | CCA Software Component Identifier |
-        |     |              | (Section 3.1.3 of RFCthis)        |
-        +-----+--------------+-----------------------------------+
-
-                         Table 1: CoRIM CBOR Tags
+   This document makes no requests to IANA.
 
 6.  Acknowledgements
 
@@ -717,10 +694,6 @@ Table of Contents
               Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
               March 2025, <https://datatracker.ietf.org/doc/html/draft-
               ietf-rats-corim-07>.
-
-   [IANA.cbor-tags]
-              IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <https://www.iana.org/assignments/cbor-tags>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
