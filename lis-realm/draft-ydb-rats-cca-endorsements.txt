@@ -244,8 +244,9 @@ Table of Contents
 
 3.1.3.1.  CCA Platform Software Components
 
-   Each CCA Platform software component is encoded in a measurement-
-   values-map as defined in Figure 5.
+   Each CCA Platform software component (called arm-platform-sw-
+   component in Section 4.6.1 of [I-D.ffm-rats-cca-token]) is encoded in
+   a measurement-values-map as defined in Figure 5.
 
    cca-swcomp-measurement-values-map = {
      ? &(version: 0) => cca-swcomp-version-map
@@ -337,9 +338,11 @@ Table of Contents
    The measurement-values-map for a CCA Platform configuration is
    wrapped in a measurement-map with an mkey using the text variant of
    the $measured-element-type-choice.  The value of the mkey MUST be
-   "cca.platform-config".  The authorized-by field of the measurement-
-   map MUST NOT be present.  Find the related CDDL definitions in
-   Figure 8.
+   "cca.platform-config".  There MUST be only one measurement-map with
+   mkey "cca.platform-config" in the triple.
+
+   The authorized-by field of the measurement-map MUST NOT be present.
+   Find the related CDDL definitions in Figure 8.
 
    cca-config-measurement-map = {
      &(mkey: 0) => "cca.platform-config"
