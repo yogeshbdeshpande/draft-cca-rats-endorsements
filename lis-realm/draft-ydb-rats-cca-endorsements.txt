@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 29 November 2025                                         Linaro
-                                                             28 May 2025
+Expires: 6 December 2025                                          Linaro
+                                                             4 June 2025
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2025.
+   This Internet-Draft will expire on 6 December 2025.
 
 Copyright Notice
 
@@ -478,11 +478,11 @@ Table of Contents
 
 3.2.  Arm CCA Realm Endorsements
 
-   CCA provides confidential computing environments, known as Realms,
-   that enable application workloads requiring confidential execution to
-   operate in isolation from the host hypervisor and any other
-   concurrent workload.  CCA allows the initial and run-time state of a
-   Realm to be attested (Section 4.8 of [I-D.ffm-rats-cca-token]).
+   Arm CCA provides confidential computing environments, known as
+   Realms, that enable application workloads requiring confidential
+   execution to operate in isolation from the host hypervisor and any
+   other concurrent workload.  CCA allows the initial and run-time state
+   of a Realm to be attested (Section 4.8 of [I-D.ffm-rats-cca-token]).
 
    Realm Endorsements consist of Reference Values (Section 3.2.3), which
    are measurements of the configuration and contents of a Realm at the
