@@ -1519,11 +1519,12 @@ cca-config-tagged-masked-raw-value = #6.563([
 </div>
 <p id="section-3.1.3.2-4">The <code>measurement-values-map</code> for a CCA Platform configuration is wrapped in a <code>measurement-map</code> with an <code>mkey</code> using the text variant of the <code>$measured-element-type-choice</code>.
 The value of the <code>mkey</code> MUST be "cca.platform-config".
-The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.
-Find the related CDDL definitions in <a href="#cddl-config-mm" class="auto internal xref">Figure 8</a>.<a href="#section-3.1.3.2-4" class="pilcrow">¶</a></p>
+There MUST be only one <code>measurement-map</code> with <code>mkey</code> "cca.platform-config" in the triple.<a href="#section-3.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.2-5">The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.
+Find the related CDDL definitions in <a href="#cddl-config-mm" class="auto internal xref">Figure 8</a>.<a href="#section-3.1.3.2-5" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-software-componen"></span><div id="cddl-config-mm">
 <figure id="figure-8">
-              <div class="lang-cddl sourcecode" id="section-3.1.3.2-5.1">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.2-6.1">
 <pre>
 cca-config-measurement-map = {
   &amp;(mkey: 0) =&gt; "cca.platform-config"
