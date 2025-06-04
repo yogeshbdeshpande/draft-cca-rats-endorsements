@@ -1419,18 +1419,18 @@ cca-swcomp-version-map = {
   &amp;(version: 0) =&gt; text
 }
 
-cca-swcomp-signer-id = #6.560(cca-hash-type)
-
-cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+cca-swcomp-digests-type = [ + cca-digest ]
 
 cca-digest = [
   alg: text
   val: cca-hash-type
 ]
 
-cca-swcomp-digests-type = [ + cca-digest ]
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
 
 cca-swcomp-name = text
+
+cca-swcomp-signer-id = #6.560(cca-hash-type)
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
