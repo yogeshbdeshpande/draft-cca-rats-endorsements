@@ -20,12 +20,12 @@
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
+    lxml 5.3.1
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
-    setuptools 70.3.0
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-ydb-rats-cca-endorsements.xml" rel="alternate" type="application/rfc+xml">
@@ -1045,11 +1045,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Arm CCA Endorsements</td>
-<td class="right">May 2025</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Deshpande &amp; Fossati</td>
-<td class="center">Expires 23 November 2025</td>
+<td class="center">Expires 6 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ydb-rats-cca-endorsements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-22" class="published">22 May 2025</time>
+<time datetime="2025-06-04" class="published">4 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-23">23 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-06">6 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1114,7 +1114,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1165,7 +1165,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-reference-values" class="internal xref">Reference Values</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
-                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-attestation-verification-cl" class="internal xref">Attestation Verification Claims</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-attestation-verification-ke" class="internal xref">Attestation Verification Keys</a></p>
 </li>
                 </ul>
 </li>
@@ -1247,9 +1247,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-arm-cca-endorsements">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-arm-cca-endorsements" class="section-name selfRef">Arm CCA Endorsements</a>
       </h2>
-<p id="section-3-1">Arm CCA attestation scheme is a composite attestation scheme which comprises a CCA Platform Attestation &amp; a Realm Attestation <span>[<a href="#CCA-ARCH" class="cite xref">CCA-ARCH</a>]</span>.
-Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform and CCA Realm. This draft documents both the CCA platform and realm endorsements.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<div id="arm-cca-platform-endorsements">
+<p id="section-3-1">The Arm CCA Attester is a layered Attester comprising separate yet linked Platform and Realm Attesters.
+For the details, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>.
+Appraising Arm CCA Evidence requires endorsements for both the Platform and Realm.
+This document outlines the Platform and Realm endorsements in <a href="#sec-platform-endorsements" class="auto internal xref">Section 3.1</a> and <a href="#realm-endorsements" class="auto internal xref">Section 3.2</a>, respectively.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="sec-platform-endorsements">
 <section id="section-3.1">
         <h3 id="name-arm-cca-platform-endorsemen">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-arm-cca-platform-endorsemen" class="section-name selfRef">Arm CCA Platform Endorsements</a>
@@ -1260,7 +1262,7 @@ Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform 
             <p id="section-3.1-2.1.1">Reference Values (<a href="#sec-ref-values" class="auto internal xref">Section 3.1.3</a>), i.e., measurements of the CCA Platform firmware.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-2.2">
-            <p id="section-3.1-2.2.1">Attestation Verification Claims (<a href="#sec-keys" class="auto internal xref">Section 3.1.4</a>), i.e., cryptographic keys that can be used to verify signed attestation token produced by the CCA platform, along with the identifiers that bind the keys to their platform instances.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-2.2.1">Attestation Verification Keys (<a href="#sec-keys" class="auto internal xref">Section 3.1.4</a>), i.e., cryptographic keys that can be used to verify Evidence produced by the CCA Platform, along with the identifiers that link the keys to their platform instances.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <div id="arm-cca-platform-endorsement-profile">
@@ -1268,11 +1270,11 @@ Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform 
           <h4 id="name-arm-cca-platform-endorsement">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-arm-cca-platform-endorsement" class="section-name selfRef">Arm CCA Platform Endorsement Profile</a>
           </h4>
-<p id="section-3.1.1-1">Arm CCA platform endorsements are carried in one or more CoMIDs inside a CoRIM.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_platform#1.0.0</code> as shown in <a href="#ex-cca-platform-profile" class="auto internal xref">Figure 1</a>.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">Arm CCA Platform endorsements are carried in one or more CoMIDs inside a CoRIM.
+The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_platform#1.0.0</code>, as shown in <a href="#ex-cca-platform-profile" class="auto internal xref">Figure 1</a>.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-profile-versio"></span><div id="ex-cca-platform-profile">
 <figure id="figure-1">
-            <div class="alignLeft art-text artwork" id="section-3.1.1-3.1">
+            <div class="alignLeft art-text artwork" id="section-3.1.1-2.1">
 <pre>
 / corim-map / {
   / corim.profile / 3: [
@@ -1283,7 +1285,7 @@ Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform 
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-cca-platform-profile-versio" class="selfRef">CCA platform profile version 1, CoRIM profile</a>
+<a href="#name-cca-platform-profile-versio" class="selfRef">CCA Platform profile version 1, CoRIM profile</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1293,49 +1295,64 @@ Hence appraisal of Arm CCA attestation needs endorsements for both CCA Platform 
           <h4 id="name-arm-cca-platform-endorsements">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-arm-cca-platform-endorsements" class="section-name selfRef">Arm CCA Platform Endorsements linkage to CCA Platform</a>
           </h4>
-<p id="section-3.1.2-1">Each CCA Platform Endorsement - be it a Reference Value or Attestation Verification Key
-is associated with a unique CCA platform identifier. A CCA platform
-identifier known as CCA Platform Implementation ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.2" class="relref">Section 4.4.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>)
-uniquely identifies a class of CCA platform to which the manufacturer/endorser links the supplied
-Endorsements (Reference Values &amp; Attestation Verification Keys) for a CCA platform.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-2">In order to support CCA Implementation IDs, the CoMID type
-<code>$class-id-type-choice</code> is extended as follows <a href="#ex-cca-platform-impl-id" class="auto internal xref">Figure 2</a>:<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<span id="name-example-cca-platform-implem"></span><div id="ex-cca-platform-impl-id">
+<p id="section-3.1.2-1">Each CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique identifier known as CCA Platform Implementation ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.2" class="relref">Section 4.4.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).
+The Implementation ID uniquely identifies a given implementation of a CCA Platform and it is used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">To encode an Implementation ID, the <code>tagged-bytes</code> variant of the <code>$class-id-type-choice</code> is used, as described in <a href="#cddl-impl-id" class="auto internal xref">Figure 2</a>.
+The length of the byte string MUST be exactly 32.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-implementation"></span><div id="cddl-impl-id">
 <figure id="figure-2">
-            <div class="alignLeft art-text artwork" id="section-3.1.2-3.1">
+            <div class="lang-cddl sourcecode" id="section-3.1.2-3.1">
 <pre>
-cca-implementation-id-type = bytes .size 32
+impl-id-tagged-bytes = #6.560(arm-platform-implementation-id-type)
 
-tagged-implementation-id-type = #6.600(implementation-id-type)
-
-$class-id-type-choice /= tagged-implementation-id-type
+arm-platform-implementation-id-type = bytes .size 32
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-example-cca-platform-implem" class="selfRef">Example CCA Platform Implementation ID</a>
+<a href="#name-cca-platform-implementation" class="selfRef">CCA Platform Implementation ID encoding</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.2-4">Besides, a CCA Endorsement can be associated with a specific instance of a
-certain CCA Platform implementation - as is the case of Attestation Verification Claims.  A CCA
-Attestation Verification Claims are associated with a CCA platform instance by means of the Instance ID
-(see Section 4.4.1 of -cca-token}}) and its platform Implementation ID.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-5">These identifiers are typically found in the subject of a CoMID triple, encoded in an <code>environment-map</code> as shown in <a href="#ex-cca-platform-id" class="auto internal xref">Figure 3</a>.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
-<span id="name-example-cca-platform-identi"></span><div id="ex-cca-platform-id">
+<p id="section-3.1.2-4">Besides, a CCA Endorsement can be associated with a specific <em>instance</em> of a certain CCA Platform implementation - as is the case of Attestation Verification Keys.
+The Instance ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.1" class="relref">Section 4.4.1</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>) provides a unique identifier for a given CCA Platform instance.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-5">To encode an Instance ID, the <code>tagged-ueid-type</code> variant of the <code>$instance-id-type-choice</code> is used, as described in <a href="#cddl-inst-id" class="auto internal xref">Figure 3</a>.
+The first byte MUST be 0x01 (RAND) followed by the 32-byte unique instance identifier.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-instance-id-en"></span><div id="cddl-inst-id">
 <figure id="figure-3">
-            <div class="alignLeft art-text artwork" id="section-3.1.2-6.1">
+            <div class="lang-cddl sourcecode" id="section-3.1.2-6.1">
+<pre>
+inst-id-tagged-ueid = #6.550(eat-ueid-rand-type)
+
+eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+
+eat-ueid-rand-fmt = [
+  ; the type byte is 0x01
+  ueid-rand-typ
+  bytes .size 32
+]
+
+ueid-rand-typ = h'01'
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-cca-platform-instance-id-en" class="selfRef">CCA Platform Instance ID encoding</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.2-7">CCA Attestation Verification Keys are associated with a CCA Platform instance by means of the Instance ID and the corresponding Implementation ID.
+These identifiers are typically found in the subject of a CoMID triple, encoded in an <code>environment-map</code> as shown in <a href="#ex-cca-platform-id" class="auto internal xref">Figure 4</a>.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
+<span id="name-example-cca-platform-identi"></span><div id="ex-cca-platform-id">
+<figure id="figure-4">
+            <div class="lang-cbor-diag sourcecode" id="section-3.1.2-8.1">
 <pre>
 / environment-map / {
   / comid.class / 0 : {
-    / comid.class-id / 0 :
-      / tagged-impl-id-type / 600(
+    / comid.class-id (implementation id) / 0 :
+      / tagged-bytes / 560(
         h'61636d652d696d706c656d656e746174
           696f6e2d69642d303030303030303031'
-      ),
-      / comid.vendor / 1 : "ACME Ltd.",
-      / comid.model /  2 : "Roadrunner 1.0"
+      )
   },
   / comid.instance / 1 :
-    / tagged-ueid-type / 550(
+    / tagged-ueid-type (instance id) / 550(
       h'01
         4ca3e4f50bf248c39787020d68ffd05c
         88767751bf2645ca923f57a98becd296'
@@ -1343,13 +1360,11 @@ Attestation Verification Claims are associated with a CCA platform instance by m
 }
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-example-cca-platform-identi" class="selfRef">Example CCA Platform Identification</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.2-7">Optional <code>vendor</code> and <code>model</code> can be specified as well. Together, they are
-interpreted as a unique identifier of the CCA platform.
-Consistently providing a product identifier is RECOMMENDED.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-9">Together, they are interpreted as a unique identifier of the CCA Platform.<a href="#section-3.1.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-ref-values">
@@ -1357,7 +1372,9 @@ Consistently providing a product identifier is RECOMMENDED.<a href="#section-3.1
           <h4 id="name-reference-values">
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-reference-values" class="section-name selfRef">Reference Values</a>
           </h4>
-<p id="section-3.1.3-1">Reference Values carry measurements and other metadata associated with the updatable firmware of CCA platform. The CCA platform is a collective term used to identify all the hardware and firmware components that comprise a CCA system. Specifically these include the following:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-1">Reference Values carry measurements and other metadata associated with the updatable firmware of the CCA Platform.
+CCA Platform is a collective term used to identify all the hardware and firmware components that comprise a CCA system.
+Specifically these include the following:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.3-2.1">
               <p id="section-3.1.3-2.1.1">CCA system security domain<a href="#section-3.1.3-2.1.1" class="pilcrow">¶</a></p>
@@ -1372,63 +1389,103 @@ Consistently providing a product identifier is RECOMMENDED.<a href="#section-3.1
 <p id="section-3.1.3-3">When appraising Evidence, the Verifier compares Reference Values against:<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.3-4.1">
-              <p id="section-3.1.3-4.1.1">The values found in the Software Components of the CCA platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6" class="relref">Section 4.6</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.3-4.1.1">The values found in the Software Components of the CCA Platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6" class="relref">Section 4.6</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.3-4.2">
-              <p id="section-3.1.3-4.2.1">The value set in the platform configuration of the CCA platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.5.3" class="relref">Section 4.5.3</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.3-4.2.1">The value set in the platform configuration of the CCA Platform token (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.5.3" class="relref">Section 4.5.3</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).<a href="#section-3.1.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.3-5">Each measurement is encoded in a <code>measurement-map</code> of a CoMID
-<code>reference-triple-record</code>.  Since a <code>measurement-map</code> can encode one or more
-measurements, a single <code>reference-triple-record</code> can carry as many measurements as needed, provided they belong to the same CCA platform identified in the subject of
-the "reference value" triple.  A single <code>reference-triple-record</code> SHALL
-completely describe the CCA platform measurements.<a href="#section-3.1.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-5">Each measurement is encoded in a <code>measurement-map</code> of a CoMID <code>reference-triple-record</code>.
+Since a <code>measurement-map</code> can encode one or more measurements, a single <code>reference-triple-record</code> can carry as many measurements as needed, provided they belong to the same CCA Platform identified in the subject of the triple.
+A single <code>reference-triple-record</code> MUST completely describe the CCA Platform measurements.<a href="#section-3.1.3-5" class="pilcrow">¶</a></p>
 <div id="cca-platform-software-components">
 <section id="section-3.1.3.1">
             <h5 id="name-cca-platform-software-compo">
 <a href="#section-3.1.3.1" class="section-number selfRef">3.1.3.1. </a><a href="#name-cca-platform-software-compo" class="section-name selfRef">CCA Platform Software Components</a>
             </h5>
-<p id="section-3.1.3.1-1">For the Reference Values of CCA platform software components the identifier of a measured software component is encoded in a <code>arm-swcomp-id</code> object as follows <a href="#ex-swcomp-id" class="auto internal xref">Figure 4</a>:<a href="#section-3.1.3.1-1" class="pilcrow">¶</a></p>
-<span id="name-example-sw-component-id"></span><div id="ex-swcomp-id">
-<figure id="figure-4">
-              <div class="alignLeft art-text artwork" id="section-3.1.3.1-2.1">
+<p id="section-3.1.3.1-1">Each CCA Platform software component (called <code>arm-platform-sw-component</code> in <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6.1" class="relref">Section 4.6.1</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>) is encoded in a <code>measurement-values-map</code> as defined in <a href="#cddl-swcomp-mvm" class="auto internal xref">Figure 5</a>.<a href="#section-3.1.3.1-1" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-software-compon"></span><div id="cddl-swcomp-mvm">
+<figure id="figure-5">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.1-2.1">
 <pre>
-arm-swcomp-id = {
-  arm.measurement-type =&gt; text
-  arm.version =&gt; text
-  arm.signer-id =&gt; arm.hash-type
+cca-swcomp-measurement-values-map = {
+  ? &amp;(version: 0) =&gt; cca-swcomp-version-map
+  &amp;(digests: 2) =&gt; cca-swcomp-digests-type
+  ? &amp;(name: 11) =&gt; cca-swcomp-name
+  &amp;(cryptokeys: 13) =&gt; [ cca-swcomp-signer-id ]
 }
 
-arm.hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+cca-swcomp-version-map = {
+  &amp;(version: 0) =&gt; text
+}
 
-arm.measurement-type = 1
-arm.version = 4
-arm.signer-id = 5
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-sw-component-id" class="selfRef">Example SW Component ID</a>
-              </figcaption></figure>
-</div>
-<p id="section-3.1.3.1-3">The semantics of the codepoints in the <code>arm-swcomp-id</code> map are equivalent to those in the <code>cca-platform-sw-component</code> map defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6.1" class="relref">Section 4.6.1</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>.  The <code>arm-swcomp-id</code> MUST uniquely identify a given software component within the CCA platform / product.<a href="#section-3.1.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.1-4">In order to support CCA Reference Value identifiers, the CoMID type
-<code>$measured-element-type-choice</code> is extended as follows<a href="#ex-swcomp-id-ext" class="auto internal xref">Figure 5</a>:<a href="#section-3.1.3.1-4" class="pilcrow">¶</a></p>
-<span id="name-example-sw-component-id-ext"></span><div id="ex-swcomp-id-ext">
-<figure id="figure-5">
-              <div class="alignLeft art-text artwork" id="section-3.1.3.1-5.1">
-<pre>
-tagged-arm-swcomp-id = #6.601(arm-swcomp-id)
+cca-swcomp-digests-type = [ + cca-digest ]
 
-$measured-element-type-choice /= tagged-arm-swcomp-id
+cca-digest = [
+  alg: text
+  val: cca-hash-type
+]
+
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+
+cca-swcomp-name = text
+
+cca-swcomp-signer-id = #6.560(cca-hash-type)
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-sw-component-id-ext" class="selfRef">Example SW Component ID Extension</a>
+<a href="#name-cca-platform-software-compon" class="selfRef">CCA Platform Software Component encoding</a>
               </figcaption></figure>
 </div>
-<p id="section-3.1.3.1-6">and automatically bound to the <code>comid.mkey</code> in the <code>measurement-map</code>.<a href="#section-3.1.3.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.1-7">The raw measurement is encoded in a <code>digests-type</code> object in the
-<code>measurement-values-map</code>.  The <code>digests-type</code> array MUST contain at least one entry. The <code>digests-type</code> array MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist. Refer below <a href="#ex-cca-platform-refval-meas" class="auto internal xref">Figure 6</a>.<a href="#section-3.1.3.1-7" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.3.1-3">
+              <dt id="section-3.1.3.1-3.1">version (key 0):</dt>
+              <dd style="margin-left: 1.5em" id="section-3.1.3.1-3.2">
+                <p id="section-3.1.3.1-3.2.1">A <code>version-map</code> with its <code>version</code> field containing the version (key 4) of the <code>arm-platform-sw-component</code>.
+The <code>version-scheme</code> field of the <code>version-map</code> MUST NOT be present.
+This field is optional.<a href="#section-3.1.3.1-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-3.1.3.1-3.3">digests (key 2):</dt>
+              <dd style="margin-left: 1.5em" id="section-3.1.3.1-3.4">
+                <p id="section-3.1.3.1-3.4.1">Each array element encodes the "measurement value" (key 2) and "hash algorithm identifier" (key 6) of the <code>arm-platform-sw-component</code> in the <code>val</code> and <code>alg</code> entries, respectively.
+The <code>alg</code> entry MUST use the text encoding.
+The digests array MUST contain at least one entry and MAY contain more than one entry if multiple digests (obtained with different hash algorithms) of the same measured component exist.
+If multiple entries exist, they MUST have different <code>alg</code> values.
+This field is mandatory.<a href="#section-3.1.3.1-3.4.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-3.1.3.1-3.5">name (key 11):</dt>
+              <dd style="margin-left: 1.5em" id="section-3.1.3.1-3.6">
+                <p id="section-3.1.3.1-3.6.1">A text value containing the "component type" (key 1) of the <code>arm-platform-sw-component</code>.
+This field is optional.<a href="#section-3.1.3.1-3.6.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-3.1.3.1-3.7">cryptokeys (key 13):</dt>
+              <dd style="margin-left: 1.5em" id="section-3.1.3.1-3.8">
+                <p id="section-3.1.3.1-3.8.1">An array with <em>only one</em> entry using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
+The entry contains the "signer id" (key 5) of the <code>arm-platform-sw-component</code>.
+This field is mandatory.<a href="#section-3.1.3.1-3.8.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+<p id="section-3.1.3.1-4">Each <code>measurement-values-map</code> for a CCA Platform software component is wrapped in a <code>measurement-map</code> with an <code>mkey</code> using the text variant of the <code>$measured-element-type-choice</code>.
+The value of the <code>mkey</code> MUST be "cca.software-component".
+The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.
+Find the related CDDL definitions in <a href="#cddl-swcomp-mm" class="auto internal xref">Figure 6</a>.<a href="#section-3.1.3.1-4" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-software-compone"></span><div id="cddl-swcomp-mm">
+<figure id="figure-6">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.1-5.1">
+<pre>
+cca-swcomp-measurement-map = {
+  &amp;(mkey: 0) =&gt; "cca.software-component"
+  &amp;(mval: 1) =&gt; cca-swcomp-measurement-values-map
+}
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-cca-platform-software-compone" class="selfRef">CCA Platform Software Component measurement-map</a>
+              </figcaption></figure>
+</div>
 </section>
 </div>
 <div id="cca-platform-configuration">
@@ -1436,111 +1493,124 @@ $measured-element-type-choice /= tagged-arm-swcomp-id
             <h5 id="name-cca-platform-configuration">
 <a href="#section-3.1.3.2" class="section-number selfRef">3.1.3.2. </a><a href="#name-cca-platform-configuration" class="section-name selfRef">CCA Platform Configuration</a>
             </h5>
-<p id="section-3.1.3.2-1">A Reference value for CCA platform configuration describes the set of chosen implementation options of the CCA platform. As an example, these may include a description of the level of physical memory protection which is provided.<a href="#section-3.1.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.2-2">CCA platform configuration reference value represent vendor specific variable length data. As a result, in the CCA platform CoRIM profile, it is represented in a <code>measurement-values-map</code> using <code>raw-values</code> set to <code>tagged-bytes</code> to express a variable length byte string, representing platform configuration data.<a href="#section-3.1.3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.2-3">$raw-value-type-choice /= tagged-bytes<a href="#section-3.1.3.2-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="complete-representation">
-<section id="section-3.1.3.3">
-            <h5 id="name-complete-representation">
-<a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-complete-representation" class="section-name selfRef">Complete Representation</a>
-            </h5>
-<p id="section-3.1.3.3-1">The complete representation of CCA Platform Reference Values is given in <a href="#ex-cca-platform-refval-meas" class="auto internal xref">Figure 6</a> and <a href="#ex-cca-platform-refval-cfg" class="auto internal xref">Figure 7</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
-<span id="name-example-cca-sw-component-re"></span><div id="ex-cca-platform-refval-meas">
-<figure id="figure-6">
-              <div class="alignLeft art-text artwork" id="section-3.1.3.3-2.1">
-<pre>
-/ concise-mid-tag / {
-  / comid.tag-identity / 1 : {
-    / comid.tag-id / 0 : h'3f06af63a93c11e4979700505690773f'
-  },
-  / comid.triples / 4 : {
-    / comid.reference-triples / 0 : [
-      [
-        / environment-map / {
-          / comid.class / 0 : {
-            / comid.class-id / 0 :
-              / tagged-impl-id-type / 600(
-                h'61636d652d696d706c656d656e746174
-                  696f6e2d69642d303030303030303031'
-              ),
-              / comid.vendor / 1 : "ACME Ltd.",
-              / comid.model /  2 : "Roadrunner 1.0"
-          }
-        },
-        [
-          / measurement-map / {
-            / comid.mkey / 0 : 601({
-              / arm.measurement-type / 1 : "PRoT",
-              / arm.version /          4 : "1.3.5",
-              / arm.signer-id /        5 : h'acbb11c7e4da217205523ce4ce
-                                             1a245ae1a239ae3c6bfd9e7871
-                                             f7e5d8bae86b'
-            }),
-            / comid.mval / 1 : {
-              / comid.digests / 2 : [
-                / hash-alg-id / 1, / sha256 /
-                / hash-value /  h'44aa336af4cb14a879432e53dd6571c7
-                                  fa9bccafb75f488259262d6ea3a4d91b'
-              ]
-            }
-          }
-        ]
-      ]
-    ]
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-example-cca-sw-component-re" class="selfRef">Example CCA SW Component Reference Value</a>
-              </figcaption></figure>
-</div>
-<span id="name-example-cca-platform-config"></span><div id="ex-cca-platform-refval-cfg">
+<p id="section-3.1.3.2-1">The CCA Platform configuration describes the set of chosen implementation options of the CCA Platform.
+For example, this may include a description of the level of physical memory protection provided.<a href="#section-3.1.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.2-2">CCA Platform configuration is vendor-specific variable-length data.
+Only some of the data may be security-relevant.
+For these reasons, it is represented in a <code>raw-value</code> of the <code>measurement-values-map</code>, using the <code>tagged-masked-raw-value</code> variant of the <code>$raw-values-type-choice</code>.
+Refer to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-5.1.4.1.4.6" class="relref">Section 5.1.4.1.4.6</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for the details about the comparison algorithm.<a href="#section-3.1.3.2-2" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-configuration-"></span><div id="cddl-config-mvm">
 <figure id="figure-7">
-              <div class="alignLeft art-text artwork" id="section-3.1.3.3-3.1">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.2-3.1">
 <pre>
-/ concise-mid-tag / {
-  / comid.tag-identity / 1 : {
-    / comid.tag-id / 0 : h'3f06af63a93c11e4979700505690773f'
-  },
-  / comid.triples / 4 : {
-    / comid.reference-triples / 0 : [
-      [
-        / environment-map / {
-          / comid.class / 0 : {
-            / comid.class-id / 0 :
-              / tagged-impl-id-type / 600(
-                h'61636d652d696d706c656d656e746174
-                  696f6e2d69642d303030303030303031'
-              ),
-              / comid.vendor / 1 : "ACME Ltd.",
-              / comid.model /  2 : "Roadrunner 1.0"
-          }
-        },
-        [
-          / measurement-map / {
-            / comid.mkey / 0 : 602({
-              / "cca.platform-config-id" / 1 : "any-value"
-            }),
-            / comid.mval / 1 : {
-              / comid.raw-value / 4 : {
-               / tagged-bytes / 560(
-                 h'67b28b6c39cc40a19117ab5b05911e37'
-                )
-              }
-            }
-          }
-        ]
-      ]
-    ]
-  }
+cca-config-measurement-values-map = {
+  &amp;(raw-value: 4) =&gt; cca-tagged-masked-raw-value
 }
+
+cca-config-tagged-masked-raw-value = #6.563([
+  value: bytes
+  mask: bytes
+])
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-example-cca-platform-config" class="selfRef">Example CCA Platform Configuration Reference Values</a>
+<a href="#name-cca-platform-configuration-" class="selfRef">CCA Platform Configuration measurement-map</a>
+              </figcaption></figure>
+</div>
+<p id="section-3.1.3.2-4">The <code>measurement-values-map</code> for a CCA Platform configuration is wrapped in a <code>measurement-map</code> with an <code>mkey</code> using the text variant of the <code>$measured-element-type-choice</code>.
+The value of the <code>mkey</code> MUST be "cca.platform-config".
+There MUST be only one <code>measurement-map</code> with <code>mkey</code> "cca.platform-config" in the triple.<a href="#section-3.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.2-5">The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.
+Find the related CDDL definitions in <a href="#cddl-config-mm" class="auto internal xref">Figure 8</a>.<a href="#section-3.1.3.2-5" class="pilcrow">¶</a></p>
+<span id="name-cca-platform-software-componen"></span><div id="cddl-config-mm">
+<figure id="figure-8">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.2-6.1">
+<pre>
+cca-config-measurement-map = {
+  &amp;(mkey: 0) =&gt; "cca.platform-config"
+  &amp;(mval: 1) =&gt; cca-config-measurement-values-map
+}
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-cca-platform-software-componen" class="selfRef">CCA Platform Software Component measurement-map</a>
+              </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="comid-example">
+<section id="section-3.1.3.3">
+            <h5 id="name-comid-example">
+<a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-comid-example" class="section-name selfRef">CoMID Example</a>
+            </h5>
+<p id="section-3.1.3.3-1">An example CoMID containing one Reference Values triple containing expected values for both software components and platform configuration is given in <a href="#ex-cca-platform-refval" class="auto internal xref">Figure 9</a>.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
+<span id="name-example-cca-platform-refere"></span><div id="ex-cca-platform-refval">
+<figure id="figure-9">
+              <div class="breakable lang-cbor-diag sourcecode" id="section-3.1.3.3-2.1">
+<pre>
+/ concise-mid-tag / {
+  / comid.tag-identity / 1 : {
+    / comid.tag-id / 0 : h'3f06af63a93c11e4979700505690773f'
+  },
+  / comid.triples / 4 : {
+    / comid.reference-triples / 0 : [
+      [
+        / environment-map / {
+          / comid.class / 0 : {
+            / comid.class-id / 0 :
+              / tagged-impl-id-type / 600(
+                h'61636d652d696d706c656d656e746174
+                  696f6e2d69642d303030303030303031'
+              )
+          }
+        },
+        [
+          / measurement-map / {
+            / comid.mkey / 0 : "cca.software-component",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                / hash-alg-id / "sha-256",
+                / hash-value /  h'9a271f2a916b0b6ee6cecb2426f0b320
+                                  6ef074578be55d9bc94f6f3fe3ab86aa'
+              ],
+              / name / 11 : "RSE_BL1_2",
+              / cryptokeys / 13 : 560(h'5378796307535df3ec8d8b15a2
+                                        e2dc5641419c3d3060cfe32238
+                                        c0fa973f7aa3')
+            }
+          },
+          / measurement-map / {
+            / comid.mkey / 0 : "cca.software-component",
+            / comid.mval / 1 : {
+              / comid.digests / 2 : [
+                / hash-alg-id / "sha-256",
+                / hash-value /  h'53c234e5e8472b6ac51c1ae1cab3fe06
+                                  fad053beb8ebfd8977b010655bfdd3c3'
+              ],
+              / name / 11 : "RSE_BL2",
+              / cryptokeys / 13 : 560(h'5378796307535df3ec8d8b15a2
+                                        e2dc5641419c3d3060cfe32238
+                                        c0fa973f7aa3')
+            }
+          },
+          / measurement-map / {
+            / comid.mkey / 0 : "cca.platform-config",
+            / comid.mval / 1 : {
+              / comid.raw-value / 4 : / tagged-masked-raw-value / 563([
+                / value / h'cfcfcfcf',
+                / mask /  h'ffffffff'
+              ])
+            }
+          }
+        ]
+      ]
+    ]
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-example-cca-platform-refere" class="selfRef">Example CCA Platform Reference Values</a>
               </figcaption></figure>
 </div>
 </section>
@@ -1549,27 +1619,27 @@ $measured-element-type-choice /= tagged-arm-swcomp-id
 </div>
 <div id="sec-keys">
 <section id="section-3.1.4">
-          <h4 id="name-attestation-verification-cl">
-<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-attestation-verification-cl" class="section-name selfRef">Attestation Verification Claims</a>
+          <h4 id="name-attestation-verification-ke">
+<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-attestation-verification-ke" class="section-name selfRef">Attestation Verification Keys</a>
           </h4>
-<p id="section-3.1.4-1">Attestation Verification Claim carries the verification key associated with
-the Initial Attestation Key (IAK) of a CCA platform. When appraising Evidence,
-the Verifier uses the Implementation ID and Instance ID claims (see
-<a href="#sec-cca-rot-id" class="auto internal xref">Section 3.1.2</a>) to retrieve the verification key that it SHALL use to check the signature on the CCA platform token.  This allows the Verifier to prove (or disprove) the Attester's claimed identity.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-2">Each verification key is provided alongside the corresponding CCA platform Instance
-and Implementation IDs (and, possibly, a CCA platform product identifier) in an
-<code>attest-key-triple-record</code>.  Specifically:<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-1">An Attestation Verification Key contains the public key associated with the CCA Platform Attestation Key (CPAK).
+When appraising Platform Evidence, the Verifier uses the Implementation ID and Instance ID claims found in the Platform Token to identify the key that it shall use to verify the signature on the CCA Platform token.
+This allows the Verifier to prove (or disprove) the Attester's claimed identity.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-2">Each verification key is provided with the corresponding CCA Platform Instance and Implementation IDs in an <code>attest-key-triple-record</code>.
+Specifically:<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.4-3.1">
-              <p id="section-3.1.4-3.1.1">The Instance and Implementation IDs are encoded in the environment-map as shown in <a href="#ex-cca-platform-id" class="auto internal xref">Figure 3</a><a href="#section-3.1.4-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.4-3.1.1">The Instance and Implementation IDs are encoded in the <code>environment-map</code> as described in <a href="#sec-cca-rot-id" class="auto internal xref">Section 3.1.2</a>;<a href="#section-3.1.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.4-3.2">
-              <p id="section-3.1.4-3.2.1">The IAK public key is set using <code>$crypto-key-type-choice</code> set to tagged-pkix-base64-key-type. The IAK public key is a PEM-encoded SubjectPublicKeyInfo <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. There MUST be only one key in an <code>attest-key-triple-record</code>;<a href="#section-3.1.4-3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.4-3.2.1">The CPAK public key uses the <code>tagged-pkix-base64-key-type</code> variant of the <code>$crypto-key-type-choice</code>.
+The CPAK public key is a PEM-encoded SubjectPublicKeyInfo <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.
+There MUST be only one key in an <code>attest-key-triple-record</code>.<a href="#section-3.1.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.4-4">The example in <a href="#ex-cca-platform-iak" class="auto internal xref">Figure 8</a> shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public IAK associated with Instance ID <code>4ca3...d296</code>.<a href="#section-3.1.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-4">The example in <a href="#ex-cca-platform-iak" class="auto internal xref">Figure 10</a> shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public CPAK associated with Instance ID <code>4ca3...d296</code>.<a href="#section-3.1.4-4" class="pilcrow">¶</a></p>
 <span id="name-example-cca-platform-attest"></span><div id="ex-cca-platform-iak">
-<figure id="figure-8">
+<figure id="figure-10">
             <div class="alignLeft art-text artwork" id="section-3.1.4-5.1">
 <pre>
 / concise-mid-tag / {
@@ -1581,16 +1651,14 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
       [
         / environment-map / {
           / comid.class / 0 : {
-            / comid.class-id / 0 :
-              / tagged-impl-id-type / 600(
+            / comid.class-id (implementation id) / 0 :
+              / tagged-bytes / 560(
                 h'61636d652d696d706c656d656e746174
                   696f6e2d69642d303030303030303031'
-              ),
-              / comid.vendor / 1 : "ACME Ltd.",
-              / comid.model /  2 : "Roadrunner 1.0"
+              )
           },
           / comid.instance / 1 :
-            / tagged-ueid-type / 550(
+            / tagged-ueid-type (instance id) / 550(
               h'01
                 4ca3e4f50bf248c39787020d68ffd05c
                 88767751bf2645ca923f57a98becd296'
@@ -1610,7 +1678,7 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-example-cca-platform-attest" class="selfRef">Example CCA Platform Attestation Verification Key</a>
             </figcaption></figure>
 </div>
@@ -1618,7 +1686,7 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 </div>
 </section>
 </div>
-<div id="arm-cca-realm-endorsements">
+<div id="realm-endorsements">
 <section id="section-3.2">
         <h3 id="name-arm-cca-realm-endorsements">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-arm-cca-realm-endorsements" class="section-name selfRef">Arm CCA Realm Endorsements</a>
@@ -1636,12 +1704,12 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-realm-endorsements-linkage-" class="section-name selfRef">Realm Endorsements linkage to Realm</a>
           </h4>
 <p id="section-3.2.1-1">Each Realm has a unique execution context and hence a unique Realm instance. Each Realm is uniquely identified in the Arm CCA system. For a Realm its Endorsements are associated to this unique instance. The Realm instance is a vendor defined variable length identifier. Hence in this profile, it is represented in a CoMID inside an <code>environment-map</code> with <code>$instance-id-type-choice</code> set to <code>tagged-bytes</code>, i.e. an opaque, variable-length byte string. In this profile of CCA Endorsements, the Realm Initial Measurements are set in <code>tagged-bytes</code> to represent Realm instance.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">When supplying Realm Endorsements, a supplier of one or more Realms may wish to identify itself. Hence the following class related elements in the <code>environment-map</code> of a  <code>comid</code> can be used. See <a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 9</a><a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-2">When supplying Realm Endorsements, a supplier of one or more Realms may wish to identify itself. Hence the following class related elements in the <code>environment-map</code> of a  <code>comid</code> can be used. See <a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 11</a><a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-3">In the <code>class-map</code> select <code>vendor</code> name and/or <code>class-id</code> set as <code>UUID</code> representing unique identity of the Realm owner.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-4">$class-id-type-choice /= tagged-uuid-type<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-5">vendor =&gt; <code>tstr</code> to represent vendor name<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-identifiers"></span><div id="ex-cca-realm-identifiers">
-<figure id="figure-9">
+<figure id="figure-11">
             <div class="alignLeft art-text artwork" id="section-3.2.1-6.1">
 <pre>
 / environment-map / {
@@ -1659,7 +1727,7 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 }
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-cca-realm-identifiers" class="selfRef">CCA realm identifiers</a>
             </figcaption></figure>
 </div>
@@ -1671,9 +1739,9 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-arm-cca-realm-endorsement-p" class="section-name selfRef">Arm CCA Realm Endorsement Profile</a>
           </h4>
 <p id="section-3.2.2-1">Arm CCA Realm Endorsements are carried in a CoMID inside a CoRIM.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_realm#1.0.0</code> as shown in <a href="#ex-cca-realm-profile" class="auto internal xref">Figure 10</a>.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:cca_realm#1.0.0</code> as shown in <a href="#ex-cca-realm-profile" class="auto internal xref">Figure 12</a>.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-profile-version-1"></span><div id="ex-cca-realm-profile">
-<figure id="figure-10">
+<figure id="figure-12">
             <div class="alignLeft art-text artwork" id="section-3.2.2-3.1">
 <pre>
 / corim-map / {
@@ -1684,7 +1752,7 @@ and Implementation IDs (and, possibly, a CCA platform product identifier) in an
 }
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-cca-realm-profile-version-1" class="selfRef">CCA realm profile version 1, CoRIM profile</a>
             </figcaption></figure>
 </div>
@@ -1711,11 +1779,11 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
           </ol>
 <p id="section-3.2.3-4">RIM and REMs are encoded in a <code>measurement-values-map</code> (in a <code>measurement-map</code>) of a CoMID <code>reference-triple-record</code>. Inside <code>measurement-values-map</code> these measurements are carried as <code>integrity-registers</code> map. Integrity Registers map is used to group together one or more measured objects pertaining to an environment. Please refer to <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for details about Integrity Register map.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-5">All the measured objects in an Integrity Registers map are explicitly named. In the context of Realms, the measured objects are RIM and REMs. Inside Integrity Register map, RIM is uniquely identified by the name "rim", while REMs which is an array of measurements from 1..4 are uniquely identified by the coresponding name "rem0".."rem3".<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-6">Realm Personalization Value, (RPV) is an optional identity used by a Realm endorser to uniquely identify multiple Realms which all have the same RIM. RPV if provided is a fixed length 64 bytes identifier. In this profile, RPV is represented using Raw Value Measurements in a <code>measurement-values-map</code>, with raw value type choice set to <code>tagged-bytes</code>. See <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 11</a><a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-6">Realm Personalization Value, (RPV) is an optional identity used by a Realm endorser to uniquely identify multiple Realms which all have the same RIM. RPV if provided is a fixed length 64 bytes identifier. In this profile, RPV is represented using Raw Value Measurements in a <code>measurement-values-map</code>, with raw value type choice set to <code>tagged-bytes</code>. See <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 13</a><a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-7">$raw-value-type-choice /= tagged-bytes<a href="#section-3.2.3-7" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-8">Given below is the complete example of a Realm Endorsements.<a href="#section-3.2.3-8" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-identifiers-2"></span><div id="ex-cca-realm-refval">
-<figure id="figure-11">
+<figure id="figure-13">
             <div class="alignLeft art-text artwork" id="section-3.2.3-9.1">
 <pre>
 / concise-mid-tag / {
@@ -1794,7 +1862,7 @@ CCA Realm.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-cca-realm-identifiers-2" class="selfRef">CCA realm identifiers</a>
             </figcaption></figure>
 </div>
