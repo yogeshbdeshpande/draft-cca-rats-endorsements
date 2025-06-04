@@ -106,7 +106,7 @@ The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.
 ### Arm CCA Platform Endorsements linkage to CCA Platform {#sec-cca-rot-id}
 
 Each CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique identifier known as CCA Platform Implementation ID (see {{Section 4.4.2 of -cca-token}}).
-The Implementation ID uniquely identifies a given implementation of a CCA Platform and it used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.
+The Implementation ID uniquely identifies a given implementation of a CCA Platform and it is used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.
 
 To encode an Implementation ID, the `tagged-bytes` variant of the `$class-id-type-choice` is used, as described in {{cddl-impl-id}}.
 The length of the byte string MUST be exactly 32.
