@@ -293,10 +293,10 @@ Table of Contents
    name (key 11):  A text value containing the "component type" (key 1)
       of the arm-platform-sw-component.  This field is optional.
 
-   cryptokeys (key 13):  An array with only one entry using the tagged-
-      bytes variant of the $crypto-key-type-choice.  The entry contains
-      the "signer id" (key 5) of the arm-platform-sw-component.  This
-      field is mandatory.
+   cryptokeys (key 13):  An array with _only one_ entry using the
+      tagged-bytes variant of the $crypto-key-type-choice.  The entry
+      contains the "signer id" (key 5) of the arm-platform-sw-component.
+      This field is mandatory.
 
    Each measurement-values-map for a CCA Platform software component is
    wrapped in a measurement-map with an mkey using the text variant of
