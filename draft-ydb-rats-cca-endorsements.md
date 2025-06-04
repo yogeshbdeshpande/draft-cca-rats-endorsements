@@ -184,18 +184,18 @@ cca-swcomp-version-map = {
   &(version: 0) => text
 }
 
-cca-swcomp-signer-id = #6.560(cca-hash-type)
-
-cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+cca-swcomp-digests-type = [ + cca-digest ]
 
 cca-digest = [
   alg: text
   val: cca-hash-type
 ]
 
-cca-swcomp-digests-type = [ + cca-digest ]
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
 
 cca-swcomp-name = text
+
+cca-swcomp-signer-id = #6.560(cca-hash-type)
 ~~~
 {: #cddl-swcomp-mvm title="CCA Platform Software Component encoding"}
 
