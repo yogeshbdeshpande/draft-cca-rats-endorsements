@@ -216,7 +216,7 @@ name (key 11):
 This field is optional.
 
 cryptokeys (key 13):
-: An array with only one entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
+: An array with *only one* entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
 The entry contains the "signer id" (key 5) of the `arm-platform-sw-component`.
 This field is mandatory.
 
