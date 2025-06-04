@@ -241,6 +241,7 @@ For example, this may include a description of the level of physical memory prot
 CCA Platform configuration is vendor-specific variable-length data.
 Only some of the data may be security-relevant.
 For these reasons, it is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
+Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
 
 ~~~ cddl
 cca-config-measurement-values-map = {
