@@ -257,6 +257,8 @@ cca-config-tagged-masked-raw-value = #6.563([
 
 The `measurement-values-map` for a CCA Platform configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
 The value of the `mkey` MUST be "cca.platform-config".
+There MUST be only one `measurement-map` with `mkey` "cca.platform-config" in the triple.
+
 The `authorized-by` field of the `measurement-map` MUST NOT be present.
 Find the related CDDL definitions in {{cddl-config-mm}}.
 
