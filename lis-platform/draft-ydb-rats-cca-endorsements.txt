@@ -323,6 +323,8 @@ Table of Contents
    Only some of the data may be security-relevant.  For these reasons,
    it is represented in a raw-value of the measurement-values-map, using
    the tagged-masked-raw-value variant of the $raw-values-type-choice.
+   Refer to Section 5.1.4.1.4.6 of [I-D.ietf-rats-corim] for the details
+   about the comparison algorithm.
 
    cca-config-measurement-values-map = {
      &(raw-value: 4) => cca-tagged-masked-raw-value
