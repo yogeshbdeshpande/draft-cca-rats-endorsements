@@ -170,7 +170,7 @@ A single `reference-triple-record` MUST completely describe the CCA Platform mea
 
 #### CCA Platform Software Components
 
-Each CCA Platform software component is encoded in a `measurement-values-map` as defined in {{cddl-swcomp-mvm}}.
+Each CCA Platform software component (called `arm-platform-sw-component` in {{Section 4.6.1 of -cca-token}}) is encoded in a `measurement-values-map` as defined in {{cddl-swcomp-mvm}}.
 
 ~~~ cddl
 cca-swcomp-measurement-values-map = {
