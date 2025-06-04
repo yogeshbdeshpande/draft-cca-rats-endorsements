@@ -1288,8 +1288,8 @@ This document outlines the Platform and Realm Endorsements in <a href="#sec-plat
           <h4 id="name-arm-cca-platform-endorsements">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-arm-cca-platform-endorsements" class="section-name selfRef">Arm CCA Platform Endorsements linkage to CCA Platform</a>
           </h4>
-<p id="section-3.1.2-1">Each CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique CCA Platform identifier known as Implementation ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.2" class="relref">Section 4.4.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).
-The Implementation ID uniquely identifies a given implementation of a CCA Platform and it used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">Each CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique identifier known as CCA Platform Implementation ID (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.4.2" class="relref">Section 4.4.2</a> of [<a href="#I-D.ffm-rats-cca-token" class="cite xref">I-D.ffm-rats-cca-token</a>]</span>).
+The Implementation ID uniquely identifies a given implementation of a CCA Platform and it is used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-2">To encode an Implementation ID, the <code>tagged-bytes</code> variant of the <code>$class-id-type-choice</code> is used, as described in <a href="#cddl-impl-id" class="auto internal xref">Figure 2</a>.
 The length of the byte string MUST be exactly 32.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-implementation"></span><div id="cddl-impl-id">
@@ -1412,18 +1412,18 @@ cca-swcomp-version-map = {
   &amp;(version: 0) =&gt; text
 }
 
-cca-swcomp-signer-id = #6.560(cca-hash-type)
-
-cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+cca-swcomp-digests-type = [ + cca-digest ]
 
 cca-digest = [
   alg: text
   val: cca-hash-type
 ]
 
-cca-swcomp-digests-type = [ + cca-digest ]
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
 
 cca-swcomp-name = text
+
+cca-swcomp-signer-id = #6.560(cca-hash-type)
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
@@ -1455,7 +1455,7 @@ This field is optional.<a href="#section-3.1.3.1-3.6.1" class="pilcrow">¶</a></
               <dd class="break"></dd>
 <dt id="section-3.1.3.1-3.7">cryptokeys (key 13):</dt>
               <dd style="margin-left: 1.5em" id="section-3.1.3.1-3.8">
-                <p id="section-3.1.3.1-3.8.1">An array with only one entry using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
+                <p id="section-3.1.3.1-3.8.1">An array with <em>only one</em> entry using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
 The entry contains the "signer id" (key 5) of the <code>arm-platform-sw-component</code>.
 This field is mandatory.<a href="#section-3.1.3.1-3.8.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1490,7 +1490,8 @@ cca-swcomp-measurement-map = {
 For example, this may include a description of the level of physical memory protection provided.<a href="#section-3.1.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.2-2">CCA Platform configuration is vendor-specific variable-length data.
 Only some of the data may be security-relevant.
-For these reasons, it is represented in a <code>raw-value</code> of the <code>measurement-values-map</code>, using the <code>tagged-masked-raw-value</code> variant of the <code>$raw-values-type-choice</code>.<a href="#section-3.1.3.2-2" class="pilcrow">¶</a></p>
+For these reasons, it is represented in a <code>raw-value</code> of the <code>measurement-values-map</code>, using the <code>tagged-masked-raw-value</code> variant of the <code>$raw-values-type-choice</code>.
+Refer to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-5.1.4.1.4.6" class="relref">Section 5.1.4.1.4.6</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for the details about the comparison algorithm.<a href="#section-3.1.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-configuration-"></span><div id="cddl-config-mvm">
 <figure id="figure-7">
               <div class="lang-cddl sourcecode" id="section-3.1.3.2-3.1">
