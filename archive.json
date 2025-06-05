@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-29T00:42:04.371934+00:00",
+  "timestamp": "2025-06-05T00:42:33.767647+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -71,19 +71,19 @@
       "id": "I_kwDOMSEE_M6UpG_C",
       "title": "Clarify whether Arm CCA platform config is mandatory or optional?",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "In the CCA Endorsement draft it is not clear whether the supply chain has to provide \r\nArm CCA Platform Configuration or one can omit if the Config Parameter is not used..?\r\n\r\nAs per RMM specification:\r\n`The CCA platform config claim is expected to contain the System Properties field which is present in the Root\r\nNon-volatile Storage (RNVS) public parameters.`\r\n\r\nThis issue tracks need for a clear documentation of this aspect in the next revision of the specification!\r\n",
       "createdAt": "2024-08-29T08:37:07Z",
-      "updatedAt": "2025-05-19T11:55:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-04T13:13:55Z",
+      "closedAt": "2025-06-04T13:13:55Z",
       "comments": [
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "There are at least three things to tease out about this claim:\r\n\r\n1. Exact semantics\r\n2. Optionality\r\n3. Matching criteria\r\n",
           "createdAt": "2024-08-29T09:01:39Z",
           "updatedAt": "2024-08-29T09:01:39Z"
@@ -97,14 +97,14 @@
         },
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "> I am not convinced about item 3. The Platform Config, as received in Evidence should be an exact match of the Config as supplied in Reference Value, so 3. is not really something to tease about!\r\n\r\nIf the config ID is organised as a bitmap, with bit positions indicating specific platform features/settings, it makes sense for the verifier to check that only those of interest are enabled, and be neutral about others.",
           "createdAt": "2024-08-29T09:47:48Z",
           "updatedAt": "2024-08-29T09:47:48Z"
         },
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "As per LIS conversation:\n\n1. To encode the expected Platform Config we will use a `raw-value` of type `tagged-mask-raw-value`.\n2. The associated `mkey` is `\"arm-platform-config\u201d`.",
           "createdAt": "2025-05-19T11:55:08Z",
           "updatedAt": "2025-05-19T11:55:08Z"
@@ -116,7 +116,7 @@
       "id": "I_kwDOMSEE_M63MQIW",
       "title": "Remove Realm Class Variables",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -125,8 +125,8 @@
       "labels": [],
       "body": "The Realm Class Variables namely:\n1. Realm Class ID\n2. Realm Vendor ID \nneeds to be removed, as they do not appear in the CCA Realm Evidence Token.\n\nHence they are of no use in Evidence to Reference Value matching phase in CoRIM Verifier and as such cannot be part of the CCA Endorsement story!",
       "createdAt": "2025-05-19T11:04:15Z",
-      "updatedAt": "2025-05-28T07:55:39Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-04T15:49:13Z",
+      "closedAt": "2025-06-04T15:49:13Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -142,19 +142,19 @@
       "id": "I_kwDOMSEE_M63MUsD",
       "title": "Redefine Realm Reference Values, using Mkey semantics",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Currently, Realm Reference Values (namely CCA RIM and CCA REM) are expressed using, Integrity Registers.\n\nWith the decision to remove Integrity Registers, need to re-model RIM and REM using `mkey` and `mval`, as the base semantics.\n\nThe new CoRIM draft allows expressing multiple Measurement Maps for an Environment so the expression of RIM and REM using the new semantics is the correct representation.",
       "createdAt": "2025-05-19T11:11:09Z",
-      "updatedAt": "2025-05-19T11:43:46Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-04T15:49:14Z",
+      "closedAt": "2025-06-04T15:49:14Z",
       "comments": [
         {
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "The mapping is as follows:\n\n| Realm claim name | `mkey` name | `mval` value |\n|---|---|---|\n| Realm Initial Measurement (RIM) | `rim` | `digests` |\n| Realm Extensible Measurements (REM) | `rem${i}` where `i` is the index 0..3 in the array | `digests` |\n| [Realm Personalisation Value (RPV) | `rpv` | `raw-value` of type `tagged-bytes` |\n\n",
           "createdAt": "2025-05-19T11:43:45Z",
           "updatedAt": "2025-05-19T11:43:45Z"
@@ -166,7 +166,7 @@
       "id": "I_kwDOMSEE_M63MZ61",
       "title": "Align CCA Platform Measurements with CoRIM Draft 07",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -175,8 +175,8 @@
       "labels": [],
       "body": "The current CCA Endorsement Draft 01, uses `cca-platform-sw-component`, which is a profile specific representation.\n\nHowever  [CoRIM specification Draft 07 ](https://datatracker.ietf.org/doc/draft-ietf-rats-corim/) has enough measurement map semantics to express the CCA Platform Software Components to be expressed using the base types.\n\nThis issue tracks the changes needed in the spec to represent `cca-platform-sw-component` using base CoRIM types!",
       "createdAt": "2025-05-19T11:18:45Z",
-      "updatedAt": "2025-05-27T13:03:33Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-04T13:13:55Z",
+      "closedAt": "2025-06-04T13:13:55Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -192,15 +192,15 @@
       "id": "I_kwDOMSEE_M63M382",
       "title": "CBOR tags related actions",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "1. We need to decide which, among PSA and CCA, defines 600 (i.e., Implementation ID)\n2. We need to remove 601 as part of #6",
       "createdAt": "2025-05-19T12:04:37Z",
-      "updatedAt": "2025-05-19T12:04:37Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-04T15:49:14Z",
+      "closedAt": "2025-06-04T15:49:14Z",
       "comments": []
     },
     {
@@ -216,6 +216,22 @@
       "body": "Add a section that describes how evidence in CCA token format is transformed into CoRIM internal representation.",
       "createdAt": "2025-05-28T10:43:11Z",
       "updatedAt": "2025-05-28T10:43:11Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOMSEE_M650sux",
+      "title": "Support for certified CPAKs",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/13",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We need to cater for the CPAK alternative model described in https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-01.html#section-6.\n\nThe straightforward way to implement this is using CoTS.",
+      "createdAt": "2025-06-04T12:05:45Z",
+      "updatedAt": "2025-06-04T12:05:45Z",
       "closedAt": null,
       "comments": []
     }
@@ -666,50 +682,574 @@
       "id": "PR_kwDOMSEE_M6Xy4cu",
       "title": "Platform endorsements revamp",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As per face-to-face discussion in Lisbon.\r\n\r\nFix #2\r\nFix #6",
       "createdAt": "2025-05-27T14:31:52Z",
-      "updatedAt": "2025-05-27T14:31:52Z",
+      "updatedAt": "2025-06-04T13:13:58Z",
       "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "baseRefName": "main",
       "baseRefOid": "eff1778a752d68f23dfa20335fa77ef3a6021da8",
       "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "headRefName": "lis-platform",
-      "headRefOid": "f733e734ebe72546887cf2814980b7f728ea7aed",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "dd385a621ff47f4972b49c3bbbf6232673f2920f",
+      "closedAt": "2025-06-04T13:13:54Z",
+      "mergedAt": "2025-06-04T13:13:54Z",
+      "mergedBy": "yogeshbdeshpande",
+      "mergeCommit": {
+        "oid": "5b036eaf16aa15fa8c765bebab4a0a55a73800ef"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMSEE_M6sVkFT",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T08:44:08Z",
+          "updatedAt": "2025-06-03T08:44:09Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "I checked https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/ \r\nand it is consistently using the term `CCA Attestation token` and attestation token, so we should be consistent in our terminologies.",
+              "createdAt": "2025-06-03T08:44:08Z",
+              "updatedAt": "2025-06-03T08:44:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sVpFu",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T08:50:18Z",
+          "updatedAt": "2025-06-03T08:50:18Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nThe Implementation ID uniquely identifies a given implementation of a CCA Platform and it is used by the Endorser or Reference Value Provider as an anchor to which Reference Values and Attestation Verification Keys for a CCA Platform are linked.\r\n```",
+              "createdAt": "2025-06-03T08:50:18Z",
+              "updatedAt": "2025-06-03T08:50:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sVqaE",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T08:51:53Z",
+          "updatedAt": "2025-06-03T08:51:53Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\nEach CCA Platform Endorsement, be it a Reference Value or an Attestation Verification Key, is associated with a unique identifier known as CCA Platform Implementation ID (see {{Section 4.4.2 of -cca-token}}).\r\n```",
+              "createdAt": "2025-06-03T08:51:53Z",
+              "updatedAt": "2025-06-04T09:10:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sVq9N",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T08:52:33Z",
+          "updatedAt": "2025-06-03T08:52:34Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "Section 4.4.2 title of cca-token is \"CCA Platform Implementation ID\" and as such be used here!",
+              "createdAt": "2025-06-03T08:52:33Z",
+              "updatedAt": "2025-06-03T08:52:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sV_c8",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:15:58Z",
+          "updatedAt": "2025-06-03T09:15:58Z",
+          "comments": [
+            {
+              "originalPosition": 170,
+              "body": "Line 196 should appear above 191 to connect it properly!",
+              "createdAt": "2025-06-03T09:15:58Z",
+              "updatedAt": "2025-06-03T09:15:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWEdX",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:21:45Z",
+          "updatedAt": "2025-06-03T09:21:45Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "Question:\r\n\r\nAre multiple signers supported in this revision. If so should it not be [+cca-swcomp-signer-id ]\r\n\r\nif not, it should be `&(cryptokeys: 13) => cca-swcomp-signer-id `",
+              "createdAt": "2025-06-03T09:21:45Z",
+              "updatedAt": "2025-06-03T09:21:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWIXp",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:25:18Z",
+          "updatedAt": "2025-06-03T09:25:18Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "I have a problem with this usage of `mkey` hard coded to \"cca.software-component\"\r\nAs in CCA profile, there are multiple measured elements, within an Environment Map, and this usage is an improper and redundant use of Mkeys, for multiple measured elements.  Please see CoRIm draft definitions as below:\r\n\r\nSection 5.4.1.4\r\nAn environment may have multiple measured elements. Measured elements are distinguished from each other by measurement keys. Measurement keys may be used to disambiguate measurements of the same type originating from different elements.\r\n\r\n5.1.4.1.4.1.\r\nMeasurement keys are locally scoped extensible identifiers. The initial types defined are OID, UUID, uint, and tstr. mkey may be necessary to disambiguate multiple measurements of the same type or to distinguish multiple measured elements within the same environment.\r\n\r\n",
+              "createdAt": "2025-06-03T09:25:18Z",
+              "updatedAt": "2025-06-03T09:25:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWLez",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:27:12Z",
+          "updatedAt": "2025-06-03T09:27:12Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "The more appropriate usage is to identify uniquely the Optional Name of `Component-Type` using MKey, as it then becomes a locally scoped unique identifier to identify each SW Component Uniquely (if provided). ",
+              "createdAt": "2025-06-03T09:27:12Z",
+              "updatedAt": "2025-06-03T09:28:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWR_a",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:32:26Z",
+          "updatedAt": "2025-06-03T09:32:27Z",
+          "comments": [
+            {
+              "originalPosition": 221,
+              "body": "Shall we not specify the usage of `mask` in terms of setting the configuration as mask bytes, with meaning of 0xFF has a specific implied meaning that all bits of the value are comparable ?",
+              "createdAt": "2025-06-03T09:32:26Z",
+              "updatedAt": "2025-06-03T09:39:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWUiR",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:35:30Z",
+          "updatedAt": "2025-06-03T09:35:30Z",
+          "comments": [
+            {
+              "originalPosition": 215,
+              "body": "It is important to stress that there is only one entry in the `cca-config-measurement-values-map`, i.e. in a profile, there can be ONLY one instance of `cca-config-measurement-values-map`",
+              "createdAt": "2025-06-03T09:35:30Z",
+              "updatedAt": "2025-06-03T09:35:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWXB1",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:38:54Z",
+          "updatedAt": "2025-06-03T09:38:54Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "We can reverse the usage to use the name field in the measurement values map to identify that these are all \"cca.software-component\"",
+              "createdAt": "2025-06-03T09:38:54Z",
+              "updatedAt": "2025-06-03T09:38:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWasW",
+          "commit": {
+            "abbreviatedOid": "f733e73"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Thanks for the great work! Let us discuss few points where we might need to collaborate again to come to some consensus!",
+          "createdAt": "2025-06-03T09:43:11Z",
+          "updatedAt": "2025-06-03T09:43:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6snNGK",
+          "commit": {
+            "abbreviatedOid": "ef9eca9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T09:18:15Z",
+          "updatedAt": "2025-06-04T09:18:16Z",
+          "comments": [
+            {
+              "originalPosition": 194,
+              "body": "```suggestion\r\n: An array with *only one* entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.\r\n```",
+              "createdAt": "2025-06-04T09:18:15Z",
+              "updatedAt": "2025-06-04T09:18:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6snN94",
+          "commit": {
+            "abbreviatedOid": "b1245b4"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T09:19:26Z",
+          "updatedAt": "2025-06-04T09:19:26Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "resolved by highlighting that only one entry is allowed in the prose\r\n",
+              "createdAt": "2025-06-04T09:19:26Z",
+              "updatedAt": "2025-06-04T09:19:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6snexB",
+          "commit": {
+            "abbreviatedOid": "d79eaf0"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T09:40:56Z",
+          "updatedAt": "2025-06-04T09:40:56Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "decided to leave is as-is, as per f2f conversation.",
+              "createdAt": "2025-06-04T09:40:56Z",
+              "updatedAt": "2025-06-04T09:41:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6snm5O",
+          "commit": {
+            "abbreviatedOid": "d79eaf0"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T09:49:52Z",
+          "updatedAt": "2025-06-04T09:49:52Z",
+          "comments": [
+            {
+              "originalPosition": 221,
+              "body": "```suggestion\r\nFor these reasons, it is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.\r\nRefer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.\r\n```",
+              "createdAt": "2025-06-04T09:49:52Z",
+              "updatedAt": "2025-06-04T09:49:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6snorA",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T09:51:24Z",
+          "updatedAt": "2025-06-04T09:51:24Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "We should make sure that we are consistent across all the related docs.  I will add an issue to the CCA token.",
+              "createdAt": "2025-06-04T09:51:24Z",
+              "updatedAt": "2025-06-04T09:51:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spTsr",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:18:11Z",
+          "updatedAt": "2025-06-04T12:18:12Z",
+          "comments": [
+            {
+              "originalPosition": 178,
+              "body": "In each of these explanation you are using a pre-existing semantics, like version (key 4) of the `arm-platform-sw-component`. Please add a reference to a suitable spec, without which the key numbers does not make sense! ",
+              "createdAt": "2025-06-04T12:18:11Z",
+              "updatedAt": "2025-06-04T12:18:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spUCa",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:18:39Z",
+          "updatedAt": "2025-06-04T12:18:40Z",
+          "comments": [
+            {
+              "originalPosition": 183,
+              "body": "Same as 203",
+              "createdAt": "2025-06-04T12:18:39Z",
+              "updatedAt": "2025-06-04T12:18:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spUQz",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:18:59Z",
+          "updatedAt": "2025-06-04T12:18:59Z",
+          "comments": [
+            {
+              "originalPosition": 190,
+              "body": "Same as 203",
+              "createdAt": "2025-06-04T12:18:59Z",
+              "updatedAt": "2025-06-04T12:18:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spUeP",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:19:18Z",
+          "updatedAt": "2025-06-04T12:19:18Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "Same as 203",
+              "createdAt": "2025-06-04T12:19:18Z",
+              "updatedAt": "2025-06-04T12:19:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spU5h",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "please review some more comments!",
+          "createdAt": "2025-06-04T12:19:52Z",
+          "updatedAt": "2025-06-04T12:19:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sphTw",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:36:54Z",
+          "updatedAt": "2025-06-04T12:36:54Z",
+          "comments": [
+            {
+              "originalPosition": 178,
+              "body": "```suggestion\r\n: A `version-map` with its `version` field containing the version (key 4) of the `arm-platform-sw-component`, (see {{Section 4.6.1.3 of -cca-token}}).\r\n```",
+              "createdAt": "2025-06-04T12:36:54Z",
+              "updatedAt": "2025-06-04T12:36:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spjW0",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:39:43Z",
+          "updatedAt": "2025-06-04T12:39:43Z",
+          "comments": [
+            {
+              "originalPosition": 178,
+              "body": "This seems unnecessary.  Just above we say:\r\n\r\n> The values found in the Software Components of the CCA Platform token (see [Section 4.6](https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-token-01#section-4.6) of [[I-D.ffm-rats-cca-token](https://yogeshbdeshpande.github.io/draft-cca-rats-endorsements/lis-realm/draft-ydb-rats-cca-endorsements.html#I-D.ffm-rats-cca-token)]).\r\n\r\nwhich provides the necessary context to interpret the referenced keys.",
+              "createdAt": "2025-06-04T12:39:43Z",
+              "updatedAt": "2025-06-04T12:39:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sprEA",
+          "commit": {
+            "abbreviatedOid": "ed591d3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:49:59Z",
+          "updatedAt": "2025-06-04T12:50:00Z",
+          "comments": [
+            {
+              "originalPosition": 239,
+              "body": "```suggestion\r\nThe value of the `mkey` MUST be \"cca.platform-config\".\r\nThere MUST be only one `measurement-map` with `mkey` \"cca.platform-config\" in the triple.\r\n\r\n```",
+              "createdAt": "2025-06-04T12:49:59Z",
+              "updatedAt": "2025-06-04T12:50:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6spweI",
+          "commit": {
+            "abbreviatedOid": "bfc0fe8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-04T12:56:56Z",
+          "updatedAt": "2025-06-04T12:56:57Z",
+          "comments": [
+            {
+              "originalPosition": 136,
+              "body": "```suggestion\r\nEach CCA Platform software component (called `arm-platform-sw-component` in {{Section 4.6.1 of -cca-token}}) is encoded in a `measurement-values-map` as defined in {{cddl-swcomp-mvm}}.\r\n```",
+              "createdAt": "2025-06-04T12:56:57Z",
+              "updatedAt": "2025-06-04T13:00:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sp-IT",
+          "commit": {
+            "abbreviatedOid": "dd385a6"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2025-06-04T13:13:42Z",
+          "updatedAt": "2025-06-04T13:13:42Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 11,
       "id": "PR_kwDOMSEE_M6X7-Fs",
       "title": "Realm endorsements revamp",
       "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As per face-to-face discussion in Lisbon.\r\n\r\nFix #4\r\nFix #5\r\nFix #7\r\n\r\nNOTE: this PR is on top of #10\r\n\r\nRendered [here](https://yogeshbdeshpande.github.io/draft-cca-rats-endorsements/lis-realm/draft-ydb-rats-cca-endorsements.html).\r\n",
       "createdAt": "2025-05-28T10:22:43Z",
-      "updatedAt": "2025-05-28T12:26:41Z",
+      "updatedAt": "2025-06-04T15:49:16Z",
       "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "baseRefName": "main",
-      "baseRefOid": "eff1778a752d68f23dfa20335fa77ef3a6021da8",
+      "baseRefOid": "5b036eaf16aa15fa8c765bebab4a0a55a73800ef",
       "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
       "headRefName": "lis-realm",
-      "headRefOid": "09b183d33bcad93d8be1357cfd5600ed3a2bbe94",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5fbf1e85c1ddf101178ba9d02ff6acc2838878ac",
+      "closedAt": "2025-06-04T15:49:12Z",
+      "mergedAt": "2025-06-04T15:49:12Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8ef92e1bfc13ba15786d7312dd25923df9d7bae5"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -719,7 +1259,74 @@
           "updatedAt": "2025-05-28T10:22:53Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMSEE_M6sWdLA",
+          "commit": {
+            "abbreviatedOid": "09b183d"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:46:22Z",
+          "updatedAt": "2025-06-03T09:46:22Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "```suggestion\r\nArm CCA provides confidential computing environments, known as Realms, that enable application workloads requiring confidential execution to operate in isolation from the host hypervisor and any other concurrent workload.\r\n```",
+              "createdAt": "2025-06-03T09:46:22Z",
+              "updatedAt": "2025-06-03T09:46:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWdcD",
+          "commit": {
+            "abbreviatedOid": "09b183d"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-03T09:46:44Z",
+          "updatedAt": "2025-06-03T09:46:44Z",
+          "comments": [
+            {
+              "originalPosition": 305,
+              "body": "```suggestion\r\nArm CCA allows the initial and run-time state of a Realm to be attested ({{Section 4.8 of -cca-token}}).\r\n```",
+              "createdAt": "2025-06-03T09:46:44Z",
+              "updatedAt": "2025-06-03T09:46:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6sWhmS",
+          "commit": {
+            "abbreviatedOid": "09b183d"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "ONLY approving the Realm Part, I am ok, with the Realm changes, with some minor nits!",
+          "createdAt": "2025-06-03T09:51:07Z",
+          "updatedAt": "2025-06-03T09:51:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMSEE_M6soCU0",
+          "commit": {
+            "abbreviatedOid": "6f361a0"
+          },
+          "author": "setrofim",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-04T10:24:20Z",
+          "updatedAt": "2025-06-04T10:24:20Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
