@@ -1,5 +1,0 @@
-cca-implementation-id-type = bytes .size 32
-
-tagged-implementation-id-type = #6.600(implementation-id-type)
-
-$class-id-type-choice /= tagged-implementation-id-type
