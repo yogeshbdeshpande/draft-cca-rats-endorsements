@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 6 December 2025                                          Linaro
-                                                             4 June 2025
+Expires: 2 January 2026                                           Linaro
+                                                             1 July 2025
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2025.
+   This Internet-Draft will expire on 2 January 2026.
 
 Copyright Notice
 
@@ -367,7 +367,7 @@ Table of Contents
            / environment-map / {
              / comid.class / 0 : {
                / comid.class-id / 0 :
-                 / tagged-impl-id-type / 600(
+                 / tagged-bytes / 560(
                    h'61636d652d696d706c656d656e746174
                      696f6e2d69642d303030303030303031'
                  )
