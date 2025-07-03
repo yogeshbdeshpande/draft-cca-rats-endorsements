@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-05T00:42:33.767647+00:00",
+  "timestamp": "2025-07-03T00:43:16.548097+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -1324,6 +1324,48 @@
           "body": "LGTM",
           "createdAt": "2025-06-04T10:24:20Z",
           "updatedAt": "2025-06-04T10:24:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOMSEE_M6c5UHE",
+      "title": "Tidy up on CCA Endorsements, prior to release",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/pull/14",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-01T12:19:15Z",
+      "updatedAt": "2025-07-01T12:27:12Z",
+      "baseRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "baseRefName": "main",
+      "baseRefOid": "8ef92e1bfc13ba15786d7312dd25923df9d7bae5",
+      "headRepository": "yogeshbdeshpande/draft-cca-rats-endorsements",
+      "headRefName": "correct-tag",
+      "headRefOid": "9a873303c3fe11d14bb396d190fa112a04c87fd4",
+      "closedAt": "2025-07-01T12:27:09Z",
+      "mergedAt": "2025-07-01T12:27:09Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "af73f92da9f8145f87510440844afc94d292bbfa"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMSEE_M6xVnNI",
+          "commit": {
+            "abbreviatedOid": "9a87330"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T12:25:54Z",
+          "updatedAt": "2025-07-01T12:25:54Z",
           "comments": []
         }
       ]
