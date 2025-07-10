@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T00:43:16.548097+00:00",
+  "timestamp": "2025-07-10T00:43:49.185194+00:00",
   "repo": "yogeshbdeshpande/draft-cca-rats-endorsements",
   "labels": [
     {
@@ -234,6 +234,44 @@
       "updatedAt": "2025-06-04T12:05:45Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOMSEE_M6_dDLB",
+      "title": "clarifications on platform endorsements",
+      "url": "https://github.com/yogeshbdeshpande/draft-cca-rats-endorsements/issues/15",
+      "state": "OPEN",
+      "author": "DhanusML",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "### 1. platform endorsements in a single CoMID\nI think it is convenient if trust anchor and platform measurements can be present in different CoMIDs inside a CoRIM, since these can be produced and managed independently. \n\nBut the following change introduced in the latest version restricts the entire platform endorsements to be contained within a single CoMID: [section 3.1.1](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.1-1)\n```diff\n- Arm CCA platform endorsements are carried in one or more CoMIDs inside a CoRIM\n+ Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM\n```\nI could not understand the motivation behind this. If this was done so that the platform measurements do not get fragmented among different tags, there is the following condition ([section 3.1.2](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.2-7))\n>A single reference-triple-record MUST completely describe the CCA Platform measurements.\n\nwhich already forces platform measurements to be in a single tag. So it seems like this was done to force trust anchor to be also in the same tag as the platform measurements.\n\n### 2. environment map for trust anchor\nFrom [section 3.1.2](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.2-7):\n>CCA Attestation Verification Keys are associated with a CCA Platform instance\n>by means of the Instance ID and the corresponding Implementation ID.\n\nAre both instance ID and implementation ID required to identify the platform attestation key? [draft-ffm-rats-cca-token-01](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-01.html) states\n\n>The Instance ID claim represents the unique identifier of the Platform Attestation Key (PAK).\n\nIf this is true, the environment map for trust anchor can just contain the instance selector.\n\n(This might be an issue with CoSERV in general, but putting it here anyway):\nIf there are scenarios where instance ID alone cannot uniquely identify PAK, but a combination of instance ID and implementation ID is required, CoSERV query for the exact environment becomes difficult, since the query can only contain exactly one of the CoMID environment selectors (either class map or instance selector).\n\n ",
+      "createdAt": "2025-07-08T11:01:13Z",
+      "updatedAt": "2025-07-08T15:27:18Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Dhanus,\n\n> ### 1. platform endorsements in a single CoMID\n> \n> I think it is convenient if trust anchor and platform measurements can be present in different CoMIDs inside a CoRIM, since these can be produced and managed independently.\n> \n> But the following change introduced in the latest version restricts the entire platform endorsements to be contained within a single CoMID: [section 3.1.1](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.1-1)\n> \n> - Arm CCA platform endorsements are carried in one or more CoMIDs inside a CoRIM\n> + Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM\n> I could not understand the motivation behind this. If this was done so that the platform measurements do not get fragmented among different tags, there is the following condition ([section 3.1.2](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.2-7))\n> \n> > A single reference-triple-record MUST completely describe the CCA Platform measurements.\n> \n> which already forces platform measurements to be in a single tag. So it seems like this was done to force trust anchor to be also in the same tag as the platform measurements.\n\nThanks for pointing this out.  It's an outdated requirement that will be removed in the next release.\nIt's a requirement that we inherited from the PSA endorsement document, and we've now dropped it there but forgot to align it here.\n\n> ### 2. environment map for trust anchor\n> \n> From [section 3.1.2](https://www.ietf.org/archive/id/draft-ydb-rats-cca-endorsements-02.html#section-3.1.2-7):\n> \n> > CCA Attestation Verification Keys are associated with a CCA Platform instance\n> > by means of the Instance ID and the corresponding Implementation ID.\n> \n> Are both instance ID and implementation ID required to identify the platform attestation key? [draft-ffm-rats-cca-token-01](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-01.html) states\n> \n> > The Instance ID claim represents the unique identifier of the Platform Attestation Key (PAK).\n\nYou are right, only the Instance ID is required.  It is supposed to contain enough entropy to be unique without the namespaceing provided by the Implementation ID.\n\n> If this is true, the environment map for trust anchor can just contain the instance selector.\n> \n> (This might be an issue with CoSERV in general, but putting it here anyway): If there are scenarios where instance ID alone cannot uniquely identify PAK, but a combination of instance ID and implementation ID is required, CoSERV query for the exact environment becomes difficult, since the query can only contain exactly one of the CoMID environment selectors (either class map or instance selector).\n\nSpot on.  In the `coserv` branch we instruct the store layer to synthesise a \u201cCoSERV\u201d lookup key for trust anchors that is only based on the Instance ID: https://github.com/veraison/services/blob/6735e5bd9866ed1173fe3e6f11d9655f6a3ae118/scheme/common/arm/lookup.go#L38",
+          "createdAt": "2025-07-08T11:44:11Z",
+          "updatedAt": "2025-07-08T11:44:11Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "OWNER",
+          "body": "To be fair, on a general note, an Instance ID, has to be Unique within a Class, is a general requirement.\n\nA profile, can encode an Instance ID, using a type that can enforce it to be Globally Unique, thus enforcing a constraint, that a Vendor chooses its ALL Instances ( example: N where N can be millions) for entire product range it ever manufactures,  to be globally Unique, if need be! However, my take is that one should always associate a Class ID (Implementation ID in this case) with the Instance ID, so that the systematic encoding in Triple is always preferred way of encoding.",
+          "createdAt": "2025-07-08T14:57:25Z",
+          "updatedAt": "2025-07-08T14:57:25Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In PSA and CCA, the Instance ID is a [`euid`](https://www.rfc-editor.org/rfc/rfc9711.html#section-4.2.1) and, as such,\n> [it] MUST be universally and globally unique across manufacturers and countries, as described in [Section 4.2.1.1](https://www.rfc-editor.org/rfc/rfc9711.html#UEIDCreateRules).\n\nSo, strictly speaking, in the context of PSA and CCA attestation verification keys, the implementation ID is not necessary for identifying the attesting environment.",
+          "createdAt": "2025-07-08T15:21:26Z",
+          "updatedAt": "2025-07-08T15:27:18Z"
+        }
+      ]
     }
   ],
   "pulls": [
