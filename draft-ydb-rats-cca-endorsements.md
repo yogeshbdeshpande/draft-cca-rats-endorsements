@@ -95,7 +95,7 @@ There are two types of CCA Platform Endorsements:
 
 ### Arm CCA Platform Endorsement Profile
 
-Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM.
+Arm CCA Platform Endorsements are carried in one or more CoMIDs within a CoRIM.
 
 The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0`, as shown in {{ex-cca-platform-profile}}.
 
@@ -331,7 +331,7 @@ Therefore, this profile employs an `environment map` with a class identifier tha
 
 ### Arm CCA Realm Endorsement Profile
 
-Arm CCA Realm endorsements are carried in a CoMID within a CoRIM.
+Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
 The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
 
@@ -378,7 +378,6 @@ An example CoMID containing one Reference Values triple with the expected values
 [^todo]
 
 # IANA Considerations
-
 
 This document makes no requests to IANA.
 
