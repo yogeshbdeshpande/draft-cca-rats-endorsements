@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 2 January 2026                                           Linaro
-                                                             1 July 2025
+Expires: 18 May 2026                                              Linaro
+                                                        14 November 2025
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2026.
+   This Internet-Draft will expire on 18 May 2026.
 
 Copyright Notice
 
@@ -127,7 +127,8 @@ Table of Contents
 
 3.1.1.  Arm CCA Platform Endorsement Profile
 
-   Arm CCA Platform Endorsements are carried in a CoMID within a CoRIM.
+   Arm CCA Platform Endorsements are carried in one or more CoMIDs
+   within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
    URI tag:arm.com,2025:cca_platform#1.0.0, as shown in Figure 1.
@@ -525,7 +526,7 @@ Table of Contents
 
 3.2.2.  Arm CCA Realm Endorsement Profile
 
-   Arm CCA Realm endorsements are carried in a CoMID within a CoRIM.
+   Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
    URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 12.
@@ -684,16 +685,16 @@ Table of Contents
               Frost, S., Fossati, T., and G. Mandyam, "Arm's
               Confidential Compute Architecture Reference Attestation
               Token", Work in Progress, Internet-Draft, draft-ffm-rats-
-              cca-token-01, 3 March 2025,
+              cca-token-02, 2 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ffm-rats-cca-
-              token-01>.
+              token-02>.
 
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-corim-07>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
