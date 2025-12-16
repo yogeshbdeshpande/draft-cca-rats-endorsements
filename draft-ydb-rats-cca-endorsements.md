@@ -45,6 +45,7 @@ normative:
   I-D.ietf-rats-corim: rats-corim
   I-D.ffm-rats-cca-token: cca-token
   RFC5280: pkix-x509
+  RFC7468: pem
 
 informative:
   RFC9334: rats-arch
@@ -291,13 +292,14 @@ Specifically:
 
 * The Instance and Implementation IDs are encoded in the `environment-map` as described in {{sec-cca-rot-id}};
 * The CPAK public key uses the `tagged-pkix-base64-key-type` variant of the `$crypto-key-type-choice`.
-The CPAK public key is a PEM-encoded SubjectPublicKeyInfo {{-pkix-x509}}.
+
+The CPAK public key is a SubjectPublicKeyInfo {{-pkix-x509}} using the encoding defined in {{Section 13 of -pem}}.
 There MUST be only one key in an `attest-key-triple-record`.
 
 The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public CPAK associated with Instance ID `4ca3...d296`.
 
 ~~~
-{::include examples/platform-iak.diag}
+{::include-fold examples/platform-iak.diag}
 ~~~
 {: #ex-cca-platform-iak title="Example CCA Platform Attestation Verification Key" }
 
