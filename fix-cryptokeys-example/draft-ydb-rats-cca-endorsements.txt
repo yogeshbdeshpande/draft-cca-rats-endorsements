@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 16 May 2026                                              Linaro
-                                                        12 November 2025
+Expires: 19 June 2026                                             Linaro
+                                                        16 December 2025
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 May 2026.
+   This Internet-Draft will expire on 19 June 2026.
 
 Copyright Notice
 
@@ -384,9 +384,9 @@ Table of Contents
                                      6ef074578be55d9bc94f6f3fe3ab86aa'
                  ],
                  / name / 11 : "RSE_BL1_2",
-                 / cryptokeys / 13 : 560(h'5378796307535df3ec8d8b15a2
-                                           e2dc5641419c3d3060cfe32238
-                                           c0fa973f7aa3')
+                 / cryptokeys / 13 : [ 560(h'5378796307535df3ec8d8b15a2
+                                             e2dc5641419c3d3060cfe32238
+                                             c0fa973f7aa3') ]
                }
              },
              / measurement-map / {
@@ -398,9 +398,9 @@ Table of Contents
                                      fad053beb8ebfd8977b010655bfdd3c3'
                  ],
                  / name / 11 : "RSE_BL2",
-                 / cryptokeys / 13 : 560(h'5378796307535df3ec8d8b15a2
-                                           e2dc5641419c3d3060cfe32238
-                                           c0fa973f7aa3')
+                 / cryptokeys / 13 : [ 560(h'5378796307535df3ec8d8b15a2
+                                             e2dc5641419c3d3060cfe32238
+                                             c0fa973f7aa3') ]
                }
              },
              / measurement-map / {
