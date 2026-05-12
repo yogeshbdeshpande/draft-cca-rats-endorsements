@@ -439,10 +439,8 @@ Table of Contents
    2.  measurement-values-map encodes the device specific details as
        follows.
 
-   2.1 When the device type supports encryption, then the specific
-   encryption type is provisioned using the (raw-value: 4), i.e. tagged-
-   masked-raw-value variant of the $raw-values-type-choice.  This field
-   is ommited for devices that do not support encryption.
+   2.1 Various device features are encoded using the raw-value: 4, i.e.
+   tagged-masked-raw-value variant of the $raw-values-type-choice.
 
    2.2 The (name: 11), carries the name of the protocol used by the
    device.
@@ -453,19 +451,17 @@ Table of Contents
    specific measurement reported in the digest.  For this profile, the
    following measurements are reported.
 
-   For the register-is set to "device-measurements-exchange", then, cca-
-   digest encodes the device measurements exchange digest
+   When the register-id is set to "device-measurements-exchange", then,
+   cca-digest encodes the device measurements exchange digest.
 
-   For the register-id set to "certificate-digest", then cca-digest
-   encodes the certificate chain digest
+   When the register-id is set to "certificate-digest", then cca-digest
+   encodes the certificate chain digest.
 
    When the protocol specified in the name supports VCA (Version-
    Capabilities-Algorithm message concatenation), for example, "spdm-
    1.2.3" then the following integrity register is used to specify the
-   SPDM VCA Digest.
-
-   The register-id is set to "spdm-vca", then cca-digest encodes the
-   SPDM VCA Digest
+   SPDM VCA Digest.  When the register-id is set to "spdm-vca", then
+   cca-digest encodes the SPDM VCA Digest
 
 3.1.3.5.  CoMID Example
 
