@@ -334,7 +334,7 @@ Table of Contents
      mask: bytes
    ])
 
-            Figure 7: CCA Platform Configuration measurement-map
+        Figure 7: CCA Platform Configuration measurement-values-map
 
    The measurement-values-map for a CCA Platform configuration is
    wrapped in a measurement-map with an mkey using the text variant of
@@ -350,7 +350,7 @@ Table of Contents
      &(mval: 1) => cca-config-measurement-values-map
    }
 
-         Figure 8: CCA Platform Software Component measurement-map
+            Figure 8: CCA Platform Configuration measurement-map
 
 3.1.3.3.  CCA Platform Trusted Board Boot ROTPK
 
@@ -405,7 +405,7 @@ Table of Contents
 
    cca-rotpk-id = #6.560(cca-hash-type)
 
-            Figure 9: CCA Platform ROTPK Measurement Values Map
+            Figure 9: CCA Platform ROTPK measurement-values-map
 
    cca-rotpk-measurement-map = {
      &(mkey: 0) => "CM.2.3"
@@ -516,11 +516,53 @@ Table of Contents
 
              Figure 12: CCA Platform Extension measurement-map
 
-3.1.3.5.  CoMID Example
+3.1.3.5.  CCA Platform Manufacturing Configuration
+
+   The CCA platform manufacturing configuration represents a record of
+   production phases and testing conducted during the manufacturing
+   process for the platform instance.
+
+   CCA Platform configuration is vendor-specific variable-length data.
+
+   It is represented in a raw-value of the measurement-values-map, using
+   the tagged-masked-raw-value variant of the $raw-values-type-choice.
+   Refer to Section 5.1.4.1.4.6 of [I-D.ietf-rats-corim] for the details
+   about the comparison algorithm.
+
+   cca-config-measurement-values-map = {
+     &(raw-value: 4) => cca-tagged-masked-raw-value
+   }
+
+   cca-config-tagged-masked-raw-value = #6.563([
+     value: bytes
+     mask: bytes
+   ])
+
+      Figure 13: CCA Platform Manufacturing Configuration measurement-
+                                 values-map
+
+   The measurement-values-map for a CCA Platform manufacturing
+   configuration is wrapped in a measurement-map with an mkey using the
+   text variant of the $measured-element-type-choice.  The value of the
+   mkey MUST be "cca.platform-manufacturing-config".  There MUST be only
+   one measurement-map with mkey "cca.platform-manufacturing-config" in
+   the triple.
+
+   The authorized-by field of the measurement-map MUST NOT be present.
+   Find the related CDDL definitions in Figure 14 & in Figure 13.
+
+   cca-config-measurement-map = {
+     &(mkey: 0) => "cca.platform-config"
+     &(mval: 1) => cca-config-measurement-values-map
+   }
+
+    Figure 14: CCA Platform Manufacturing Configuration measurement-map
+
+3.1.3.6.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
    expected values for both software components and platform
-   configuration is given in Figure 13.
+   configuration is given in Figure 15.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -582,7 +624,7 @@ Table of Contents
      }
    }
 
-              Figure 13: Example CCA Platform Reference Values
+              Figure 15: Example CCA Platform Reference Values
 
 3.1.4.  Attestation Verification Keys
 
@@ -608,7 +650,7 @@ Table of Contents
    encoding defined in Section 13 of [RFC7468].  There MUST be only one
    key in an attest-key-triple-record.
 
-   The example in Figure 14 shows the CCA Endorsement of type
+   The example in Figure 16 shows the CCA Endorsement of type
    Attestation Verification Key carrying a secp256r1 EC public CPAK
    associated with Instance ID 4ca3...d296.
 
@@ -649,7 +691,7 @@ Table of Contents
      }
    }
 
-        Figure 14: Example CCA Platform Attestation Verification Key
+        Figure 16: Example CCA Platform Attestation Verification Key
 
 3.2.  Arm CCA Realm Endorsements
 
@@ -678,7 +720,7 @@ Table of Contents
    enough to serve as an identifier for the Realm Target Environment.
    Therefore, this profile employs an environment map with a class
    identifier that uses the tagged bytes variant of the $class-id-type-
-   choice to encode the RIM value (Figure 15).
+   choice to encode the RIM value (Figure 17).
 
    / environment-map / {
      / comid.class / 0 : {
@@ -690,21 +732,21 @@ Table of Contents
      }
    }
 
-                    Figure 15: CCA Realm Identification
+                    Figure 17: CCA Realm Identification
 
 3.2.2.  Arm CCA Realm Endorsement Profile
 
    Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
-   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 16.
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 18.
 
    / corim-map / {
      / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
      / ... /
    }
 
-     Figure 16: CoRIM profile for CCA Realm endorsements version 1.0.0
+     Figure 18: CoRIM profile for CCA Realm endorsements version 1.0.0
 
 3.2.3.  Reference Values
 
@@ -742,7 +784,7 @@ Table of Contents
 3.2.3.1.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
-   expected values for a Realm is given in Figure 17.
+   expected values for a Realm is given in Figure 19.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -829,7 +871,7 @@ Table of Contents
      }
    }
 
-                      Figure 17: CCA realm identifiers
+                      Figure 19: CCA realm identifiers
 
 4.  Security Considerations
 
