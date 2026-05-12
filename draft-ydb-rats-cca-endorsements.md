@@ -255,7 +255,7 @@ cca-config-tagged-masked-raw-value = #6.563([
   mask: bytes
 ])
 ~~~
-{: #cddl-config-mvm title="CCA Platform Configuration measurement-map"}
+{: #cddl-config-mvm title="CCA Platform Configuration measurement-values-map"}
 
 The `measurement-values-map` for a CCA Platform configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
 The value of the `mkey` MUST be "cca.platform-config".
@@ -270,7 +270,181 @@ cca-config-measurement-map = {
   &(mval: 1) => cca-config-measurement-values-map
 }
 ~~~
-{: #cddl-config-mm title="CCA Platform Software Component measurement-map"}
+{: #cddl-config-mm title="CCA Platform Configuration measurement-map"}
+
+#### CCA Platform Trusted Board Boot ROTPK
+
+When an implementation of the CCA Platform follows the Trusted Board Boot specification, the platform will include several provisioned public key identifiers,
+which are used to establish a chain of trust. Each public key identifier is expressed as Hash of the Public Key.
+
+For CCA Implementation, the public key identifiers are provisioned as a number of arrays, with each array entry containing a list of key identifiers.
+
+For CCA Implementation, there are ONLY two possible arrays:
+1. Chip Manufacturing array - known as "CM"
+2. Device Manufacturing array - known as "DM"
+
+In CCA Implementation, the maximum number of arrays is 8, while the maximum entries in a single array is 6.
+
+CCA Platform public key identifiers are encoded in a CoMID using Reference Value Triples.
+
+Each array entry is encoded in a single Reference Value Triple.
+
+Each public key identifier is encoded in a single `measurement-map`, such as:
+
+1. `mkey` uniquely identifies position of each key, using the text vairant of `$measured-element-type-choice`.
+The encoding follows a consistent pattern i.e. the name of the set ("CM" or "DM"), followed by the index of the array, followed by its position(entry), within the array.
+For example to encode a "CM" key for an active array index of 2, with position 3 (within the array), `mkey` will be set to "CM.2.3"
+
+2. The public key identifier is encoded using cryptokeys (key 13): An array with *only one* entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
+The length of the `tagged-bytes` can ONLY be one of 32, 48 or 64.
+
+3. The `authorized-by` field of the `measurement-map` MUST NOT be present.
+
+Find the related CDDL definition of Measurement Values Map in {{cddl-rotpk-mvm}} and the associated measurement map in {{cddl-rotpk-mm}}.
+
+~~~ cddl
+cca-rotpk-measurement-values-map = {
+  &(cryptokeys: 13) => [ cca-rotpk-id ]
+}
+
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+
+cca-rotpk-id = #6.560(cca-hash-type)
+~~~
+{: #cddl-rotpk-mvm title="CCA Platform ROTPK measurement-values-map"}
+
+~~~ cddl
+cca-rotpk-measurement-map = {
+  &(mkey: 0) => "CM.2.3"
+  &(mval: 1) => cca-rotpk-measurement-values-map
+}
+~~~
+{: #cddl-rotpk-mm title="CCA ROTPK measurement-map"}
+
+
+An Endorser may choose to provision all entries, i.e. the entire set, or may choose to ONLY provision a single entry which is currently active, on the platform.
+If entire set is provisioned, then multiple Reference Value Triples in a CoMID encode the array entries.
+
+#### CCA Platform Extension
+
+CCA platform extension allows an Endorser to provision the permitted components that can be attached to a CCA Platform.
+An example of such a component is a coherent memory (CMEM) device.
+
+The platform extension informs the Verifier about the types of devices that can attach, with their reference measurement digest and certificate chain digest.
+
+To encode measurement information for a device, a single `measurement-map` of a Reference Value Triple is used.
+The encoding is stated below:
+
+1. `mkey` identifies the type of device, using the text variant of `$measured-element-type-choice`. One such example is  "cxl-type-3".
+
+2. `measurement-values-map` encodes the device specific details as follows.
+
+2.1  Various device features are encoded using the `raw-value: 4`, i.e. `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
+
+2.2 The (name: 11), carries the name of the protocol used by the device.
+
+2.3 The integrity registers, i.e. (integrity-registers: 14), is used to represent various measurement digests from the device.
+The text variant of `integrity-register-id-type-choice` is used to identify the specific measurement reported in the digest.
+For this profile, the following measurements are reported.
+
+When the register-id is set to "device-measurements-exchange", then, `cca-digest ` encodes the device measurements exchange digest.
+
+When the register-id is set to "certificate-digest", then `cca-digest ` encodes the certificate chain digest.
+
+When the protocol specified in the `name` supports VCA (Version-Capabilities-Algorithm message concatenation), for example, "spdm-1.2.3" then the following integrity register is used to specify the SPDM VCA Digest.
+When the register-id is set to "spdm-vca", then `cca-digest ` encodes the SPDM VCA Digest
+
+Find the related CDDL definition of Measurement Values Map in {{cddl-platform-ext-mvm}} and the associated measurement map in {{cddl-platform-ext}}.
+
+~~~ cddl
+cca-config-platform-masked-raw-value = #6.563([
+  value: bytes
+  mask: bytes .bits features
+])
+
+features = &(
+  host-side-encryption-enabled: 0,
+  target-side-encryption-enabled: 1,
+  no-encryption-enabled: 2,
+  device-use-of-ide-enabled: 4,
+)
+
+cca-extension-integrity-registers = {
+ "device-measurements-exchange": [
+                [
+                  / hash-alg-id / 1, / sha256 /
+                  / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4d9'
+                ]
+              ],
+  "certificate-digest": [
+                [
+                  / hash-alg-id / 1, / sha256 /
+                  / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4da'
+                ]
+  ],
+  "spdm-vca": [
+              [
+                / hash-alg-id / 1, / sha256 /
+                / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4db'
+              ]
+  ]
+
+}
+cca-platform-ext-measurement-values-map = {
+  &(name: 11) => text ; example "spdm-1.2.0"
+  &(raw-value: 4) => cca-platform-masked-raw-value
+  &(integrity-registers: 14) => cca-extension-integrity-registers
+}
+
+~~~
+{: #cddl-platform-ext-mvm title="CCA Platform Extension Measurement Values Map"}
+
+The below CDDL describes the complete measurement map
+
+~~~ cddl
+cca-platform-ext-measurement-map = {
+  &(mkey: 0) => "cxl-type-3"
+  &(mval: 1) => cca-platform-ext-measurement-values-map
+}
+~~~
+{: #cddl-platform-ext title="CCA Platform Extension measurement-map"}
+
+#### CCA Platform Manufacturing Configuration
+
+The CCA platform manufacturing configuration represents a record of production
+phases and testing conducted during the manufacturing process for the platform instance.
+
+CCA Platform configuration is vendor-specific variable-length data.
+
+It is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
+Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
+
+~~~ cddl
+cca-config-measurement-values-map = {
+  &(raw-value: 4) => cca-tagged-masked-raw-value
+}
+
+cca-config-tagged-masked-raw-value = #6.563([
+  value: bytes
+  mask: bytes
+])
+~~~
+{: #cddl-mfg-config-mvm title="CCA Platform Manufacturing Configuration measurement-values-map"}
+
+The `measurement-values-map` for a CCA Platform manufacturing configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
+The value of the `mkey` MUST be "cca.platform-manufacturing-config".
+There MUST be only one `measurement-map` with `mkey` "cca.platform-manufacturing-config" in the triple.
+
+The `authorized-by` field of the `measurement-map` MUST NOT be present.
+Find the related CDDL definitions in {{cddl-mfg-config-mm}} & in {{cddl-mfg-config-mvm}}.
+
+~~~ cddl
+cca-config-measurement-map = {
+  &(mkey: 0) => "cca.platform-config"
+  &(mval: 1) => cca-config-measurement-values-map
+}
+~~~
+{: #cddl-mfg-config-mm title="CCA Platform Manufacturing Configuration measurement-map"}
 
 #### CoMID Example
 
