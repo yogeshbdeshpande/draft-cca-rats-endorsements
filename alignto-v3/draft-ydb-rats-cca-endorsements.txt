@@ -405,7 +405,7 @@ Table of Contents
 
    cca-rotpk-id = #6.560(cca-hash-type)
 
-        Figure 9: CCA Platform ROTPK Measurement Values Map encoding
+            Figure 9: CCA Platform ROTPK Measurement Values Map
 
    cca-rotpk-measurement-map = {
      &(mkey: 0) => "CM.2.3"
