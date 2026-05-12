@@ -414,7 +414,7 @@ cca-platform-ext-measurement-map = {
 The CCA platform manufacturing configuration represents a record of production
 phases and testing conducted during the manufacturing process for the platform instance.
 
-CCA Platform configuration is vendor-specific variable-length data.
+CCA Platform Manufacturing configuration is vendor-specific variable-length data.
 
 It is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
 Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
