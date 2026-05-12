@@ -433,7 +433,7 @@ Table of Contents
    map of a Reference Value Triple is used.  The encoding is stated
    below:
 
-   1.  mkey identifies the type of device, using the text vairant of
+   1.  mkey identifies the type of device, using the text variant of
        $measured-element-type-choice.  One such example is "cxl-type-3".
 
    2.  measurement-values-map encodes the device specific details as
@@ -463,11 +463,61 @@ Table of Contents
    SPDM VCA Digest.  When the register-id is set to "spdm-vca", then
    cca-digest encodes the SPDM VCA Digest
 
+   cca-config-platform-masked-raw-value = #6.563([
+     value: bytes
+     mask: bytes .bits features
+   ])
+
+   features = &(
+     host-side-encryption-enabled: 0,
+     target-side-encryption-enabled: 1,
+     no-encryption-enabled: 2,
+     device-use-of-ide-enabled: 4,
+   )
+
+   cca-extension-integrity-registers = {
+    "device-measurements-exchange": [
+                   [
+                     / hash-alg-id / 1, / sha256 /
+                     / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4d9'
+                   ]
+                 ],
+     "certificate-digest": [
+                   [
+                     / hash-alg-id / 1, / sha256 /
+                     / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4da'
+                   ]
+     ],
+     "spdm-vca": [
+                 [
+                   / hash-alg-id / 1, / sha256 /
+                   / hash-value / h'50aa341af9cb20a879440e58dd6581c14fa14bccafb75f488259262d6ea3a4db'
+                 ]
+     ]
+
+   }
+   cca-platform-ext-measurement-values-map = {
+     &(name: 11) => text ; example "spdm-1.2.0"
+     &(raw-value: 4) => cca-platform-masked-raw-value
+     &(integrity-registers: 14) => cca-extension-integrity-registers
+   }
+
+          Figure 11: CCA Platform Extension Measurement Values Map
+
+   The below CDDL describes the complete measurement map
+
+   cca-platform-ext-measurement-map = {
+     &(mkey: 0) => "cxl-type-3"
+     &(mval: 1) => cca-platform-ext-measurement-values-map
+   }
+
+             Figure 12: CCA Platform Extension measurement-map
+
 3.1.3.5.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
    expected values for both software components and platform
-   configuration is given in Figure 11.
+   configuration is given in Figure 13.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -529,7 +579,7 @@ Table of Contents
      }
    }
 
-              Figure 11: Example CCA Platform Reference Values
+              Figure 13: Example CCA Platform Reference Values
 
 3.1.4.  Attestation Verification Keys
 
@@ -555,7 +605,7 @@ Table of Contents
    encoding defined in Section 13 of [RFC7468].  There MUST be only one
    key in an attest-key-triple-record.
 
-   The example in Figure 12 shows the CCA Endorsement of type
+   The example in Figure 14 shows the CCA Endorsement of type
    Attestation Verification Key carrying a secp256r1 EC public CPAK
    associated with Instance ID 4ca3...d296.
 
@@ -596,7 +646,7 @@ Table of Contents
      }
    }
 
-        Figure 12: Example CCA Platform Attestation Verification Key
+        Figure 14: Example CCA Platform Attestation Verification Key
 
 3.2.  Arm CCA Realm Endorsements
 
@@ -625,7 +675,7 @@ Table of Contents
    enough to serve as an identifier for the Realm Target Environment.
    Therefore, this profile employs an environment map with a class
    identifier that uses the tagged bytes variant of the $class-id-type-
-   choice to encode the RIM value (Figure 13).
+   choice to encode the RIM value (Figure 15).
 
    / environment-map / {
      / comid.class / 0 : {
@@ -637,21 +687,21 @@ Table of Contents
      }
    }
 
-                    Figure 13: CCA Realm Identification
+                    Figure 15: CCA Realm Identification
 
 3.2.2.  Arm CCA Realm Endorsement Profile
 
    Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
-   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 14.
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 16.
 
    / corim-map / {
      / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
      / ... /
    }
 
-     Figure 14: CoRIM profile for CCA Realm endorsements version 1.0.0
+     Figure 16: CoRIM profile for CCA Realm endorsements version 1.0.0
 
 3.2.3.  Reference Values
 
@@ -689,7 +739,7 @@ Table of Contents
 3.2.3.1.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
-   expected values for a Realm is given in Figure 15.
+   expected values for a Realm is given in Figure 17.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -776,7 +826,7 @@ Table of Contents
      }
    }
 
-                      Figure 15: CCA realm identifiers
+                      Figure 17: CCA realm identifiers
 
 4.  Security Considerations
 
