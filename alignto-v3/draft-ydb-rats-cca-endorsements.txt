@@ -359,18 +359,20 @@ Table of Contents
    public key identifiers, which are used to establish a chain of trust.
    Each public key identifier is expressed as Hash of the Public Key.
    For CCA Implementation, the public key identifiers are provisioned as
-   a number of arrays (known as sets), with each array entry containing
-   a list of key identifiers.  For CCA Implementation, there are ONLY
-   two possible sets: 1.  Chip Manufacturing set - known as "CM" 2.
-   Device Manufacturing set - known as "DM"
+   a number of arrays, with each array entry containing a list of key
+   identifiers.  For CCA Implementation, there are ONLY two possible
+   arrays: 1.  Chip Manufacturing array - known as "CM" 2.  Device
+   Manufacturing array - known as "DM"
 
-   In CCA Implementation, the maximum number of arrays (sets) is 8,
-   while the maximum entries in a single array is 6.
+   In CCA Implementation, the maximum number of arrays is 8, while the
+   maximum entries in a single array is 6.
 
    CCA Platform public key identifiers are encoded in a CoMID using
    Reference Value Triples.  Each array entry is encoded in a single
-   Reference Value Triple. uses the text variant of the Each public key
-   identifier is encoded in a single measurement-map, such as:
+   Reference Value Triple.
+
+   Each public key identifier is encoded in a single measurement-map,
+   such as:
 
    1.  mkey uniquely identifies position of each key, using the text
        vairant of $measured-element-type-choice.  The encoding follows a
@@ -385,6 +387,29 @@ Table of Contents
        the $crypto-key-type-choice.  The length of the tagged-bytes can
        ONLY be one of 32, 48 or 64.
 
+   3.  The authorized-by field of the measurement-map MUST NOT be
+       present.
+
+   Find the related CDDL definition of Measurement Values Map in
+   Figure 9 and the associated measurement map in Figure 10.
+
+   cca-rotpk-measurement-values-map = {
+     &(cryptokeys: 13) => [ cca-rotpk-id ]
+   }
+
+   cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+
+   cca-rotpk-id = #6.560(cca-hash-type)
+
+        Figure 9: CCA Platform ROTPK Measurement Values Map encoding
+
+   cca-rotpk-measurement-map = {
+     &(mkey: 0) => "CM.2.3"
+     &(mval: 1) => cca-rotpk-measurement-values-map
+   }
+
+                    Figure 10: CCA ROTPK measurement-map
+
    An Endorser may choose to provision all entries, i.e. the entire set,
    or may choose to ONLY provision a single entry which is currently
    active, on the platform.  If entire set is provisioned, then multiple
@@ -394,7 +419,7 @@ Table of Contents
 
    An example CoMID containing one Reference Values triple with the
    expected values for both software components and platform
-   configuration is given in Figure 9.
+   configuration is given in Figure 11.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -456,7 +481,7 @@ Table of Contents
      }
    }
 
-              Figure 9: Example CCA Platform Reference Values
+              Figure 11: Example CCA Platform Reference Values
 
 3.1.4.  Attestation Verification Keys
 
@@ -482,7 +507,7 @@ Table of Contents
    encoding defined in Section 13 of [RFC7468].  There MUST be only one
    key in an attest-key-triple-record.
 
-   The example in Figure 10 shows the CCA Endorsement of type
+   The example in Figure 12 shows the CCA Endorsement of type
    Attestation Verification Key carrying a secp256r1 EC public CPAK
    associated with Instance ID 4ca3...d296.
 
@@ -523,7 +548,7 @@ Table of Contents
      }
    }
 
-        Figure 10: Example CCA Platform Attestation Verification Key
+        Figure 12: Example CCA Platform Attestation Verification Key
 
 3.2.  Arm CCA Realm Endorsements
 
@@ -552,7 +577,7 @@ Table of Contents
    enough to serve as an identifier for the Realm Target Environment.
    Therefore, this profile employs an environment map with a class
    identifier that uses the tagged bytes variant of the $class-id-type-
-   choice to encode the RIM value (Figure 11).
+   choice to encode the RIM value (Figure 13).
 
    / environment-map / {
      / comid.class / 0 : {
@@ -564,21 +589,21 @@ Table of Contents
      }
    }
 
-                    Figure 11: CCA Realm Identification
+                    Figure 13: CCA Realm Identification
 
 3.2.2.  Arm CCA Realm Endorsement Profile
 
    Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
-   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 12.
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 14.
 
    / corim-map / {
      / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
      / ... /
    }
 
-     Figure 12: CoRIM profile for CCA Realm endorsements version 1.0.0
+     Figure 14: CoRIM profile for CCA Realm endorsements version 1.0.0
 
 3.2.3.  Reference Values
 
@@ -616,7 +641,7 @@ Table of Contents
 3.2.3.1.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
-   expected values for a Realm is given in Figure 13.
+   expected values for a Realm is given in Figure 15.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -703,7 +728,7 @@ Table of Contents
      }
    }
 
-                      Figure 13: CCA realm identifiers
+                      Figure 15: CCA realm identifiers
 
 4.  Security Considerations
 
