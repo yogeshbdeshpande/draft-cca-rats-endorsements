@@ -426,7 +426,7 @@ Table of Contents
    such a component is a coherent memory (CMEM) device.
 
    The platform extension informs the Verifier about the types of
-   devices that can attach, with their reference measurement digest or a
+   devices that can attach, with their reference measurement digest and
    certificate chain digest.
 
    To encode measurement information for a device, a single measurement-
