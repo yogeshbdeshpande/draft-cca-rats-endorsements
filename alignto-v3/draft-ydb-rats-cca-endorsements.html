@@ -1624,9 +1624,10 @@ For this profile, the following measurements are reported.<a href="#section-3.1.
 <p id="section-3.1.3.4-9">When the register-id is set to "certificate-digest", then <code>cca-digest </code> encodes the certificate chain digest.<a href="#section-3.1.3.4-9" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.4-10">When the protocol specified in the <code>name</code> supports VCA (Version-Capabilities-Algorithm message concatenation), for example, "spdm-1.2.3" then the following integrity register is used to specify the SPDM VCA Digest.
 When the register-id is set to "spdm-vca", then <code>cca-digest </code> encodes the SPDM VCA Digest<a href="#section-3.1.3.4-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-11">Find the related CDDL definition of Measurement Values Map in <a href="#cddl-platform-ext-mvm" class="auto internal xref">Figure 11</a> and the associated measurement map in <a href="#cddl-platform-ext" class="auto internal xref">Figure 12</a>.<a href="#section-3.1.3.4-11" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-extension-meas"></span><div id="cddl-platform-ext-mvm">
 <figure id="figure-11">
-              <div class="lang-cddl sourcecode" id="section-3.1.3.4-11.1">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.4-12.1">
 <pre>
 cca-config-platform-masked-raw-value = #6.563([
   value: bytes
@@ -1673,10 +1674,10 @@ cca-platform-ext-measurement-values-map = {
 <a href="#name-cca-platform-extension-meas" class="selfRef">CCA Platform Extension Measurement Values Map</a>
               </figcaption></figure>
 </div>
-<p id="section-3.1.3.4-12">The below CDDL describes the complete measurement map<a href="#section-3.1.3.4-12" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-13">The below CDDL describes the complete measurement map<a href="#section-3.1.3.4-13" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-extension-measu"></span><div id="cddl-platform-ext">
 <figure id="figure-12">
-              <div class="lang-cddl sourcecode" id="section-3.1.3.4-13.1">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.4-14.1">
 <pre>
 cca-platform-ext-measurement-map = {
   &amp;(mkey: 0) =&gt; "cxl-type-3"

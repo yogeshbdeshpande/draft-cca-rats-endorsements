@@ -463,6 +463,9 @@ Table of Contents
    SPDM VCA Digest.  When the register-id is set to "spdm-vca", then
    cca-digest encodes the SPDM VCA Digest
 
+   Find the related CDDL definition of Measurement Values Map in
+   Figure 11 and the associated measurement map in Figure 12.
+
    cca-config-platform-masked-raw-value = #6.563([
      value: bytes
      mask: bytes .bits features
