@@ -358,18 +358,22 @@ Table of Contents
    Boot specification, the platform will include several provisioned
    public key identifiers, which are used to establish a chain of trust.
    Each public key identifier is expressed as Hash of the Public Key.
+
    For CCA Implementation, the public key identifiers are provisioned as
    a number of arrays, with each array entry containing a list of key
-   identifiers.  For CCA Implementation, there are ONLY two possible
-   arrays: 1.  Chip Manufacturing array - known as "CM" 2.  Device
-   Manufacturing array - known as "DM"
+   identifiers.
+
+   For CCA Implementation, there are ONLY two possible arrays: 1.  Chip
+   Manufacturing array - known as "CM" 2.  Device Manufacturing array -
+   known as "DM"
 
    In CCA Implementation, the maximum number of arrays is 8, while the
    maximum entries in a single array is 6.
 
    CCA Platform public key identifiers are encoded in a CoMID using
-   Reference Value Triples.  Each array entry is encoded in a single
-   Reference Value Triple.
+   Reference Value Triples.
+
+   Each array entry is encoded in a single Reference Value Triple.
 
    Each public key identifier is encoded in a single measurement-map,
    such as:
@@ -378,16 +382,18 @@ Table of Contents
        vairant of $measured-element-type-choice.  The encoding follows a
        consistent pattern i.e. the name of the set ("CM" or "DM"),
        followed by the index of the array, followed by its
-       position(entry), within the array.  For example to encode a "CM"
-       key for an active array index of 2, with position 3 (within the
-       array),mkey` will be set to "CM.2.3"
+       position(entry), within the array.
 
-   2.  The public key identifier is encoded using cryptokeys (key 13):
+   For example to encode a "CM" key for an active array index of 2, with
+   position 3 (within the array), mkey will be set to "CM.2.3"
+
+   1.  The public key identifier is encoded using cryptokeys (key 13):
        An array with _only one_ entry using the tagged-bytes variant of
-       the $crypto-key-type-choice.  The length of the tagged-bytes can
-       ONLY be one of 32, 48 or 64.
+       the $crypto-key-type-choice.
 
-   3.  The authorized-by field of the measurement-map MUST NOT be
+   The length of the tagged-bytes can ONLY be one of 32, 48 or 64.
+
+   1.  The authorized-by field of the measurement-map MUST NOT be
        present.
 
    Find the related CDDL definition of Measurement Values Map in
