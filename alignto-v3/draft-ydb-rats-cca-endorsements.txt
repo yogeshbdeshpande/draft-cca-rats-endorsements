@@ -369,14 +369,16 @@ Table of Contents
 
    CCA Platform public key identifiers are encoded in a CoMID using
    Reference Value Triples.  Each array entry is encoded in a single
-   Reference Value Triple.
+   Reference Value Triple. uses the text variant of the Each public key
+   identifier is encoded in a single measurement-map, such as:
 
-   Each public key identifier is encoded in a single measurement-map,
-   such as:
-
-   1.  Mkey uniquely identifies position of each key, i.e. the name of
-       the set ("CM" or "DM"), followed by the index of the array,
-       followed by its position(entry), within the array.
+   1.  mkey uniquely identifies position of each key, using the text
+       vairant of $measured-element-type-choice.  The encoding follows a
+       consistent pattern i.e. the name of the set ("CM" or "DM"),
+       followed by the index of the array, followed by its
+       position(entry), within the array.  For example to encode a "CM"
+       key for an active array index of 2, with position 3 (within the
+       array),mkey` will be set to "CM.2.3"
 
    2.  The public key identifier is encoded using cryptokeys (key 13):
        An array with _only one_ entry using the tagged-bytes variant of
@@ -385,8 +387,8 @@ Table of Contents
 
    An Endorser may choose to provision all entries, i.e. the entire set,
    or may choose to ONLY provision a single entry which is currently
-   active.  If entire set is provisioned, then multiple Reference Value
-   Triples in a CoMID are used for encoding.
+   active, on the platform.  If entire set is provisioned, then multiple
+   Reference Value Triples in a CoMID encode the array entries.
 
 3.1.3.4.  CoMID Example
 
