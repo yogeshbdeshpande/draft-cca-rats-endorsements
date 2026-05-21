@@ -303,6 +303,129 @@ The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attesta
 ~~~
 {: #ex-cca-platform-iak title="Example CCA Platform Attestation Verification Key" }
 
+### Evidence Transformations
+
+This section describes the transformations required to map a CCA Platform Token to its equivalent CoRIM internal representation.
+
+{{trans-plat}} shows the complete transformation.
+
+#### Platform Identifiers
+
+The following function maps the CCA implementation and instance identifiers onto a CoRIM environment map.
+
+~~~ pseudocode
+FUNC cca_platform_id_to_env(
+    inst-id: arm-platform-instance-id-type,
+    impl-id: arm-platform-implementation-id-type,
+) -> environment-map {
+    env := environment-map::NEW()
+    env.class.class-id = tagged-bytes(impl-id)
+    env.instance = tagged-ueid-type(inst-id)
+
+    RETURN env
+}
+~~~
+{: #trans-platform-id title="Transform CCA Platform IDs into Evironment Map" }
+
+#### Software Components
+
+The following function maps a single CCA software component to a CoRIM element map.
+The element identifier is "cca.software-component", and the element claims are synthesized from the CCA software component attributes using only the following default CoRIM `element-map` attributes: name, version, digests and cryptokeys.
+
+~~~ pseudocode
+FUNC element-from-cca-sw-component(
+    C: arm-platform-sw-component,
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.software-component")
+
+    em.element-claims.name = C.measurement-type
+    em.element-claims.version.version = C.version
+
+    digest := eatmc.digest(C.measurement-desc, C.measurement-value)
+    em.element-claims.digests::APPEND(digest)
+
+    signer := tagged-bytes(C.signer-id)
+    em.element-claims.cryptokeys::APPEND(signer)
+
+    RETURN em
+}
+~~~
+{: #trans-sw-comp title="Transform a CCA Software Component into an Element Map" }
+
+#### Platform Configuration
+
+The following function maps the CCA platform configuration claim to a CoRIM element map.
+The element identifier is "cca.platform-config", and the element claims use the standard raw-values attribute to represent the platform configuration value as `tagged-bytes`.
+
+~~~ pseudocode
+FUNC element-from-platform-config(
+    C: arm-platform-config-type
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.platform-config")
+
+    em.element-claims.raw-values = tagged-bytes(C)
+
+    RETURN em
+}
+~~~
+{: #trans-plat-conf title="Transform a CCA Plaform Config into an Element Map" }
+
+#### Platform Token
+
+The following function maps the CCA platform's claims set to a single CoRIM `ae-item`.
+
+The environment is synthesized from instance and implementation identifiers.
+Each software component is mapped to an `element-map` entry with identifier "cca.software-component".
+The platform configuration is mapped to an `element-map` entry with identifier "cca.platform-config".
+
+The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, and {{trans-plat-conf}}.
+
+The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2023:cca_platform#1.0.0".
+
+~~~ pseudocode
+FUNC transform(
+    P: arm-platform-claims,
+    cpak_pub: $crypto-key-type-choice
+) -> ae-item {
+    ASSERT::Equal(
+        P.arm-platform-profile-label,
+        "tag:arm.com,2023:cca_platform#1.0.0"
+    )
+
+    item := ae-item::NEW()
+
+    item.addition.cmtype = evidence
+
+    # map platform identifiers to environment
+    item.addition.environment = cca_platform_id_to_env(
+        P.arm-platform-instance-id-label,
+        P.arm-platform-implementation-id-label
+    )
+
+    element-list = [ + element-map ]::NEW()
+
+    # map software components to elements
+    FOREACH c IN P.arm-platform-sw-components:
+        e := element-from-sw-component(c)
+        element-list::APPEND(e)
+
+    # map platform config to element
+    e := element-from-platform-config(P.arm-platform-config-label)
+    element-list::APPEND(e)
+
+    item.addition.element-list = element-list
+    item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
+    item.addition.authority[0] = cpak_pub
+
+    RETURN item
+}
+~~~
+{: #trans-plat title="Transform a CCA Plaform into a CoRIM `ae` Relation" }
+
 ## Arm CCA Realm Endorsements {#realm-endorsements}
 
 Arm CCA provides confidential computing environments, known as Realms, that enable application workloads requiring confidential execution to operate in isolation from the host hypervisor and any other concurrent workload.
@@ -383,7 +506,10 @@ An example CoMID containing one Reference Values triple with the expected values
 
 This document makes no requests to IANA.
 
+--- back
+
 # Acknowledgements
+{:unnumbered}
 
 [^todo]
 
