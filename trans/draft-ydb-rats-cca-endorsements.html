@@ -1832,7 +1832,7 @@ FUNC transform(
 
     item.addition.element-list = element-list
     item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
-    item.addition.authority[0] = cpak_pub
+    item.addition.authority::APPEND(cpak_pub)
 
     RETURN item
 }
