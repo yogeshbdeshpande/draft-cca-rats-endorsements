@@ -296,6 +296,8 @@ Specifically:
 The CPAK public key is a SubjectPublicKeyInfo {{-pkix-x509}} using the encoding defined in {{Section 13 of -pem}}.
 There MUST be only one key in an `attest-key-triple-record`.
 
+#### CoMID Example
+
 The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public CPAK associated with Instance ID `4ca3...d296`.
 
 ~~~
