@@ -435,6 +435,17 @@ Realm Endorsements consist of Reference Values ({{sec-realm-ref-values}}), which
 
 Unlike the Platform, Realm Attestation Verification Key Endorsements are not necessary as the key material needed to verify the Realm Evidence is inline in the CCA Token ({{Section 3.2 of -cca-token}}).
 
+### Arm CCA Realm Endorsement Profile
+
+Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
+
+The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
+
+~~~ cbor-diag
+{::include examples/realm-profile.diag}
+~~~
+{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm endorsements version 1.0.0" }
+
 ### Realm Endorsements linkage to Realm {#realm-id}
 
 Realms do not have *explicit* class or instance identifiers.
@@ -453,17 +464,6 @@ Therefore, this profile employs an `environment map` with a class identifier tha
 }
 ~~~
 {: #ex-cca-realm-identifiers title="CCA Realm Identification" }
-
-### Arm CCA Realm Endorsement Profile
-
-Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
-
-The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
-
-~~~ cbor-diag
-{::include examples/realm-profile.diag}
-~~~
-{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm endorsements version 1.0.0" }
 
 ### Reference Values {#sec-realm-ref-values}
 
