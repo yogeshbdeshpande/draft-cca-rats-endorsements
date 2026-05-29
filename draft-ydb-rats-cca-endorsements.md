@@ -500,6 +500,149 @@ An example CoMID containing one Reference Values triple with the expected values
 ~~~
 {: #ex-cca-realm-refval title="CCA realm identifiers" }
 
+### Evidence Transformations
+
+This section describes the transformations required to map a CCA Realm Token to its equivalent CoRIM internal representation.
+
+{{trans-realm}} shows the complete transformation.
+
+#### Realm Identifiers
+
+The following function maps the CCA Realm initial measurement onto a CoRIM environment map.
+
+~~~ pseudocode
+FUNC cca_realm_id_to_env(
+    rim: cca-realm-measurement-type
+) -> environment-map {
+    env := environment-map::NEW()
+    env.class.class-id = tagged-bytes(rim)
+
+    RETURN env
+}
+~~~
+{: #trans-realm-id title="Transform a CCA Realm Initial Measurement into an Element Map" }
+
+#### Realm Initial Measurements
+
+The following function maps the CCA Realm Initial Measurement claim to a CoRIM element map.
+The element identifier is "cca.rim", and the element claims use the standard digests attribute to represent the RIM value, using the digest algorithm taken from the Realm hash algorithm ID claim.
+
+~~~ pseudocode
+FUNC element-from-rim(
+    rim-value: cca-realm-measurement-type,
+    rim-algo: text
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rim")
+
+    digest := eatmc.digest(rim-algo, rim-value)
+    em.element-claims.digests::APPEND(digest)
+
+    RETURN em
+}
+~~~
+{: #trans-rim title="Transform a CCA Realm Initial Measurement into an Element Map" }
+
+#### Realm Extended Measurements
+
+The following function maps the i-th (0..3) bank of a CCA Realm Extended Measurements claim to a CoRIM element map.
+The element identifier is one of "cca.rem0".."cca.rem3", depending on the bank index, and the element claims use the standard digests attribute to represent the REM value, using the digest algorithm taken from the Realm hash algorithm ID claim.
+
+~~~ pseudocode
+FUNC element-from-rem(
+    rem-index: uint,
+    rem-value: cca-realm-measurement-type,
+    rim-algo: text
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rem" + rem-index)
+
+    digest := eatmc.digest(rem-algo, rem-value)
+    em.element-claims.digests::APPEND(digest)
+
+    RETURN em
+}
+~~~
+{: #trans-rem title="Transform a CCA Realm Extended Measurement Bank into an Element Map" }
+
+#### Realm Personalization Value
+
+The following function maps the CCA realm personalization value claim to a CoRIM element map.
+The element identifier is "cca.rpv", and the element claims use the standard raw-values attribute to represent the personalization value as tagged-bytes.
+
+~~~ pseudocode
+FUNC element-from-rpv(
+    rpv: cca-realm-personalization-value-type
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rpv")
+
+    em.element-claims.raw-values = tagged-bytes(rpv)
+
+    RETURN em
+}
+~~~
+{: #trans-rpv title="Transform a CCA Realm Personalization Value into an Element Map" }
+
+#### Realm Token
+
+The following function maps the CCA realm's claims set to a single CoRIM `ae-item`.
+
+The environment is synthesized from the RIM.
+Each REM bank, if present, is mapped to an element-map entry with identifier "cca.rem0".."cca.rem3".
+The personalization value, if present, is mapped to an element-map entry with identifier "cca.rpv".
+
+The process uses the functions defined in {{trans-realm-id}}, {{trans-rim}}, {{trans-rem}}, and {{trans-rpv}}.
+
+The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2023:realm#1.0.0".
+
+~~~ pseudocode
+FUNC transform(
+    R: cca-realm-claims
+) -> ae-item {
+    ASSERT::Equal(
+        R.cca-realm-profile-label,
+        "tag:arm.com,2023:realm#1.0.0"
+    )
+
+    item := ae-item::NEW()
+
+    item.addition.cmtype = evidence
+
+    # map platform identifiers to environment
+    item.addition.environment = cca_realm_id_to_env(
+        R.cca-realm-initial-measurement-label
+    )
+
+    element-list = [ + element-map ]::NEW()
+
+    # map realm initial measurement to element
+    e := element-from-rim(R.cca-realm-profile-label)
+    element-list::APPEND(e)
+
+    # map optional REMs
+    IF R.cca-realm-extensible-measurements:
+        FOREACH idx, r IN R.cca-realm-extensible-measurements:
+            e := element-from-rem(idx, r, R.cca-realm-hash-algo-id-label)
+            element-list::APPEND(e)
+
+    # map optional RVP
+    IF R.cca-realm-personalization-value:
+        e := element-from-rpv(R.arm-platform-config-label)
+        element-list::APPEND(e)
+
+    item.addition.element-list = element-list
+    item.addition.profile = "tag:arm.com,2025:cca_realm#1.0.0"
+    item.addition.authority::APPEND(R.cca-realm-public-key-label)
+
+    RETURN item
+}
+~~~
+{: #trans-realm title="Transform a CCA Realm into a CoRIM `ae` Relation" }
+
 # Security Considerations
 
 [^todo]
