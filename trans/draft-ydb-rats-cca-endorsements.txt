@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 22 November 2026                                         Linaro
-                                                             21 May 2026
+Expires: 30 November 2026                                         Linaro
+                                                             29 May 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2026.
+   This Internet-Draft will expire on 30 November 2026.
 
 Copyright Notice
 
@@ -72,9 +72,10 @@ Table of Contents
        3.1.4.  Attestation Verification Keys
        3.1.5.  Evidence Transformations
      3.2.  Arm CCA Realm Endorsements
-       3.2.1.  Realm Endorsements linkage to Realm
-       3.2.2.  Arm CCA Realm Endorsement Profile
+       3.2.1.  Arm CCA Realm Endorsement Profile
+       3.2.2.  Realm Endorsements linkage to Realm
        3.2.3.  Reference Values
+       3.2.4.  Evidence Transformations
    4.  Security Considerations
    5.  IANA Considerations
    6.  References
@@ -445,6 +446,8 @@ Table of Contents
    encoding defined in Section 13 of [RFC7468].  There MUST be only one
    key in an attest-key-triple-record.
 
+3.1.4.1.  CoMID Example
+
    The example in Figure 10 shows the CCA Endorsement of type
    Attestation Verification Key carrying a secp256r1 EC public CPAK
    associated with Instance ID 4ca3...d296.
@@ -639,14 +642,28 @@ Table of Contents
    Evidence is inline in the CCA Token (Section 3.2 of
    [I-D.ffm-rats-cca-token]).
 
-3.2.1.  Realm Endorsements linkage to Realm
+3.2.1.  Arm CCA Realm Endorsement Profile
+
+   Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
+
+   The profile attribute in the CoRIM MUST be present and MUST be the
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 15.
+
+   / corim-map / {
+     / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
+     / ... /
+   }
+
+     Figure 15: CoRIM profile for CCA Realm endorsements version 1.0.0
+
+3.2.2.  Realm Endorsements linkage to Realm
 
    Realms do not have _explicit_ class or instance identifiers.
    However, the Realm Initial Measurement (RIM) is unique and stable
    enough to serve as an identifier for the Realm Target Environment.
    Therefore, this profile employs an environment map with a class
    identifier that uses the tagged bytes variant of the $class-id-type-
-   choice to encode the RIM value (Figure 15).
+   choice to encode the RIM value (Figure 16).
 
    / environment-map / {
      / comid.class / 0 : {
@@ -658,21 +675,7 @@ Table of Contents
      }
    }
 
-                    Figure 15: CCA Realm Identification
-
-3.2.2.  Arm CCA Realm Endorsement Profile
-
-   Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
-
-   The profile attribute in the CoRIM MUST be present and MUST be the
-   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 16.
-
-   / corim-map / {
-     / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
-     / ... /
-   }
-
-     Figure 16: CoRIM profile for CCA Realm endorsements version 1.0.0
+                    Figure 16: CCA Realm Identification
 
 3.2.3.  Reference Values
 
@@ -688,7 +691,7 @@ Table of Contents
    3.  Realm Personalization Value (RPV)
 
    All Realm Reference Values are carried in a reference-triple-record
-   whose environment-map is as described in Section 3.2.1 The triple
+   whose environment-map is as described in Section 3.2.2 The triple
    includes as many measurement-maps as needed to fully describe the
    Realm.
 
@@ -798,6 +801,163 @@ Table of Contents
    }
 
                       Figure 17: CCA realm identifiers
+
+3.2.4.  Evidence Transformations
+
+   This section describes the transformations required to map a CCA
+   Realm Token to its equivalent CoRIM internal representation.
+
+   Figure 22 shows the complete transformation.
+
+3.2.4.1.  Realm Identifiers
+
+   The following function maps the CCA Realm initial measurement onto a
+   CoRIM environment map.
+
+   FUNC cca_realm_id_to_env(
+       rim: cca-realm-measurement-type
+   ) -> environment-map {
+       env := environment-map::NEW()
+       env.class.class-id = tagged-bytes(rim)
+
+       RETURN env
+   }
+
+        Figure 18: Transform a CCA Realm Initial Measurement into an
+                                Element Map
+
+3.2.4.2.  Realm Initial Measurements
+
+   The following function maps the CCA Realm Initial Measurement claim
+   to a CoRIM element map.  The element identifier is "cca.rim", and the
+   element claims use the standard digests attribute to represent the
+   RIM value, using the digest algorithm taken from the Realm hash
+   algorithm ID claim.
+
+   FUNC element-from-rim(
+       rim-value: cca-realm-measurement-type,
+       rim-algo: text
+   ) -> element-map {
+       em := element-map::NEW()
+
+       em.element-id = tstr("cca.rim")
+
+       digest := eatmc.digest(rim-algo, rim-value)
+       em.element-claims.digests::APPEND(digest)
+
+       RETURN em
+   }
+
+        Figure 19: Transform a CCA Realm Initial Measurement into an
+                                Element Map
+
+3.2.4.3.  Realm Extended Measurements
+
+   The following function maps the i-th (0..3) bank of a CCA Realm
+   Extended Measurements claim to a CoRIM element map.  The element
+   identifier is one of "cca.rem0".."cca.rem3", depending on the bank
+   index, and the element claims use the standard digests attribute to
+   represent the REM value, using the digest algorithm taken from the
+   Realm hash algorithm ID claim.
+
+   FUNC element-from-rem(
+       rem-index: uint,
+       rem-value: cca-realm-measurement-type,
+       rim-algo: text
+   ) -> element-map {
+       em := element-map::NEW()
+
+       em.element-id = tstr("cca.rem" + rem-index)
+
+       digest := eatmc.digest(rem-algo, rem-value)
+       em.element-claims.digests::APPEND(digest)
+
+       RETURN em
+   }
+
+      Figure 20: Transform a CCA Realm Extended Measurement Bank into
+                               an Element Map
+
+3.2.4.4.  Realm Personalization Value
+
+   The following function maps the CCA realm personalization value claim
+   to a CoRIM element map.  The element identifier is "cca.rpv", and the
+   element claims use the standard raw-values attribute to represent the
+   personalization value as tagged-bytes.
+
+   FUNC element-from-rpv(
+       rpv: cca-realm-personalization-value-type
+   ) -> element-map {
+       em := element-map::NEW()
+
+       em.element-id = tstr("cca.rpv")
+
+       em.element-claims.raw-values = tagged-bytes(rpv)
+
+       RETURN em
+   }
+
+       Figure 21: Transform a CCA Realm Personalization Value into an
+                                Element Map
+
+3.2.4.5.  Realm Token
+
+   The following function maps the CCA realm's claims set to a single
+   CoRIM ae-item.
+
+   The environment is synthesized from the RIM.  Each REM bank, if
+   present, is mapped to an element-map entry with identifier
+   "cca.rem0".."cca.rem3".  The personalization value, if present, is
+   mapped to an element-map entry with identifier "cca.rpv".
+
+   The process uses the functions defined in Figure 18, Figure 19,
+   Figure 20, and Figure 21.
+
+   The process assumes that the profile of the CCA Realm claims-set is
+   "tag:arm.com,2023:realm#1.0.0".
+
+   FUNC transform(
+       R: cca-realm-claims
+   ) -> ae-item {
+       ASSERT::Equal(
+           R.cca-realm-profile-label,
+           "tag:arm.com,2023:realm#1.0.0"
+       )
+
+       item := ae-item::NEW()
+
+       item.addition.cmtype = evidence
+
+       # map platform identifiers to environment
+       item.addition.environment = cca_realm_id_to_env(
+           R.cca-realm-initial-measurement-label
+       )
+
+       element-list = [ + element-map ]::NEW()
+
+       # map realm initial measurement to element
+       e := element-from-rim(R.cca-realm-profile-label)
+       element-list::APPEND(e)
+
+       # map optional REMs
+       IF R.cca-realm-extensible-measurements:
+           FOREACH idx, r IN R.cca-realm-extensible-measurements:
+               e := element-from-rem(idx, r, R.cca-realm-hash-algo-id-label)
+               element-list::APPEND(e)
+
+       # map optional RVP
+       IF R.cca-realm-personalization-value:
+           e := element-from-rpv(R.arm-platform-config-label)
+           element-list::APPEND(e)
+
+       item.addition.element-list = element-list
+       item.addition.profile = "tag:arm.com,2025:cca_realm#1.0.0"
+       item.addition.authority::APPEND(R.cca-realm-public-key-label)
+
+       RETURN item
+   }
+
+        Figure 22: Transform a CCA Realm into a CoRIM `ae` Relation
 
 4.  Security Considerations
 
