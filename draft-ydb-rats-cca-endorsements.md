@@ -311,9 +311,9 @@ This section describes the transformations required to map a CCA Platform Token 
 
 {{trans-plat}} shows the complete transformation.
 
-#### Platform Identifiers
+#### Platform Identification
 
-The following function maps the CCA implementation and instance identifiers onto a CoRIM environment map.
+The following function maps the CCA Implementation and Instance IDs - which, used together to provide a unique and stable identifier for the CCA platform - onto a CoRIM `environment-map`.
 
 ~~~ pseudocode
 FUNC cca_platform_id_to_env(
@@ -452,7 +452,7 @@ The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.
 
 Realms do not have *explicit* class or instance identifiers.
 However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
-Therefore, this profile employs an `environment map` with a class identifier that uses the `tagged bytes` variant of the `$class-id-type-choice` to encode the RIM value ({{ex-cca-realm-identifiers}}).
+Therefore, this profile employs an `environment-map` with a class identifier that uses the `tagged-bytes` variant of the `$class-id-type-choice` to encode the RIM value ({{ex-cca-realm-identifiers}}).
 
 ~~~ cbor-diag
 / environment-map / {
@@ -506,9 +506,9 @@ This section describes the transformations required to map a CCA Realm Token to 
 
 {{trans-realm}} shows the complete transformation.
 
-#### Realm Identifiers
+#### Realm Identification
 
-The following function maps the CCA Realm initial measurement onto a CoRIM environment map.
+The following function maps the CCA Realm Initial Measurement - which, as discussed in {{realm-id}}, provides a stable identifier for the Realm - onto a CoRIM `environment-map`.
 
 ~~~ pseudocode
 FUNC cca_realm_id_to_env(
