@@ -1044,11 +1044,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Arm CCA Endorsements</td>
-<td class="right">May 2026</td>
+<td class="right">June 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Deshpande &amp; Fossati</td>
-<td class="center">Expires 30 November 2026</td>
+<td class="center">Expires 4 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1061,12 @@ svg {
 <dd class="internet-draft">draft-ydb-rats-cca-endorsements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-29" class="published">29 May 2026</time>
+<time datetime="2026-06-02" class="published">2 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-30">30 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-04">4 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1698,12 +1698,12 @@ n8akBr+fh94uxHU5m+Kijivp2r2oxxN6MhM4tr8mWQli1P61xh3T0ViDREbF26DGO\\
           </h4>
 <p id="section-3.1.5-1">This section describes the transformations required to map a CCA Platform Token to its equivalent CoRIM internal representation.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-2"><a href="#trans-plat" class="auto internal xref">Figure 14</a> shows the complete transformation.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
-<div id="platform-identifiers">
+<div id="platform-identification">
 <section id="section-3.1.5.1">
-            <h5 id="name-platform-identifiers">
-<a href="#section-3.1.5.1" class="section-number selfRef">3.1.5.1. </a><a href="#name-platform-identifiers" class="section-name selfRef">Platform Identifiers</a>
+            <h5 id="name-platform-identification">
+<a href="#section-3.1.5.1" class="section-number selfRef">3.1.5.1. </a><a href="#name-platform-identification" class="section-name selfRef">Platform Identification</a>
             </h5>
-<p id="section-3.1.5.1-1">The following function maps the CCA implementation and instance identifiers onto a CoRIM environment map.<a href="#section-3.1.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5.1-1">The following function maps the CCA Implementation and Instance IDs - which, used together to provide a unique and stable identifier for the CCA platform - onto a CoRIM <code>environment-map</code>.<a href="#section-3.1.5.1-1" class="pilcrow">¶</a></p>
 <span id="name-transform-cca-platform-ids-"></span><div id="trans-platform-id">
 <figure id="figure-11">
               <div class="lang-pseudocode sourcecode" id="section-3.1.5.1-2.1">
@@ -1895,7 +1895,7 @@ Arm CCA allows the initial and run-time state of a Realm to be attested (<span><
           </h4>
 <p id="section-3.2.2-1">Realms do not have <em>explicit</em> class or instance identifiers.
 However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
-Therefore, this profile employs an <code>environment map</code> with a class identifier that uses the <code>tagged bytes</code> variant of the <code>$class-id-type-choice</code> to encode the RIM value (<a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 16</a>).<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+Therefore, this profile employs an <code>environment-map</code> with a class identifier that uses the <code>tagged-bytes</code> variant of the <code>$class-id-type-choice</code> to encode the RIM value (<a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 16</a>).<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-identification"></span><div id="ex-cca-realm-identifiers">
 <figure id="figure-16">
             <div class="lang-cbor-diag sourcecode" id="section-3.2.2-2.1">
@@ -2055,12 +2055,12 @@ The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NO
           </h4>
 <p id="section-3.2.4-1">This section describes the transformations required to map a CCA Realm Token to its equivalent CoRIM internal representation.<a href="#section-3.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.2.4-2"><a href="#trans-realm" class="auto internal xref">Figure 22</a> shows the complete transformation.<a href="#section-3.2.4-2" class="pilcrow">¶</a></p>
-<div id="realm-identifiers">
+<div id="realm-identification">
 <section id="section-3.2.4.1">
-            <h5 id="name-realm-identifiers">
-<a href="#section-3.2.4.1" class="section-number selfRef">3.2.4.1. </a><a href="#name-realm-identifiers" class="section-name selfRef">Realm Identifiers</a>
+            <h5 id="name-realm-identification">
+<a href="#section-3.2.4.1" class="section-number selfRef">3.2.4.1. </a><a href="#name-realm-identification" class="section-name selfRef">Realm Identification</a>
             </h5>
-<p id="section-3.2.4.1-1">The following function maps the CCA Realm initial measurement onto a CoRIM environment map.<a href="#section-3.2.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.4.1-1">The following function maps the CCA Realm Initial Measurement - which, as discussed in <a href="#realm-id" class="auto internal xref">Section 3.2.2</a>, provides a stable identifier for the Realm - onto a CoRIM <code>environment-map</code>.<a href="#section-3.2.4.1-1" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-initi"></span><div id="trans-realm-id">
 <figure id="figure-18">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.1-2.1">

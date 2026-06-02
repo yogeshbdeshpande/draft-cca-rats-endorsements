@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 30 November 2026                                         Linaro
-                                                             29 May 2026
+Expires: 4 December 2026                                          Linaro
+                                                             2 June 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2026.
+   This Internet-Draft will expire on 4 December 2026.
 
 Copyright Notice
 
@@ -498,10 +498,11 @@ Table of Contents
 
    Figure 14 shows the complete transformation.
 
-3.1.5.1.  Platform Identifiers
+3.1.5.1.  Platform Identification
 
-   The following function maps the CCA implementation and instance
-   identifiers onto a CoRIM environment map.
+   The following function maps the CCA Implementation and Instance IDs -
+   which, used together to provide a unique and stable identifier for
+   the CCA platform - onto a CoRIM environment-map.
 
    FUNC cca_platform_id_to_env(
        inst-id: arm-platform-instance-id-type,
@@ -661,8 +662,8 @@ Table of Contents
    Realms do not have _explicit_ class or instance identifiers.
    However, the Realm Initial Measurement (RIM) is unique and stable
    enough to serve as an identifier for the Realm Target Environment.
-   Therefore, this profile employs an environment map with a class
-   identifier that uses the tagged bytes variant of the $class-id-type-
+   Therefore, this profile employs an environment-map with a class
+   identifier that uses the tagged-bytes variant of the $class-id-type-
    choice to encode the RIM value (Figure 16).
 
    / environment-map / {
@@ -809,10 +810,11 @@ Table of Contents
 
    Figure 22 shows the complete transformation.
 
-3.2.4.1.  Realm Identifiers
+3.2.4.1.  Realm Identification
 
-   The following function maps the CCA Realm initial measurement onto a
-   CoRIM environment map.
+   The following function maps the CCA Realm Initial Measurement -
+   which, as discussed in Section 3.2.2, provides a stable identifier
+   for the Realm - onto a CoRIM environment-map.
 
    FUNC cca_realm_id_to_env(
        rim: cca-realm-measurement-type
