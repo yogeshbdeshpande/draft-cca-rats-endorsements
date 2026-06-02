@@ -446,6 +446,7 @@ cca-config-measurement-map = {
 ~~~
 {: #cddl-mfg-config-mm title="CCA Platform Manufacturing Configuration measurement-map"}
 
+
 #### CoMID Example
 
 An example CoMID containing one Reference Values triple with the expected values for both software components and platform configuration is given in {{ex-cca-platform-refval}}.
