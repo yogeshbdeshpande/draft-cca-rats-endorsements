@@ -105,7 +105,7 @@ There are two types of CCA Platform Endorsements:
 
 Arm CCA Platform Endorsements are carried in one or more CoMIDs within a CoRIM.
 
-The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_platform#1.0.0`, as shown in {{ex-cca-platform-profile}}.
+The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:endorsements/cca_platform#1.0.0`, as shown in {{ex-cca-platform-profile}}.
 
 ~~~
 {::include examples/platform-profile.diag}
@@ -517,7 +517,7 @@ FUNC transform(
     element-list::APPEND(e)
 
     item.addition.element-list = element-list
-    item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
+    item.addition.profile = "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
     RETURN item
@@ -538,7 +538,7 @@ Unlike the Platform, Realm Attestation Verification Key Endorsements are not nec
 
 Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
-The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
+The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:endorsements/cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
 
 ~~~ cbor-diag
 {::include examples/realm-profile.diag}
@@ -732,7 +732,7 @@ FUNC transform(
         element-list::APPEND(e)
 
     item.addition.element-list = element-list
-    item.addition.profile = "tag:arm.com,2025:cca_realm#1.0.0"
+    item.addition.profile = "tag:arm.com,2025:endorsements/cca_realm#1.0.0"
     item.addition.authority::APPEND(R.cca-realm-public-key-label)
 
     RETURN item
