@@ -295,7 +295,7 @@ CCA Platform public key identifiers are encoded in a CoMID using Reference Value
 
 Each array entry is encoded in a single Reference Value Triple.
 
-Each public key identifier is encoded in a single `measurement-map`, such as:
+Each public key identifier is encoded in a single `measurement-map`.
 
 1. `mkey` uniquely identifies position of each key identifier, using the text vairant of `$measured-element-type-choice`.
 The encoding follows a consistent pattern: the prefix "cca.rotpk" followed by the name of the set (“CM" or “DM") followed by the array index (starting from zero), then the entry position within the array (starting from zero).
@@ -321,7 +321,7 @@ cca-rotpk-id = #6.560(cca-hash-type)
 
 ~~~ cddl
 cca-rotpk-measurement-map = {
-  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]+" ; example "cca.rotpk.CM.2.3"
+  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]" ; example "cca.rotpk.CM.2.3"
   &(mval: 1) => cca-rotpk-measurement-values-map
 }
 ~~~
@@ -340,7 +340,7 @@ It is represented in a `raw-value` of the `measurement-values-map`, using the `t
 Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
 
 ~~~ cddl
-cca-config-manufacturing-measurement-values-map = {
+cca-manufacturing-config-measurement-values-map = {
   &(raw-value: 4) => cca-tagged-masked-raw-value
 }
 
@@ -362,7 +362,7 @@ Find the related CDDL definitions in  {{cddl-mfg-config-mvm}} and in {{cddl-mfg-
 ~~~ cddl
 cca-config-measurement-map = {
   &(mkey: 0) => "cca.platform-manufacturing-config"
-  &(mval: 1) => cca-config-manufacturing-measurement-values-map
+  &(mval: 1) => cca-manufacturing-config-measurement-values-map
 }
 ~~~
 {: #cddl-mfg-config-mm title="CCA Platform Manufacturing Configuration measurement-map"}
