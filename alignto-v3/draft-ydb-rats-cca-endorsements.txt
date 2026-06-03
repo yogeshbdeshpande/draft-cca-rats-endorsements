@@ -434,7 +434,7 @@ Table of Contents
    Refer to Section 5.1.4.1.4.6 of [I-D.ietf-rats-corim] for the details
    about the comparison algorithm.
 
-   cca-config-measurement-values-map = {
+   cca-config-manufacturing-measurement-values-map = {
      &(raw-value: 4) => cca-tagged-masked-raw-value
    }
 
@@ -458,8 +458,8 @@ Table of Contents
    Find the related CDDL definitions in Figure 11 and in Figure 12.
 
    cca-config-measurement-map = {
-     &(mkey: 0) => "cca.platform-config"
-     &(mval: 1) => cca-config-measurement-values-map
+     &(mkey: 0) => "cca.platform-manufacturing-config"
+     &(mval: 1) => cca-config-manufacturing-measurement-values-map
    }
 
     Figure 12: CCA Platform Manufacturing Configuration measurement-map

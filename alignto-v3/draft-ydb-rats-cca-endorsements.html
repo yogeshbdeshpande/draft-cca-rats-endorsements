@@ -1607,7 +1607,7 @@ Refer to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-co
 <figure id="figure-11">
               <div class="lang-cddl sourcecode" id="section-3.1.3.4-4.1">
 <pre>
-cca-config-measurement-values-map = {
+cca-config-manufacturing-measurement-values-map = {
   &amp;(raw-value: 4) =&gt; cca-tagged-masked-raw-value
 }
 
@@ -1631,8 +1631,8 @@ There MUST be only one <code>measurement-map</code> with <code>mkey</code> "cca.
               <div class="lang-cddl sourcecode" id="section-3.1.3.4-8.1">
 <pre>
 cca-config-measurement-map = {
-  &amp;(mkey: 0) =&gt; "cca.platform-config"
-  &amp;(mval: 1) =&gt; cca-config-measurement-values-map
+  &amp;(mkey: 0) =&gt; "cca.platform-manufacturing-config"
+  &amp;(mval: 1) =&gt; cca-config-manufacturing-measurement-values-map
 }
 </pre>
 </div>
