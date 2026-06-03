@@ -113,7 +113,10 @@ Table of Contents
    of [I-D.ffm-rats-cca-token].  Appraising Arm CCA Evidence requires
    Endorsements for both the Platform and Realm.  This document outlines
    the Platform and Realm Endorsements in Section 3.1 and Section 3.2,
-   respectively.
+   respectively.  It also provides the Evidence transformation logic for
+   conducting appraisals using the CoRIM processor (see Section 8 of
+   [I-D.ietf-rats-corim]) for both platform and realm claim sets, which
+   are covered in Section 3.1.5 and Section 3.2.4, respectively.
 
 3.1.  Arm CCA Platform Endorsements
 
