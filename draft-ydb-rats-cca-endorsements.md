@@ -283,13 +283,13 @@ cca-config-measurement-map = {
 When an implementation of the CCA Platform follows the Trusted Board Boot {{TBB}} specification, the platform will include several provisioned public key identifiers to establish a chain of trust.
 Each public key identifier is expressed as a hash of the corresponding public key.
 
-For CCA Implementation, the public key identifiers are provisioned as a number of arrays, with each array entry containing a list of key identifiers.
+For CCA Implementation, the public key identifiers are provisioned as a number of array entries, with each array entry containing a list of key identifiers.
 
-For CCA Implementation, there are ONLY two possible arrays:
+For CCA Implementation, there MUST be only two types of arrays:
 1. Chip Manufacturing array - known as "CM"
 2. Device Manufacturing array - known as "DM"
 
-In CCA Implementation, the maximum number of arrays is 8, while the maximum entries in a single array is 6.
+In CCA Implementation, for a particular type of array, the maximum number of array entries SHALL be 8, while the maximum entries in a single array SHALL be 6.
 
 CCA Platform public key identifiers are encoded in a CoMID using Reference Value triples.
 
@@ -297,7 +297,7 @@ Each array entry is encoded in a single Reference Value Triple.
 
 Each public key identifier is encoded in a single `measurement-map`, such as:
 
-1. `mkey` uniquely identifies position of each key, using the text vairant of `$measured-element-type-choice`.
+1. `mkey` uniquely identifies position of each key identifier, using the text vairant of `$measured-element-type-choice`.
 The encoding follows a consistent pattern: the name of the set (“CM" or “DM") is followed by the array index, then the entry position within the array.
 For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "CM.2.3".
 
@@ -321,7 +321,7 @@ cca-rotpk-id = #6.560(cca-hash-type)
 
 ~~~ cddl
 cca-rotpk-measurement-map = {
-  &(mkey: 0) => "CM.2.3"
+  &(mkey: 0) => text .regexp "[A-Za-z]+\\.[0-9]+\\.[0-9]+" ; example "CM.2.3"
   &(mval: 1) => cca-rotpk-measurement-values-map
 }
 ~~~
