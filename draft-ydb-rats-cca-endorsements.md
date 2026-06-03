@@ -86,6 +86,7 @@ The Arm CCA Attester is a layered Attester comprising separate yet linked Platfo
 For the details, see {{Section 3 of -cca-token}}.
 Appraising Arm CCA Evidence requires Endorsements for both the Platform and Realm.
 This document outlines the Platform and Realm Endorsements in {{sec-platform-endorsements}} and {{realm-endorsements}}, respectively.
+It also provides the Evidence transformation logic for conducting appraisals using the CoRIM processor (see {{Section 8 of -rats-corim}}) for both platform and realm claim sets, which are covered in {{sec-trans-plat}} and {{sec-trans-realm}}, respectively.
 
 ## Arm CCA Platform Endorsements {#sec-platform-endorsements}
 
@@ -305,7 +306,7 @@ The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attesta
 ~~~
 {: #ex-cca-platform-iak title="Example CCA Platform Attestation Verification Key" }
 
-### Evidence Transformations
+### Evidence Transformations {#sec-trans-plat}
 
 This section describes the transformations required to map a CCA Platform Token to its equivalent CoRIM internal representation.
 
@@ -501,7 +502,7 @@ An example CoMID containing one Reference Values triple with the expected values
 ~~~
 {: #ex-cca-realm-refval title="CCA realm identifiers" }
 
-### Evidence Transformations
+### Evidence Transformations {#sec-trans-realm}
 
 This section describes the transformations required to map a CCA Realm Token to its equivalent CoRIM internal representation.
 
