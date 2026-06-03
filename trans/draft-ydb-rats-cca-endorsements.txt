@@ -655,7 +655,7 @@ Table of Contents
      / ... /
    }
 
-     Figure 15: CoRIM profile for CCA Realm endorsements version 1.0.0
+     Figure 15: CoRIM profile for CCA Realm Endorsements version 1.0.0
 
 3.2.2.  Realm Endorsements linkage to Realm
 
