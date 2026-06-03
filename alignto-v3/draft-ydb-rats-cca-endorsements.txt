@@ -377,8 +377,7 @@ Table of Contents
 
    Each array entry is encoded in a single Reference Value Triple.
 
-   Each public key identifier is encoded in a single measurement-map,
-   such as:
+   Each public key identifier is encoded in a single measurement-map.
 
    1.  mkey uniquely identifies position of each key identifier, using
        the text vairant of $measured-element-type-choice.  The encoding
@@ -411,7 +410,7 @@ Table of Contents
             Figure 9: CCA Platform ROTPK measurement-values-map
 
    cca-rotpk-measurement-map = {
-     &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]+" ; example "cca.rotpk.CM.2.3"
+     &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]" ; example "cca.rotpk.CM.2.3"
      &(mval: 1) => cca-rotpk-measurement-values-map
    }
 
@@ -434,7 +433,7 @@ Table of Contents
    Refer to Section 5.1.4.1.4.6 of [I-D.ietf-rats-corim] for the details
    about the comparison algorithm.
 
-   cca-config-manufacturing-measurement-values-map = {
+   cca-manufacturing-config-measurement-values-map = {
      &(raw-value: 4) => cca-tagged-masked-raw-value
    }
 
@@ -459,7 +458,7 @@ Table of Contents
 
    cca-config-measurement-map = {
      &(mkey: 0) => "cca.platform-manufacturing-config"
-     &(mval: 1) => cca-config-manufacturing-measurement-values-map
+     &(mval: 1) => cca-manufacturing-config-measurement-values-map
    }
 
     Figure 12: CCA Platform Manufacturing Configuration measurement-map
