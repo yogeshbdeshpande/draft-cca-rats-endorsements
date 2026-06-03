@@ -46,6 +46,12 @@ normative:
   I-D.ffm-rats-cca-token: cca-token
   RFC5280: pkix-x509
   RFC7468: pem
+  TBB:
+    author:
+      org: Arm
+    title: Trusted Board Boot
+    target: https://trustedfirmware-a.readthedocs.io/en/stable/design/trusted-board-boot.html
+    date: 2024-12-30
 
 informative:
   RFC9334: rats-arch
@@ -256,7 +262,7 @@ cca-config-tagged-masked-raw-value = #6.563([
   mask: bytes
 ])
 ~~~
-{: #cddl-config-mvm title="CCA Platform Configuration measurement-map"}
+{: #cddl-config-mvm title="CCA Platform Configuration measurement-values-map"}
 
 The `measurement-values-map` for a CCA Platform configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
 The value of the `mkey` MUST be "cca.platform-config".
@@ -271,7 +277,96 @@ cca-config-measurement-map = {
   &(mval: 1) => cca-config-measurement-values-map
 }
 ~~~
-{: #cddl-config-mm title="CCA Platform Software Component measurement-map"}
+{: #cddl-config-mm title="CCA Platform Configuration measurement-map"}
+
+#### CCA Platform Trusted Board Boot ROTPK
+
+When an implementation of the CCA Platform follows the Trusted Board Boot {{TBB}} specification, the platform will include several provisioned public key identifiers to establish a chain of trust.
+Each public key identifier is expressed as a hash of the corresponding public key.
+
+For CCA Implementation, the public key identifiers are provisioned as a number of array entries, with each array entry containing a list of key identifiers.
+
+For CCA Implementation, there MUST be only two types of arrays:
+1. Chip Manufacturing array - known as "CM"
+2. Device Manufacturing array - known as "DM"
+
+In CCA Implementation, for a particular type of array, the maximum number of array entries SHALL be 8, while the maximum entries in a single array SHALL be 6.
+
+CCA Platform public key identifiers are encoded in a CoMID using Reference Value triples.
+
+Each array entry is encoded in a single Reference Value Triple.
+
+Each public key identifier is encoded in a single `measurement-map`.
+
+1. `mkey` uniquely identifies the position of each key identifier, using the text variant of `$measured-element-type-choice`.
+The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), then the array index (starting from zero), and finally the entry position within the array (starting from zero).
+For example, to encode a "CM" key identifier for an active array index of 2 at position 3 in the array, mkey will be set to "cca.rotpk.CM.2.3".
+
+2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
+The length of the `tagged-bytes` MUST be 32, 48 or 64 bytes.
+
+3. The `authorized-by` field of the `measurement-map` MUST NOT be present.
+
+Find the related CDDL definition of Measurement Values Map in {{cddl-rotpk-mvm}} and the associated measurement map in {{cddl-rotpk-mm}}.
+
+~~~ cddl
+cca-rotpk-measurement-values-map = {
+  &(cryptokeys: 13) => [ cca-rotpk-id ]
+}
+
+cca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+
+cca-rotpk-id = #6.560(cca-hash-type)
+~~~
+{: #cddl-rotpk-mvm title="CCA Platform ROTPK measurement-values-map"}
+
+~~~ cddl
+cca-rotpk-measurement-map = {
+  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]" ; example "cca.rotpk.CM.2.3"
+  &(mval: 1) => cca-rotpk-measurement-values-map
+}
+~~~
+{: #cddl-rotpk-mm title="CCA ROTPK measurement-map"}
+
+
+An Endorser may choose to provision either the entire set of entries or the single active entry currently in use on the platform.
+
+#### CCA Platform Manufacturing Configuration
+
+The CCA Platform Manufacturing Configuration represents a record of production phases and testing conducted during the manufacturing process for the platform instance.
+
+CCA Platform Manufacturing Configuration is vendor-specific variable-length data.
+
+It is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
+Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
+
+~~~ cddl
+cca-manufacturing-config-measurement-values-map = {
+  &(raw-value: 4) => cca-tagged-masked-raw-value
+}
+
+cca-config-tagged-masked-raw-value = #6.563([
+  value: bytes
+  mask: bytes
+])
+~~~
+{: #cddl-mfg-config-mvm title="CCA Platform Manufacturing Configuration measurement-values-map"}
+
+The `measurement-values-map` for a CCA Platform manufacturing configuration is wrapped in a `measurement-map` with an `mkey` using the text variant of the `$measured-element-type-choice`.
+The value of the `mkey` MUST be "cca.platform-manufacturing-config".
+There MUST be only one `measurement-map` with `mkey` "cca.platform-manufacturing-config" in the triple.
+
+The `authorized-by` field of the `measurement-map` MUST NOT be present.
+
+Find the related CDDL definitions in  {{cddl-mfg-config-mvm}} and in {{cddl-mfg-config-mm}}.
+
+~~~ cddl
+cca-config-measurement-map = {
+  &(mkey: 0) => "cca.platform-manufacturing-config"
+  &(mval: 1) => cca-manufacturing-config-measurement-values-map
+}
+~~~
+{: #cddl-mfg-config-mm title="CCA Platform Manufacturing Configuration measurement-map"}
 
 #### CoMID Example
 
