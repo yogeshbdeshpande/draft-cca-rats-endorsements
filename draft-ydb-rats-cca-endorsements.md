@@ -313,7 +313,8 @@ This section describes the transformations required to map a CCA Platform Token 
 
 #### Platform Identification
 
-The following function maps the CCA Implementation and Instance IDs - which, used together to provide a unique and stable identifier for the CCA platform - onto a CoRIM `environment-map`.
+The CCA Implementation and Instance IDs are used together to provide a unique identifer for the CCA platform.
+The following function maps these IDs onto a CoRIM `environment-map`.
 
 ~~~ pseudocode
 FUNC cca_platform_id_to_env(
