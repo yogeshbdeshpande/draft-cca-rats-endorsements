@@ -340,7 +340,7 @@ It is represented in a `raw-value` of the `measurement-values-map`, using the `t
 Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
 
 ~~~ cddl
-cca-config-measurement-values-map = {
+cca-config-manufacturing-measurement-values-map = {
   &(raw-value: 4) => cca-tagged-masked-raw-value
 }
 
@@ -361,8 +361,8 @@ Find the related CDDL definitions in  {{cddl-mfg-config-mvm}} and in {{cddl-mfg-
 
 ~~~ cddl
 cca-config-measurement-map = {
-  &(mkey: 0) => "cca.platform-config"
-  &(mval: 1) => cca-config-measurement-values-map
+  &(mkey: 0) => "cca.platform-manufacturing-config"
+  &(mval: 1) => cca-config-manufacturing-measurement-values-map
 }
 ~~~
 {: #cddl-mfg-config-mm title="CCA Platform Manufacturing Configuration measurement-map"}
