@@ -328,7 +328,7 @@ FUNC cca_platform_id_to_env(
     RETURN env
 }
 ~~~
-{: #trans-platform-id title="Transform CCA Platform IDs into Evironment Map" }
+{: #trans-platform-id title="Transform CCA Platform IDs into Environment Map" }
 
 #### Software Components
 
