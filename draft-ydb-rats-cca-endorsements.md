@@ -298,8 +298,8 @@ Each array entry is encoded in a single Reference Value Triple.
 Each public key identifier is encoded in a single `measurement-map`, such as:
 
 1. `mkey` uniquely identifies position of each key identifier, using the text vairant of `$measured-element-type-choice`.
-The encoding follows a consistent pattern: the name of the set (“CM" or “DM") is followed by the array index, then the entry position within the array.
-For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "CM.2.3".
+The encoding follows a consistent pattern: the prefix "cca.rotpk" followed by the name of the set (“CM" or “DM") followed by the array index (starting from zero), then the entry position within the array (starting from zero).
+For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "cca.rotpk.CM.2.3".
 
 2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
 The length of the `tagged-bytes` MUST be 32, 48 or 64 bytes.
@@ -321,7 +321,7 @@ cca-rotpk-id = #6.560(cca-hash-type)
 
 ~~~ cddl
 cca-rotpk-measurement-map = {
-  &(mkey: 0) => text .regexp "[A-Za-z]+\\.[0-9]+\\.[0-9]+" ; example "CM.2.3"
+  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]+" ; example "cca.rotpk.CM.2.3"
   &(mval: 1) => cca-rotpk-measurement-values-map
 }
 ~~~
@@ -329,7 +329,6 @@ cca-rotpk-measurement-map = {
 
 
 An Endorser may choose to provision either the entire set of entries or the single active entry currently in use on the platform.
-If the entire set is provisioned, each array MUST be encoded using a different Reference Value triple.
 
 #### CCA Platform Manufacturing Configuration
 
