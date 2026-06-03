@@ -1048,7 +1048,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Deshpande &amp; Fossati</td>
-<td class="center">Expires 4 December 2026</td>
+<td class="center">Expires 5 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1061,12 @@ svg {
 <dd class="internet-draft">draft-ydb-rats-cca-endorsements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-02" class="published">2 June 2026</time>
+<time datetime="2026-06-03" class="published">3 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-04">4 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1535,25 +1535,25 @@ cca-config-measurement-map = {
             <h5 id="name-cca-platform-trusted-board-">
 <a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-cca-platform-trusted-board-" class="section-name selfRef">CCA Platform Trusted Board Boot ROTPK</a>
             </h5>
-<p id="section-3.1.3.3-1">When an implementation of the CCA Platform follows the Trusted Board Boot specification <span>[<a href="#TBB" class="cite xref">TBB</a>]</span>, the platform will include several provisioned public key identifiers,
-which are used to establish a chain of trust. Each public key identifier is expressed as Hash of the Public Key.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.3-1">When an implementation of the CCA Platform follows the Trusted Board Boot <span>[<a href="#TBB" class="cite xref">TBB</a>]</span> specification, the platform will include several provisioned public key identifiers to establish a chain of trust.
+Each public key identifier is expressed as a hash of the corresponding public key.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.3-2">For CCA Implementation, the public key identifiers are provisioned as a number of arrays, with each array entry containing a list of key identifiers.<a href="#section-3.1.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.3-3">For CCA Implementation, there are ONLY two possible arrays:
 1. Chip Manufacturing array - known as "CM"
 2. Device Manufacturing array - known as "DM"<a href="#section-3.1.3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.3-4">In CCA Implementation, the maximum number of arrays is 8, while the maximum entries in a single array is 6.<a href="#section-3.1.3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.3-5">CCA Platform public key identifiers are encoded in a CoMID using Reference Value Triples.<a href="#section-3.1.3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.3-5">CCA Platform public key identifiers are encoded in a CoMID using Reference Value triples.<a href="#section-3.1.3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.3-6">Each array entry is encoded in a single Reference Value Triple.<a href="#section-3.1.3.3-6" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.3-7">Each public key identifier is encoded in a single <code>measurement-map</code>, such as:<a href="#section-3.1.3.3-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.1.3.3-8">
 <li id="section-3.1.3.3-8.1">
                 <p id="section-3.1.3.3-8.1.1"><code>mkey</code> uniquely identifies position of each key, using the text vairant of <code>$measured-element-type-choice</code>.
-The encoding follows a consistent pattern i.e. the name of the set ("CM" or "DM"), followed by the index of the array, followed by its position(entry), within the array.
-For example to encode a "CM" key for an active array index of 2, with position 3 (within the array), <code>mkey</code> will be set to "CM.2.3"<a href="#section-3.1.3.3-8.1.1" class="pilcrow">¶</a></p>
+The encoding follows a consistent pattern: the name of the set (“CM" or “DM") is followed by the array index, then the entry position within the array.
+For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "CM.2.3".<a href="#section-3.1.3.3-8.1.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-3.1.3.3-8.2">
-                <p id="section-3.1.3.3-8.2.1">The public key identifier is encoded using cryptokeys (key 13): An array with <em>only one</em> entry using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
-The length of the <code>tagged-bytes</code> can ONLY be one of 32, 48 or 64.<a href="#section-3.1.3.3-8.2.1" class="pilcrow">¶</a></p>
+                <p id="section-3.1.3.3-8.2.1">The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
+The length of the <code>tagged-bytes</code> MUST be 32, 48 or 64 bytes.<a href="#section-3.1.3.3-8.2.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-3.1.3.3-8.3">
                 <p id="section-3.1.3.3-8.3.1">The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.<a href="#section-3.1.3.3-8.3.1" class="pilcrow">¶</a></p>
@@ -1591,8 +1591,8 @@ cca-rotpk-measurement-map = {
 <a href="#name-cca-rotpk-measurement-map" class="selfRef">CCA ROTPK measurement-map</a>
               </figcaption></figure>
 </div>
-<p id="section-3.1.3.3-12">An Endorser may choose to provision all entries, i.e. the entire set, or may choose to ONLY provision a single entry which is currently active, on the platform.
-If entire set is provisioned, then multiple Reference Value Triples in a CoMID encode the array entries.<a href="#section-3.1.3.3-12" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.3-12">An Endorser may choose to provision either the entire set of entries or the single active entry currently in use on the platform.
+If the entire set is provisioned, each array MUST be encoded using a different Reference Value triple.<a href="#section-3.1.3.3-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cca-platform-manufacturing-configuration">
@@ -1600,9 +1600,8 @@ If entire set is provisioned, then multiple Reference Value Triples in a CoMID e
             <h5 id="name-cca-platform-manufacturing-">
 <a href="#section-3.1.3.4" class="section-number selfRef">3.1.3.4. </a><a href="#name-cca-platform-manufacturing-" class="section-name selfRef">CCA Platform Manufacturing Configuration</a>
             </h5>
-<p id="section-3.1.3.4-1">The CCA platform manufacturing configuration represents a record of production
-phases and testing conducted during the manufacturing process for the platform instance.<a href="#section-3.1.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.4-2">CCA Platform Manufacturing configuration is vendor-specific variable-length data.<a href="#section-3.1.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-1">The CCA platform manufacturing configuration represents a record of production phases and testing conducted during the manufacturing process for the platform instance.<a href="#section-3.1.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-2">CCA Platform Manufacturing Configuration is vendor-specific variable-length data.<a href="#section-3.1.3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.3.4-3">It is represented in a <code>raw-value</code> of the <code>measurement-values-map</code>, using the <code>tagged-masked-raw-value</code> variant of the <code>$raw-values-type-choice</code>.
 Refer to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-10#section-5.1.4.1.4.6" class="relref">Section 5.1.4.1.4.6</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> for the details about the comparison algorithm.<a href="#section-3.1.3.4-3" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-manufacturing-c"></span><div id="cddl-mfg-config-mvm">
@@ -1626,11 +1625,11 @@ cca-config-tagged-masked-raw-value = #6.563([
 <p id="section-3.1.3.4-5">The <code>measurement-values-map</code> for a CCA Platform manufacturing configuration is wrapped in a <code>measurement-map</code> with an <code>mkey</code> using the text variant of the <code>$measured-element-type-choice</code>.
 The value of the <code>mkey</code> MUST be "cca.platform-manufacturing-config".
 There MUST be only one <code>measurement-map</code> with <code>mkey</code> "cca.platform-manufacturing-config" in the triple.<a href="#section-3.1.3.4-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.4-6">The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.
-Find the related CDDL definitions in <a href="#cddl-mfg-config-mm" class="auto internal xref">Figure 12</a> &amp; in <a href="#cddl-mfg-config-mvm" class="auto internal xref">Figure 11</a>.<a href="#section-3.1.3.4-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-6">The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NOT be present.<a href="#section-3.1.3.4-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.3.4-7">Find the related CDDL definitions in  <a href="#cddl-mfg-config-mvm" class="auto internal xref">Figure 11</a> and in <a href="#cddl-mfg-config-mm" class="auto internal xref">Figure 12</a>.<a href="#section-3.1.3.4-7" class="pilcrow">¶</a></p>
 <span id="name-cca-platform-manufacturing-co"></span><div id="cddl-mfg-config-mm">
 <figure id="figure-12">
-              <div class="lang-cddl sourcecode" id="section-3.1.3.4-7.1">
+              <div class="lang-cddl sourcecode" id="section-3.1.3.4-8.1">
 <pre>
 cca-config-measurement-map = {
   &amp;(mkey: 0) =&gt; "cca.platform-config"
