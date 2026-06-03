@@ -333,7 +333,7 @@ If the entire set is provisioned, each array MUST be encoded using a different R
 
 #### CCA Platform Manufacturing Configuration
 
-The CCA platform manufacturing configuration represents a record of production phases and testing conducted during the manufacturing process for the platform instance.
+The CCA Platform Manufacturing Configuration represents a record of production phases and testing conducted during the manufacturing process for the platform instance.
 
 CCA Platform Manufacturing Configuration is vendor-specific variable-length data.
 
