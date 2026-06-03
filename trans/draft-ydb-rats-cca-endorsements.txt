@@ -515,7 +515,7 @@ Table of Contents
        RETURN env
    }
 
-         Figure 11: Transform CCA Platform IDs into Evironment Map
+         Figure 11: Transform CCA Platform IDs into Environment Map
 
 3.1.5.2.  Software Components
 
