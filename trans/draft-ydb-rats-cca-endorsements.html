@@ -1804,7 +1804,7 @@ FUNC element-from-platform-config(
 Each software component is mapped to an <code>element-map</code> entry with identifier "cca.software-component".
 The platform configuration is mapped to an <code>element-map</code> entry with identifier "cca.platform-config".<a href="#section-3.1.5.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.5.4-3">The process uses the functions defined in <a href="#trans-platform-id" class="auto internal xref">Figure 11</a>, <a href="#trans-sw-comp" class="auto internal xref">Figure 12</a>, and <a href="#trans-plat-conf" class="auto internal xref">Figure 13</a>.<a href="#section-3.1.5.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.5.4-4">The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2023:cca_platform#1.0.0".<a href="#section-3.1.5.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.5.4-4">The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".<a href="#section-3.1.5.4-4" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-plaform-int"></span><div id="trans-plat">
 <figure id="figure-14">
               <div class="lang-pseudocode sourcecode" id="section-3.1.5.4-5.1">
@@ -1815,7 +1815,7 @@ FUNC transform(
 ) -&gt; ae-item {
     ASSERT::Equal(
         P.arm-platform-profile-label,
-        "tag:arm.com,2023:cca_platform#1.0.0"
+        "tag:arm.com,2024:cca_platform#2.0.0"
     )
 
     item := ae-item::NEW()
@@ -2187,7 +2187,7 @@ FUNC element-from-rpv(
 Each REM bank, if present, is mapped to an element-map entry with identifier "cca.rem0".."cca.rem3".
 The personalization value, if present, is mapped to an element-map entry with identifier "cca.rpv".<a href="#section-3.2.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.4.5-3">The process uses the functions defined in <a href="#trans-realm-id" class="auto internal xref">Figure 18</a>, <a href="#trans-rim" class="auto internal xref">Figure 19</a>, <a href="#trans-rem" class="auto internal xref">Figure 20</a>, and <a href="#trans-rpv" class="auto internal xref">Figure 21</a>.<a href="#section-3.2.4.5-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.4.5-4">The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2023:realm#1.0.0".<a href="#section-3.2.4.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.4.5-4">The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2024:realm#2.0.0".<a href="#section-3.2.4.5-4" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-into-"></span><div id="trans-realm">
 <figure id="figure-22">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.5-5.1">
@@ -2197,7 +2197,7 @@ FUNC transform(
 ) -&gt; ae-item {
     ASSERT::Equal(
         R.cca-realm-profile-label,
-        "tag:arm.com,2023:realm#1.0.0"
+        "tag:arm.com,2024:realm#2.0.0"
     )
 
     item := ae-item::NEW()

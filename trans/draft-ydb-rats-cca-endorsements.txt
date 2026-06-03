@@ -582,7 +582,7 @@ Table of Contents
    Figure 13.
 
    The process assumes that the profile of the CCA Platform claims-set
-   is "tag:arm.com,2023:cca_platform#1.0.0".
+   is "tag:arm.com,2024:cca_platform#2.0.0".
 
    FUNC transform(
        P: arm-platform-claims,
@@ -590,7 +590,7 @@ Table of Contents
    ) -> ae-item {
        ASSERT::Equal(
            P.arm-platform-profile-label,
-           "tag:arm.com,2023:cca_platform#1.0.0"
+           "tag:arm.com,2024:cca_platform#2.0.0"
        )
 
        item := ae-item::NEW()
@@ -916,14 +916,14 @@ Table of Contents
    Figure 20, and Figure 21.
 
    The process assumes that the profile of the CCA Realm claims-set is
-   "tag:arm.com,2023:realm#1.0.0".
+   "tag:arm.com,2024:realm#2.0.0".
 
    FUNC transform(
        R: cca-realm-claims
    ) -> ae-item {
        ASSERT::Equal(
            R.cca-realm-profile-label,
-           "tag:arm.com,2023:realm#1.0.0"
+           "tag:arm.com,2024:realm#2.0.0"
        )
 
        item := ae-item::NEW()
