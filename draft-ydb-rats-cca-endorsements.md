@@ -280,8 +280,8 @@ cca-config-measurement-map = {
 
 #### CCA Platform Trusted Board Boot ROTPK
 
-When an implementation of the CCA Platform follows the Trusted Board Boot specification {{TBB}}, the platform will include several provisioned public key identifiers,
-which are used to establish a chain of trust. Each public key identifier is expressed as Hash of the Public Key.
+When an implementation of the CCA Platform follows the Trusted Board Boot {{TBB}} specification, the platform will include several provisioned public key identifiers to establish a chain of trust.
+Each public key identifier is expressed as a hash of the corresponding public key.
 
 For CCA Implementation, the public key identifiers are provisioned as a number of arrays, with each array entry containing a list of key identifiers.
 
@@ -291,18 +291,18 @@ For CCA Implementation, there are ONLY two possible arrays:
 
 In CCA Implementation, the maximum number of arrays is 8, while the maximum entries in a single array is 6.
 
-CCA Platform public key identifiers are encoded in a CoMID using Reference Value Triples.
+CCA Platform public key identifiers are encoded in a CoMID using Reference Value triples.
 
 Each array entry is encoded in a single Reference Value Triple.
 
 Each public key identifier is encoded in a single `measurement-map`, such as:
 
 1. `mkey` uniquely identifies position of each key, using the text vairant of `$measured-element-type-choice`.
-The encoding follows a consistent pattern i.e. the name of the set ("CM" or "DM"), followed by the index of the array, followed by its position(entry), within the array.
-For example to encode a "CM" key for an active array index of 2, with position 3 (within the array), `mkey` will be set to "CM.2.3"
+The encoding follows a consistent pattern: the name of the set (“CM" or “DM") is followed by the array index, then the entry position within the array.
+For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "CM.2.3".
 
-2. The public key identifier is encoded using cryptokeys (key 13): An array with *only one* entry using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
-The length of the `tagged-bytes` can ONLY be one of 32, 48 or 64.
+2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
+The length of the `tagged-bytes` MUST be 32, 48 or 64 bytes.
 
 3. The `authorized-by` field of the `measurement-map` MUST NOT be present.
 
@@ -328,15 +328,14 @@ cca-rotpk-measurement-map = {
 {: #cddl-rotpk-mm title="CCA ROTPK measurement-map"}
 
 
-An Endorser may choose to provision all entries, i.e. the entire set, or may choose to ONLY provision a single entry which is currently active, on the platform.
-If entire set is provisioned, then multiple Reference Value Triples in a CoMID encode the array entries.
+An Endorser may choose to provision either the entire set of entries or the single active entry currently in use on the platform.
+If the entire set is provisioned, each array MUST be encoded using a different Reference Value triple.
 
 #### CCA Platform Manufacturing Configuration
 
-The CCA platform manufacturing configuration represents a record of production
-phases and testing conducted during the manufacturing process for the platform instance.
+The CCA platform manufacturing configuration represents a record of production phases and testing conducted during the manufacturing process for the platform instance.
 
-CCA Platform Manufacturing configuration is vendor-specific variable-length data.
+CCA Platform Manufacturing Configuration is vendor-specific variable-length data.
 
 It is represented in a `raw-value` of the `measurement-values-map`, using the `tagged-masked-raw-value` variant of the `$raw-values-type-choice`.
 Refer to {{Section 5.1.4.1.4.6 of -rats-corim}} for the details about the comparison algorithm.
@@ -358,7 +357,8 @@ The value of the `mkey` MUST be "cca.platform-manufacturing-config".
 There MUST be only one `measurement-map` with `mkey` "cca.platform-manufacturing-config" in the triple.
 
 The `authorized-by` field of the `measurement-map` MUST NOT be present.
-Find the related CDDL definitions in {{cddl-mfg-config-mm}} & in {{cddl-mfg-config-mvm}}.
+
+Find the related CDDL definitions in  {{cddl-mfg-config-mvm}} and in {{cddl-mfg-config-mm}}.
 
 ~~~ cddl
 cca-config-measurement-map = {
