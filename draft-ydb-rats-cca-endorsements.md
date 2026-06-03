@@ -322,7 +322,7 @@ cca-rotpk-id = #6.560(cca-hash-type)
 
 ~~~ cddl
 cca-rotpk-measurement-map = {
-  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]" ; example "cca.rotpk.CM.2.3"
+  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]"
   &(mval: 1) => cca-rotpk-measurement-values-map
 }
 ~~~
@@ -517,7 +517,8 @@ FUNC transform(
     element-list::APPEND(e)
 
     item.addition.element-list = element-list
-    item.addition.profile = "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
+    item.addition.profile =
+        "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
     RETURN item
@@ -732,7 +733,8 @@ FUNC transform(
         element-list::APPEND(e)
 
     item.addition.element-list = element-list
-    item.addition.profile = "tag:arm.com,2025:endorsements/cca_realm#1.0.0"
+    item.addition.profile =
+        "tag:arm.com,2025:endorsements/cca_realm#1.0.0"
     item.addition.authority::APPEND(R.cca-realm-public-key-label)
 
     RETURN item
