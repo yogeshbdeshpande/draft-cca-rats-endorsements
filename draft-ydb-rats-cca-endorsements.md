@@ -447,7 +447,7 @@ The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.
 ~~~ cbor-diag
 {::include examples/realm-profile.diag}
 ~~~
-{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm endorsements version 1.0.0" }
+{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm Endorsements version 1.0.0" }
 
 ### Realm Endorsements linkage to Realm {#realm-id}
 
