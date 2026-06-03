@@ -379,14 +379,14 @@ Table of Contents
 
    Each public key identifier is encoded in a single measurement-map.
 
-   1.  mkey uniquely identifies position of each key identifier, using
-       the text vairant of $measured-element-type-choice.  The encoding
-       follows a consistent pattern: the prefix "cca.rotpk" followed by
-       the name of the set (“CM" or “DM") followed by the array index
-       (starting from zero), then the entry position within the array
-       (starting from zero).  For example, to encode a "CM" key
-       identifier for an active array index of 2 with a position of 3
-       within the array, mkey will be set to "cca.rotpk.CM.2.3".
+   1.  mkey uniquely identifies the position of each key identifier,
+       using the text variant of $measured-element-type-choice.  The
+       encoding follows a consistent pattern: the prefix "cca.rotpk",
+       followed by the set name ("CM" or "DM"), then the array index
+       (starting from zero), and finally the entry position within the
+       array (starting from zero).  For example, to encode a "CM" key
+       identifier for an active array index of 2 at position 3 in the
+       array, mkey will be set to "cca.rotpk.CM.2.3".
 
    2.  The public key identifier is encoded using cryptokeys (key 13).
        The array MUST have only one entry encoded using the tagged-bytes

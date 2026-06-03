@@ -1547,9 +1547,9 @@ Each public key identifier is expressed as a hash of the corresponding public ke
 <p id="section-3.1.3.3-7">Each public key identifier is encoded in a single <code>measurement-map</code>.<a href="#section-3.1.3.3-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.1.3.3-8">
 <li id="section-3.1.3.3-8.1">
-                <p id="section-3.1.3.3-8.1.1"><code>mkey</code> uniquely identifies position of each key identifier, using the text vairant of <code>$measured-element-type-choice</code>.
-The encoding follows a consistent pattern: the prefix "cca.rotpk" followed by the name of the set (“CM" or “DM") followed by the array index (starting from zero), then the entry position within the array (starting from zero).
-For example, to encode a "CM" key identifier for an active array index of 2 with a position of 3 within the array, mkey will be set to "cca.rotpk.CM.2.3".<a href="#section-3.1.3.3-8.1.1" class="pilcrow">¶</a></p>
+                <p id="section-3.1.3.3-8.1.1"><code>mkey</code> uniquely identifies the position of each key identifier, using the text variant of <code>$measured-element-type-choice</code>.
+The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), then the array index (starting from zero), and finally the entry position within the array (starting from zero).
+For example, to encode a "CM" key identifier for an active array index of 2 at position 3 in the array, mkey will be set to "cca.rotpk.CM.2.3".<a href="#section-3.1.3.3-8.1.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-3.1.3.3-8.2">
                 <p id="section-3.1.3.3-8.2.1">The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the <code>tagged-bytes</code> variant of the <code>$crypto-key-type-choice</code>.
