@@ -387,7 +387,7 @@ The platform configuration is mapped to an `element-map` entry with identifier "
 
 The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, and {{trans-plat-conf}}.
 
-The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2023:cca_platform#1.0.0".
+The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".
 
 ~~~ pseudocode
 FUNC transform(
@@ -396,7 +396,7 @@ FUNC transform(
 ) -> ae-item {
     ASSERT::Equal(
         P.arm-platform-profile-label,
-        "tag:arm.com,2023:cca_platform#1.0.0"
+        "tag:arm.com,2024:cca_platform#2.0.0"
     )
 
     item := ae-item::NEW()
@@ -598,7 +598,7 @@ The personalization value, if present, is mapped to an element-map entry with id
 
 The process uses the functions defined in {{trans-realm-id}}, {{trans-rim}}, {{trans-rem}}, and {{trans-rpv}}.
 
-The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2023:realm#1.0.0".
+The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2024:realm#2.0.0".
 
 ~~~ pseudocode
 FUNC transform(
@@ -606,7 +606,7 @@ FUNC transform(
 ) -> ae-item {
     ASSERT::Equal(
         R.cca-realm-profile-label,
-        "tag:arm.com,2023:realm#1.0.0"
+        "tag:arm.com,2024:realm#2.0.0"
     )
 
     item := ae-item::NEW()
