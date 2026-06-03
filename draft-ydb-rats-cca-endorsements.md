@@ -86,6 +86,7 @@ The Arm CCA Attester is a layered Attester comprising separate yet linked Platfo
 For the details, see {{Section 3 of -cca-token}}.
 Appraising Arm CCA Evidence requires Endorsements for both the Platform and Realm.
 This document outlines the Platform and Realm Endorsements in {{sec-platform-endorsements}} and {{realm-endorsements}}, respectively.
+It also provides the Evidence transformation logic for conducting appraisals using the CoRIM processor (see {{Section 8 of -rats-corim}}) for both platform and realm claim sets, which are covered in {{sec-trans-plat}} and {{sec-trans-realm}}, respectively.
 
 ## Arm CCA Platform Endorsements {#sec-platform-endorsements}
 
@@ -296,12 +297,138 @@ Specifically:
 The CPAK public key is a SubjectPublicKeyInfo {{-pkix-x509}} using the encoding defined in {{Section 13 of -pem}}.
 There MUST be only one key in an `attest-key-triple-record`.
 
+#### CoMID Example
+
 The example in {{ex-cca-platform-iak}} shows the CCA Endorsement of type Attestation Verification Key carrying a secp256r1 EC public CPAK associated with Instance ID `4ca3...d296`.
 
 ~~~
 {::include-fold examples/platform-iak.diag}
 ~~~
 {: #ex-cca-platform-iak title="Example CCA Platform Attestation Verification Key" }
+
+### Evidence Transformations {#sec-trans-plat}
+
+This section describes the transformations required to map a CCA Platform Token to its equivalent CoRIM internal representation.
+
+{{trans-plat}} shows the complete transformation.
+
+#### Platform Identification
+
+The CCA Implementation and Instance IDs are used together to provide a unique identifer for the CCA platform.
+The following function maps these IDs onto a CoRIM `environment-map`.
+
+~~~ pseudocode
+FUNC cca_platform_id_to_env(
+    inst-id: arm-platform-instance-id-type,
+    impl-id: arm-platform-implementation-id-type,
+) -> environment-map {
+    env := environment-map::NEW()
+    env.class.class-id = tagged-bytes(impl-id)
+    env.instance = tagged-ueid-type(inst-id)
+
+    RETURN env
+}
+~~~
+{: #trans-platform-id title="Transform CCA Platform IDs into Environment Map" }
+
+#### Software Components
+
+The following function maps a single CCA software component to a CoRIM element map.
+The element identifier is "cca.software-component", and the element claims are synthesized from the CCA software component attributes using only the following default CoRIM `element-map` attributes: name, version, digests and cryptokeys.
+
+~~~ pseudocode
+FUNC element-from-cca-sw-component(
+    C: arm-platform-sw-component,
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.software-component")
+
+    em.element-claims.name = C.measurement-type
+    em.element-claims.version.version = C.version
+
+    digest := eatmc.digest(C.measurement-desc, C.measurement-value)
+    em.element-claims.digests::APPEND(digest)
+
+    signer := tagged-bytes(C.signer-id)
+    em.element-claims.cryptokeys::APPEND(signer)
+
+    RETURN em
+}
+~~~
+{: #trans-sw-comp title="Transform a CCA Software Component into an Element Map" }
+
+#### Platform Configuration
+
+The following function maps the CCA platform configuration claim to a CoRIM element map.
+The element identifier is "cca.platform-config", and the element claims use the standard raw-values attribute to represent the platform configuration value as `tagged-bytes`.
+
+~~~ pseudocode
+FUNC element-from-platform-config(
+    C: arm-platform-config-type
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.platform-config")
+
+    em.element-claims.raw-values = tagged-bytes(C)
+
+    RETURN em
+}
+~~~
+{: #trans-plat-conf title="Transform a CCA Plaform Config into an Element Map" }
+
+#### Platform Token
+
+The following function maps the CCA platform's claims set to a single CoRIM `ae-item`.
+
+The environment is synthesized from instance and implementation identifiers.
+Each software component is mapped to an `element-map` entry with identifier "cca.software-component".
+The platform configuration is mapped to an `element-map` entry with identifier "cca.platform-config".
+
+The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, and {{trans-plat-conf}}.
+
+The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".
+
+~~~ pseudocode
+FUNC transform(
+    P: arm-platform-claims,
+    cpak_pub: $crypto-key-type-choice
+) -> ae-item {
+    ASSERT::Equal(
+        P.arm-platform-profile-label,
+        "tag:arm.com,2024:cca_platform#2.0.0"
+    )
+
+    item := ae-item::NEW()
+
+    item.addition.cmtype = evidence
+
+    # map platform identifiers to environment
+    item.addition.environment = cca_platform_id_to_env(
+        P.arm-platform-instance-id-label,
+        P.arm-platform-implementation-id-label
+    )
+
+    element-list = [ + element-map ]::NEW()
+
+    # map software components to elements
+    FOREACH c IN P.arm-platform-sw-components:
+        e := element-from-sw-component(c)
+        element-list::APPEND(e)
+
+    # map platform config to element
+    e := element-from-platform-config(P.arm-platform-config-label)
+    element-list::APPEND(e)
+
+    item.addition.element-list = element-list
+    item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
+    item.addition.authority::APPEND(cpak_pub)
+
+    RETURN item
+}
+~~~
+{: #trans-plat title="Transform a CCA Plaform into a CoRIM `ae` Relation" }
 
 ## Arm CCA Realm Endorsements {#realm-endorsements}
 
@@ -312,11 +439,22 @@ Realm Endorsements consist of Reference Values ({{sec-realm-ref-values}}), which
 
 Unlike the Platform, Realm Attestation Verification Key Endorsements are not necessary as the key material needed to verify the Realm Evidence is inline in the CCA Token ({{Section 3.2 of -cca-token}}).
 
+### Arm CCA Realm Endorsement Profile
+
+Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
+
+The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
+
+~~~ cbor-diag
+{::include examples/realm-profile.diag}
+~~~
+{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm Endorsements version 1.0.0" }
+
 ### Realm Endorsements linkage to Realm {#realm-id}
 
 Realms do not have *explicit* class or instance identifiers.
 However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
-Therefore, this profile employs an `environment map` with a class identifier that uses the `tagged bytes` variant of the `$class-id-type-choice` to encode the RIM value ({{ex-cca-realm-identifiers}}).
+Therefore, this profile employs an `environment-map` with a class identifier that uses the `tagged-bytes` variant of the `$class-id-type-choice` to encode the RIM value ({{ex-cca-realm-identifiers}}).
 
 ~~~ cbor-diag
 / environment-map / {
@@ -330,17 +468,6 @@ Therefore, this profile employs an `environment map` with a class identifier tha
 }
 ~~~
 {: #ex-cca-realm-identifiers title="CCA Realm Identification" }
-
-### Arm CCA Realm Endorsement Profile
-
-Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
-
-The profile attribute in the CoRIM MUST be present and MUST be the URI `tag:arm.com,2025:cca_realm#1.0.0` as shown in {{ex-cca-realm-profile}}.
-
-~~~ cbor-diag
-{::include examples/realm-profile.diag}
-~~~
-{: #ex-cca-realm-profile title="CoRIM profile for CCA Realm endorsements version 1.0.0" }
 
 ### Reference Values {#sec-realm-ref-values}
 
@@ -375,6 +502,149 @@ An example CoMID containing one Reference Values triple with the expected values
 ~~~
 {: #ex-cca-realm-refval title="CCA realm identifiers" }
 
+### Evidence Transformations {#sec-trans-realm}
+
+This section describes the transformations required to map a CCA Realm Token to its equivalent CoRIM internal representation.
+
+{{trans-realm}} shows the complete transformation.
+
+#### Realm Identification
+
+The following function maps the CCA Realm Initial Measurement - which, as discussed in {{realm-id}}, provides a stable identifier for the Realm - onto a CoRIM `environment-map`.
+
+~~~ pseudocode
+FUNC cca_realm_id_to_env(
+    rim: cca-realm-measurement-type
+) -> environment-map {
+    env := environment-map::NEW()
+    env.class.class-id = tagged-bytes(rim)
+
+    RETURN env
+}
+~~~
+{: #trans-realm-id title="Transform a CCA Realm Initial Measurement into an Element Map" }
+
+#### Realm Initial Measurements
+
+The following function maps the CCA Realm Initial Measurement claim to a CoRIM element map.
+The element identifier is "cca.rim", and the element claims use the standard digests attribute to represent the RIM value, using the digest algorithm taken from the Realm hash algorithm ID claim.
+
+~~~ pseudocode
+FUNC element-from-rim(
+    rim-value: cca-realm-measurement-type,
+    rim-algo: text
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rim")
+
+    digest := eatmc.digest(rim-algo, rim-value)
+    em.element-claims.digests::APPEND(digest)
+
+    RETURN em
+}
+~~~
+{: #trans-rim title="Transform a CCA Realm Initial Measurement into an Element Map" }
+
+#### Realm Extended Measurements
+
+The following function maps the i-th (0..3) bank of a CCA Realm Extended Measurements claim to a CoRIM element map.
+The element identifier is one of "cca.rem0".."cca.rem3", depending on the bank index, and the element claims use the standard digests attribute to represent the REM value, using the digest algorithm taken from the Realm hash algorithm ID claim.
+
+~~~ pseudocode
+FUNC element-from-rem(
+    rem-index: uint,
+    rem-value: cca-realm-measurement-type,
+    rim-algo: text
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rem" + rem-index)
+
+    digest := eatmc.digest(rem-algo, rem-value)
+    em.element-claims.digests::APPEND(digest)
+
+    RETURN em
+}
+~~~
+{: #trans-rem title="Transform a CCA Realm Extended Measurement Bank into an Element Map" }
+
+#### Realm Personalization Value
+
+The following function maps the CCA realm personalization value claim to a CoRIM element map.
+The element identifier is "cca.rpv", and the element claims use the standard raw-values attribute to represent the personalization value as tagged-bytes.
+
+~~~ pseudocode
+FUNC element-from-rpv(
+    rpv: cca-realm-personalization-value-type
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.rpv")
+
+    em.element-claims.raw-values = tagged-bytes(rpv)
+
+    RETURN em
+}
+~~~
+{: #trans-rpv title="Transform a CCA Realm Personalization Value into an Element Map" }
+
+#### Realm Token
+
+The following function maps the CCA realm's claims set to a single CoRIM `ae-item`.
+
+The environment is synthesized from the RIM.
+Each REM bank, if present, is mapped to an element-map entry with identifier "cca.rem0".."cca.rem3".
+The personalization value, if present, is mapped to an element-map entry with identifier "cca.rpv".
+
+The process uses the functions defined in {{trans-realm-id}}, {{trans-rim}}, {{trans-rem}}, and {{trans-rpv}}.
+
+The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2024:realm#2.0.0".
+
+~~~ pseudocode
+FUNC transform(
+    R: cca-realm-claims
+) -> ae-item {
+    ASSERT::Equal(
+        R.cca-realm-profile-label,
+        "tag:arm.com,2024:realm#2.0.0"
+    )
+
+    item := ae-item::NEW()
+
+    item.addition.cmtype = evidence
+
+    # map platform identifiers to environment
+    item.addition.environment = cca_realm_id_to_env(
+        R.cca-realm-initial-measurement-label
+    )
+
+    element-list = [ + element-map ]::NEW()
+
+    # map realm initial measurement to element
+    e := element-from-rim(R.cca-realm-profile-label)
+    element-list::APPEND(e)
+
+    # map optional REMs
+    IF R.cca-realm-extensible-measurements:
+        FOREACH idx, r IN R.cca-realm-extensible-measurements:
+            e := element-from-rem(idx, r, R.cca-realm-hash-algo-id-label)
+            element-list::APPEND(e)
+
+    # map optional RVP
+    IF R.cca-realm-personalization-value:
+        e := element-from-rpv(R.arm-platform-config-label)
+        element-list::APPEND(e)
+
+    item.addition.element-list = element-list
+    item.addition.profile = "tag:arm.com,2025:cca_realm#1.0.0"
+    item.addition.authority::APPEND(R.cca-realm-public-key-label)
+
+    RETURN item
+}
+~~~
+{: #trans-realm title="Transform a CCA Realm into a CoRIM `ae` Relation" }
+
 # Security Considerations
 
 [^todo]
@@ -383,7 +653,10 @@ An example CoMID containing one Reference Values triple with the expected values
 
 This document makes no requests to IANA.
 
+--- back
+
 # Acknowledgements
+{:unnumbered}
 
 [^todo]
 
