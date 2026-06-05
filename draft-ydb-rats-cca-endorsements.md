@@ -473,6 +473,52 @@ FUNC element-from-platform-config(
 ~~~
 {: #trans-plat-conf title="Transform a CCA Plaform Config into an Element Map" }
 
+#### Platform TBB ROTPK
+
+The following function maps a CCA TBB ROTPK to a CoRIM element map.
+The element identifier is created from the claim as shown below, and the element claims use the standard raw-values attribute to represent the rotpk hash value as `tagged-bytes`.
+
+~~~ pseudocode
+FUNC element-from-tbb-rotpk(
+    C: arm-platform-tbb-rotpk-item,
+) -> element-map {
+    em := element-map::NEW()
+
+    lc = C.life-cycle
+    array-index = CHAR('0' + C.active-rotpk-array)
+    entry-index =  CHAR('0' + C.active-array-index)
+
+    em.element-id = tstr (JOIN(lc + array-index + entry-index))
+
+    em.element-claims.raw-values = tagged-bytes(C.pk-hash)
+
+    RETURN em
+}
+~~~
+{: #trans-tbb-rotpk title="Transform a CCA Platform TBB ROTPK into an Element Map" }
+
+
+#### Platform Manufacturing Configuration
+
+The following function maps the CCA platform manufacturing configuration claim to a CoRIM element map.
+The element identifier is "cca.platform-manufacturing-config", and the element claims use the standard raw-values attribute to represent the platform manufacturing configuration value as `tagged-bytes`.
+
+~~~ pseudocode
+FUNC element-from-platform-manufacturing-config(
+    C: arm-platform-manufacturing-config-type
+) -> element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.platform-manufacturing-config")
+
+    em.element-claims.raw-values = tagged-bytes(C)
+
+    RETURN em
+}
+~~~
+{: #trans-plat-mfg-conf title="Transform a CCA Plaform Manufacturing Config into an Element Map" }
+
+
 #### Platform Token
 
 The following function maps the CCA platform's claims set to a single CoRIM `ae-item`.
@@ -480,8 +526,10 @@ The following function maps the CCA platform's claims set to a single CoRIM `ae-
 The environment is synthesized from instance and implementation identifiers.
 Each software component is mapped to an `element-map` entry with identifier "cca.software-component".
 The platform configuration is mapped to an `element-map` entry with identifier "cca.platform-config".
+The Platform TBB ROTPK is mapped to an `element-map` entry with an identifier computed by concatenating the cca.lifecycle claim with string representations of the integer index for active ROTPK array & entry in the active array.
+The platform manufacturing configuration is mapped to an `element-map` entry with identifier "cca.platform-manufacturing-config".
 
-The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, and {{trans-plat-conf}}.
+The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, {{trans-plat-conf}}, {{trans-tbb-rotpk}} and {{trans-plat-mfg-conf}}
 
 The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".
 
@@ -519,6 +567,18 @@ FUNC transform(
     item.addition.element-list = element-list
     item.addition.profile =
         "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
+    item.addition.authority::APPEND(cpak_pub)
+
+    # map platform tbb rotpk to elements
+    FOREACH pk IN P.arm-platform-tbb-rotpk:
+       e := element-from-tbb-rotpk(pk)
+       element-list::APPEND(e)
+
+    # map platform manufacturing config to element
+    e := element-from-platform-manufacturing-config(P.arm-platform-manufacturing-config-label)
+    element-list::APPEND(e)
+    item.addition.element-list = element-list
+    item.addition.profile =  "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
     RETURN item
