@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 7 December 2026                                          Linaro
-                                                             5 June 2026
+Expires: 10 December 2026                                         Linaro
+                                                             8 June 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2026.
+   This Internet-Draft will expire on 10 December 2026.
 
 Copyright Notice
 
@@ -755,7 +755,7 @@ Table of Contents
        item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
        item.addition.authority::APPEND(cpak_pub)
 
-       # map platform manufacturing config to elements
+       # map platform manufacturing config to element
        e := element-from-platform-manufacturing-config(P.arm-platform-manufacturing-config-label)
        element-list::APPEND(e)
        item.addition.element-list = element-list
