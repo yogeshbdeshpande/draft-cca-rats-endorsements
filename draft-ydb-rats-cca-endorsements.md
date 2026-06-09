@@ -527,10 +527,10 @@ The following function maps the CCA platform's claims set to a single CoRIM `ae-
 The environment is synthesized from instance and implementation identifiers.
 Each software component is mapped to an `element-map` entry with identifier "cca.software-component".
 The platform configuration is mapped to an `element-map` entry with identifier "cca.platform-config".
-The Platform TBB ROTPK is mapped to an `element-map` entry with an identifier computed by concatenating the cca.lifecycle claim with string representations of the integer index for active ROTPK array & entry in the active array.
+The Platform TBB ROTPK is mapped to an `element-map` entry, the identifier of which is computed by concatenating the cca.lifecycle claim with the string representations of the integer indices of the active ROTPK array and the active array entry.
 The platform manufacturing configuration is mapped to an `element-map` entry with identifier "cca.platform-manufacturing-config".
 
-The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, {{trans-plat-conf}}, {{trans-tbb-rotpk}} and {{trans-plat-mfg-conf}}
+The process uses the functions defined in {{trans-platform-id}}, {{trans-sw-comp}}, {{trans-plat-conf}}, {{trans-tbb-rotpk}} and {{trans-plat-mfg-conf}}.
 
 The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".
 
