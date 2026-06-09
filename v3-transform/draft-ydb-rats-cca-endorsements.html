@@ -2022,17 +2022,17 @@ FUNC transform(
     item.addition.profile = "tag:arm.com,2025:cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
+    # map platform tbb rotpk to elements
+    FOREACH pk IN P.arm-platform-tbb-rotpk:
+       e := element-from-tbb-rotpk(pk)
+       element-list::APPEND(e)
+
     # map platform manufacturing config to element
     e := element-from-platform-manufacturing-config(P.arm-platform-manufacturing-config-label)
     element-list::APPEND(e)
     item.addition.element-list = element-list
     item.addition.profile =  "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
-
-    # map platform tbb rotpk to elements
-    FOREACH pk IN P.arm-platform-tbb-rotpk:
-       e := element-from-tbb-rotpk(pk)
-       element-list::APPEND(e)
 
     RETURN item
 }
