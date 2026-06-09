@@ -488,7 +488,7 @@ FUNC element-from-tbb-rotpk(
     array-index = CHAR('0' + C.active-rotpk-array)
     entry-index =  CHAR('0' + C.active-array-index)
 
-    em.element-id = tstr (JOIN(lc + array-index + entry-index))
+    em.element-id = tstr (JOIN( "cca.rotpk" + "." + lc + "." + array-index + "." + entry-index))
 
     em.element-claims.raw-values = tagged-bytes(C.pk-hash)
 
@@ -575,10 +575,13 @@ FUNC transform(
        element-list::APPEND(e)
 
     # map platform manufacturing config to element
-    e := element-from-platform-manufacturing-config(P.arm-platform-manufacturing-config-label)
+    e := element-from-platform-manufacturing-config(
+        P.arm-platform-manufacturing-config-label)
     element-list::APPEND(e)
+
     item.addition.element-list = element-list
-    item.addition.profile =  "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
+    item.addition.profile =
+        "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
     RETURN item
