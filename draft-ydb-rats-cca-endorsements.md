@@ -484,11 +484,12 @@ FUNC element-from-tbb-rotpk(
 ) -> element-map {
     em := element-map::NEW()
 
-    lc = C.life-cycle
-    array-index = CHAR('0' + C.active-rotpk-array)
-    entry-index =  CHAR('0' + C.active-array-index)
-
-    em.element-id = tstr (JOIN( "cca.rotpk" + "." + lc + "." + array-index + "." + entry-index))
+    em.element-id = tstr(
+        "cca.rotpk."
+        + C.life-cycle + "."
+        + C.active-rotpk-array + "."
+        + C.active-rotpk-index
+    )
 
     em.element-claims.raw-values = tagged-bytes(C.pk-hash)
 
@@ -576,7 +577,8 @@ FUNC transform(
 
     # map platform manufacturing config to element
     e := element-from-platform-manufacturing-config(
-        P.arm-platform-manufacturing-config-label)
+        P.arm-platform-manufacturing-config-label
+    )
     element-list::APPEND(e)
 
     item.addition.element-list = element-list
