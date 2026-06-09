@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 10 December 2026                                         Linaro
-                                                             8 June 2026
+Expires: 11 December 2026                                         Linaro
+                                                             9 June 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 December 2026.
+   This Internet-Draft will expire on 11 December 2026.
 
 Copyright Notice
 
@@ -610,7 +610,7 @@ Table of Contents
    This section describes the transformations required to map a CCA
    Platform Token to its equivalent CoRIM internal representation.
 
-   Figure 19 shows the complete transformation.
+   Figure 20 shows the complete transformation.
 
 3.1.5.1.  Platform Identification
 
@@ -681,7 +681,32 @@ Table of Contents
 
        Figure 17: Transform a CCA Plaform Config into an Element Map
 
-3.1.5.4.  Platform Manufacturing Configuration
+3.1.5.4.  Platform TBB ROTPK
+
+   The following function maps a CCA TBB ROTPK to a CoRIM element map.
+   The element identifier is created from the claim as shown below, and
+   the element claims use the standard raw-values attribute to represent
+   the rotpk hash value as tagged-bytes.
+
+   FUNC element-from-tbb-rotpk(
+       C: arm-platform-tbb-rotpk-item,
+   ) -> element-map {
+       em := element-map::NEW()
+
+       lc = C.life-cycle
+       array-index = CHAR('0' + C.active-rotpk-array)
+       entry-index =  CHAR('0' + C.active-array-index)
+
+       em.element-id = tstr (JOIN(lc + array-index + entry-index))
+
+       em.element-claims.raw-values = tagged-bytes(C.pk-hash)
+
+       RETURN em
+   }
+
+     Figure 18: Transform a CCA Platform TBB ROTPK into an Element Map
+
+3.1.5.5.  Platform Manufacturing Configuration
 
    The following function maps the CCA platform manufacturing
    configuration claim to a CoRIM element map.  The element identifier
@@ -701,10 +726,10 @@ Table of Contents
        RETURN em
    }
 
-      Figure 18: Transform a CCA Plaform Manufacturing Config into an
+      Figure 19: Transform a CCA Plaform Manufacturing Config into an
                                 Element Map
 
-3.1.5.5.  Platform Token
+3.1.5.6.  Platform Token
 
    The following function maps the CCA platform's claims set to a single
    CoRIM ae-item.
@@ -713,10 +738,15 @@ Table of Contents
    identifiers.  Each software component is mapped to an element-map
    entry with identifier "cca.software-component".  The platform
    configuration is mapped to an element-map entry with identifier
-   "cca.platform-config".
+   "cca.platform-config".  The Platform TBB ROTPK is mapped to an
+   element-map entry with an identifier computed by concatenating the
+   cca.lifecycle claim with string representations of the integer index
+   for active ROTPK array & entry in the active array.  The platform
+   manufacturing configuration is mapped to an element-map entry with
+   identifier "cca.platform-manufacturing-config".
 
-   The process uses the functions defined in Figure 15, Figure 16, and
-   Figure 17.
+   The process uses the functions defined in Figure 15, Figure 16,
+   Figure 17, Figure 18 and Figure 19
 
    The process assumes that the profile of the CCA Platform claims-set
    is "tag:arm.com,2024:cca_platform#2.0.0".
@@ -762,11 +792,15 @@ Table of Contents
        item.addition.profile =  "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
        item.addition.authority::APPEND(cpak_pub)
 
+       # map platform tbb rotpk to elements
+       FOREACH pk IN P.arm-platform-tbb-rotpk:
+          e := element-from-tbb-rotpk(pk)
+          element-list::APPEND(e)
 
        RETURN item
    }
 
-       Figure 19: Transform a CCA Plaform into a CoRIM `ae` Relation
+       Figure 20: Transform a CCA Plaform into a CoRIM `ae` Relation
 
 3.2.  Arm CCA Realm Endorsements
 
@@ -793,14 +827,14 @@ Table of Contents
    Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.
 
    The profile attribute in the CoRIM MUST be present and MUST be the
-   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 20.
+   URI tag:arm.com,2025:cca_realm#1.0.0 as shown in Figure 21.
 
    / corim-map / {
      / corim.profile / 3 : 32("tag:arm.com,2025:cca_realm#1.0.0")
      / ... /
    }
 
-     Figure 20: CoRIM profile for CCA Realm Endorsements version 1.0.0
+     Figure 21: CoRIM profile for CCA Realm Endorsements version 1.0.0
 
 3.2.2.  Realm Endorsements linkage to Realm
 
@@ -809,7 +843,7 @@ Table of Contents
    enough to serve as an identifier for the Realm Target Environment.
    Therefore, this profile employs an environment-map with a class
    identifier that uses the tagged-bytes variant of the $class-id-type-
-   choice to encode the RIM value (Figure 21).
+   choice to encode the RIM value (Figure 22).
 
    / environment-map / {
      / comid.class / 0 : {
@@ -821,7 +855,7 @@ Table of Contents
      }
    }
 
-                    Figure 21: CCA Realm Identification
+                    Figure 22: CCA Realm Identification
 
 3.2.3.  Reference Values
 
@@ -859,7 +893,7 @@ Table of Contents
 3.2.3.1.  CoMID Example
 
    An example CoMID containing one Reference Values triple with the
-   expected values for a Realm is given in Figure 22.
+   expected values for a Realm is given in Figure 23.
 
    / concise-mid-tag / {
      / comid.tag-identity / 1 : {
@@ -946,14 +980,14 @@ Table of Contents
      }
    }
 
-                      Figure 22: CCA realm identifiers
+                      Figure 23: CCA realm identifiers
 
 3.2.4.  Evidence Transformations
 
    This section describes the transformations required to map a CCA
    Realm Token to its equivalent CoRIM internal representation.
 
-   Figure 27 shows the complete transformation.
+   Figure 28 shows the complete transformation.
 
 3.2.4.1.  Realm Identification
 
@@ -970,7 +1004,7 @@ Table of Contents
        RETURN env
    }
 
-        Figure 23: Transform a CCA Realm Initial Measurement into an
+        Figure 24: Transform a CCA Realm Initial Measurement into an
                                 Element Map
 
 3.2.4.2.  Realm Initial Measurements
@@ -995,7 +1029,7 @@ Table of Contents
        RETURN em
    }
 
-        Figure 24: Transform a CCA Realm Initial Measurement into an
+        Figure 25: Transform a CCA Realm Initial Measurement into an
                                 Element Map
 
 3.2.4.3.  Realm Extended Measurements
@@ -1022,7 +1056,7 @@ Table of Contents
        RETURN em
    }
 
-      Figure 25: Transform a CCA Realm Extended Measurement Bank into
+      Figure 26: Transform a CCA Realm Extended Measurement Bank into
                                an Element Map
 
 3.2.4.4.  Realm Personalization Value
@@ -1044,7 +1078,7 @@ Table of Contents
        RETURN em
    }
 
-       Figure 26: Transform a CCA Realm Personalization Value into an
+       Figure 27: Transform a CCA Realm Personalization Value into an
                                 Element Map
 
 3.2.4.5.  Realm Token
@@ -1057,8 +1091,8 @@ Table of Contents
    "cca.rem0".."cca.rem3".  The personalization value, if present, is
    mapped to an element-map entry with identifier "cca.rpv".
 
-   The process uses the functions defined in Figure 23, Figure 24,
-   Figure 25, and Figure 26.
+   The process uses the functions defined in Figure 24, Figure 25,
+   Figure 26, and Figure 27.
 
    The process assumes that the profile of the CCA Realm claims-set is
    "tag:arm.com,2024:realm#2.0.0".
@@ -1104,7 +1138,7 @@ Table of Contents
        RETURN item
    }
 
-        Figure 27: Transform a CCA Realm into a CoRIM `ae` Relation
+        Figure 28: Transform a CCA Realm into a CoRIM `ae` Relation
 
 4.  Security Considerations
 
