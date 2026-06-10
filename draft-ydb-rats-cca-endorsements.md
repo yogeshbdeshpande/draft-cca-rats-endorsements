@@ -279,7 +279,7 @@ cca-config-measurement-map = {
 ~~~
 {: #cddl-config-mm title="CCA Platform Configuration measurement-map"}
 
-#### CCA Platform Trusted Board Boot ROTPK
+#### CCA Platform Trusted Board Boot ROTPK {#sec-rotpk}
 
 When an implementation of the CCA Platform follows the Trusted Board Boot {{TBB}} specification, the platform will include several provisioned public key identifiers to establish a chain of trust.
 Each public key identifier is expressed as a hash of the corresponding public key.
@@ -300,6 +300,7 @@ Each public key identifier is encoded in a single `measurement-map`.
 
 1. `mkey` uniquely identifies the position of each key identifier, using the text variant of `$measured-element-type-choice`.
 The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), then the array index (starting from zero), and finally the entry position within the array (starting from zero).
+The parts are separated by `"."`.
 For example, to encode a "CM" key identifier for an active array index of 2 at position 3 in the array, mkey will be set to "cca.rotpk.CM.2.3".
 
 2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
@@ -476,7 +477,8 @@ FUNC element-from-platform-config(
 #### Platform TBB ROTPK
 
 The following function maps a CCA TBB ROTPK to a CoRIM element map.
-The element identifier is created from the claim as shown below, and the element claims use the standard raw-values attribute to represent the rotpk hash value as `tagged-bytes`.
+The element identifier is created from the claim as shown below, following the same encoding pattern for the `mkey` described in {{sec-rotpk}}.
+The element claims use the standard `raw-values` attribute to represent the ROTPK hash value as `tagged-bytes`.
 
 ~~~ pseudocode
 FUNC element-from-tbb-rotpk(
