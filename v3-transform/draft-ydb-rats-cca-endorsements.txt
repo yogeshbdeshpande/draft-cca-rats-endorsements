@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 11 December 2026                                         Linaro
-                                                             9 June 2026
+Expires: 12 December 2026                                         Linaro
+                                                            10 June 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 December 2026.
+   This Internet-Draft will expire on 12 December 2026.
 
 Copyright Notice
 
@@ -391,9 +391,10 @@ Table of Contents
        encoding follows a consistent pattern: the prefix "cca.rotpk",
        followed by the set name ("CM" or "DM"), then the array index
        (starting from zero), and finally the entry position within the
-       array (starting from zero).  For example, to encode a "CM" key
-       identifier for an active array index of 2 at position 3 in the
-       array, mkey will be set to "cca.rotpk.CM.2.3".
+       array (starting from zero).  The parts are separated by ".".  For
+       example, to encode a "CM" key identifier for an active array
+       index of 2 at position 3 in the array, mkey will be set to
+       "cca.rotpk.CM.2.3".
 
    2.  The public key identifier is encoded using cryptokeys (key 13).
        The array MUST have only one entry encoded using the tagged-bytes
@@ -686,9 +687,10 @@ Table of Contents
 3.1.5.4.  Platform TBB ROTPK
 
    The following function maps a CCA TBB ROTPK to a CoRIM element map.
-   The element identifier is created from the claim as shown below, and
-   the element claims use the standard raw-values attribute to represent
-   the rotpk hash value as tagged-bytes.
+   The element identifier is created from the claim as shown below,
+   following the same encoding pattern for the mkey described in
+   Section 3.1.3.3.  The element claims use the standard raw-values
+   attribute to represent the ROTPK hash value as tagged-bytes.
 
    FUNC element-from-tbb-rotpk(
        C: arm-platform-tbb-rotpk-item,
