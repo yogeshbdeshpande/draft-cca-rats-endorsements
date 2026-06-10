@@ -1048,7 +1048,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Deshpande &amp; Fossati</td>
-<td class="center">Expires 7 December 2026</td>
+<td class="center">Expires 12 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1061,12 @@ svg {
 <dd class="internet-draft">draft-ydb-rats-cca-endorsements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-05" class="published">5 June 2026</time>
+<time datetime="2026-06-10" class="published">10 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-07">7 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-12">12 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1538,7 +1538,7 @@ cca-config-measurement-map = {
 </div>
 </section>
 </div>
-<div id="cca-platform-trusted-board-boot-rotpk">
+<div id="sec-rotpk">
 <section id="section-3.1.3.3">
             <h5 id="name-cca-platform-trusted-board-">
 <a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-cca-platform-trusted-board-" class="section-name selfRef">CCA Platform Trusted Board Boot ROTPK</a>
@@ -1557,6 +1557,7 @@ Each public key identifier is expressed as a hash of the corresponding public ke
 <li id="section-3.1.3.3-8.1">
                 <p id="section-3.1.3.3-8.1.1"><code>mkey</code> uniquely identifies the position of each key identifier, using the text variant of <code>$measured-element-type-choice</code>.
 The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), then the array index (starting from zero), and finally the entry position within the array (starting from zero).
+The parts are separated by <code>"."</code>.
 For example, to encode a "CM" key identifier for an active array index of 2 at position 3 in the array, mkey will be set to "cca.rotpk.CM.2.3".<a href="#section-3.1.3.3-8.1.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-3.1.3.3-8.2">
@@ -1811,7 +1812,7 @@ n8akBr+fh94uxHU5m+Kijivp2r2oxxN6MhM4tr8mWQli1P61xh3T0ViDREbF26DGO\\
 <a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-evidence-transformations" class="section-name selfRef">Evidence Transformations</a>
           </h4>
 <p id="section-3.1.5-1">This section describes the transformations required to map a CCA Platform Token to its equivalent CoRIM internal representation.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-2"><a href="#trans-plat" class="auto internal xref">Figure 18</a> shows the complete transformation.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-2"><a href="#trans-plat" class="auto internal xref">Figure 20</a> shows the complete transformation.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
 <div id="platform-identification">
 <section id="section-3.1.5.1">
             <h5 id="name-platform-identification">
@@ -1908,20 +1909,88 @@ FUNC element-from-platform-config(
 </div>
 </section>
 </div>
-<div id="platform-token">
+<div id="platform-tbb-rotpk">
 <section id="section-3.1.5.4">
-            <h5 id="name-platform-token">
-<a href="#section-3.1.5.4" class="section-number selfRef">3.1.5.4. </a><a href="#name-platform-token" class="section-name selfRef">Platform Token</a>
+            <h5 id="name-platform-tbb-rotpk">
+<a href="#section-3.1.5.4" class="section-number selfRef">3.1.5.4. </a><a href="#name-platform-tbb-rotpk" class="section-name selfRef">Platform TBB ROTPK</a>
             </h5>
-<p id="section-3.1.5.4-1">The following function maps the CCA platform's claims set to a single CoRIM <code>ae-item</code>.<a href="#section-3.1.5.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.5.4-2">The environment is synthesized from instance and implementation identifiers.
-Each software component is mapped to an <code>element-map</code> entry with identifier "cca.software-component".
-The platform configuration is mapped to an <code>element-map</code> entry with identifier "cca.platform-config".<a href="#section-3.1.5.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.5.4-3">The process uses the functions defined in <a href="#trans-platform-id" class="auto internal xref">Figure 15</a>, <a href="#trans-sw-comp" class="auto internal xref">Figure 16</a>, and <a href="#trans-plat-conf" class="auto internal xref">Figure 17</a>.<a href="#section-3.1.5.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.5.4-4">The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".<a href="#section-3.1.5.4-4" class="pilcrow">¶</a></p>
-<span id="name-transform-a-cca-plaform-int"></span><div id="trans-plat">
+<p id="section-3.1.5.4-1">The following function maps a CCA TBB ROTPK to a CoRIM element map.
+The element identifier is created from the claim as shown below, following the same encoding pattern for the <code>mkey</code> described in <a href="#sec-rotpk" class="auto internal xref">Section 3.1.3.3</a>.
+The element claims use the standard <code>raw-values</code> attribute to represent the ROTPK hash value as <code>tagged-bytes</code>.<a href="#section-3.1.5.4-1" class="pilcrow">¶</a></p>
+<span id="name-transform-a-cca-platform-tb"></span><div id="trans-tbb-rotpk">
 <figure id="figure-18">
-              <div class="lang-pseudocode sourcecode" id="section-3.1.5.4-5.1">
+              <div class="lang-pseudocode sourcecode" id="section-3.1.5.4-2.1">
+<pre>
+FUNC element-from-tbb-rotpk(
+    C: arm-platform-tbb-rotpk-item,
+) -&gt; element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr(
+        "cca.rotpk."
+        + C.life-cycle + "."
+        + C.active-rotpk-array + "."
+        + C.active-rotpk-index
+    )
+
+    em.element-claims.raw-values = tagged-bytes(C.pk-hash)
+
+    RETURN em
+}
+</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<a href="#name-transform-a-cca-platform-tb" class="selfRef">Transform a CCA Platform TBB ROTPK into an Element Map</a>
+              </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="platform-manufacturing-configuration">
+<section id="section-3.1.5.5">
+            <h5 id="name-platform-manufacturing-conf">
+<a href="#section-3.1.5.5" class="section-number selfRef">3.1.5.5. </a><a href="#name-platform-manufacturing-conf" class="section-name selfRef">Platform Manufacturing Configuration</a>
+            </h5>
+<p id="section-3.1.5.5-1">The following function maps the CCA platform manufacturing configuration claim to a CoRIM element map.
+The element identifier is "cca.platform-manufacturing-config", and the element claims use the standard raw-values attribute to represent the platform manufacturing configuration value as <code>tagged-bytes</code>.<a href="#section-3.1.5.5-1" class="pilcrow">¶</a></p>
+<span id="name-transform-a-cca-plaform-man"></span><div id="trans-plat-mfg-conf">
+<figure id="figure-19">
+              <div class="lang-pseudocode sourcecode" id="section-3.1.5.5-2.1">
+<pre>
+FUNC element-from-platform-manufacturing-config(
+    C: arm-platform-manufacturing-config-type
+) -&gt; element-map {
+    em := element-map::NEW()
+
+    em.element-id = tstr("cca.platform-manufacturing-config")
+
+    em.element-claims.raw-values = tagged-bytes(C)
+
+    RETURN em
+}
+</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<a href="#name-transform-a-cca-plaform-man" class="selfRef">Transform a CCA Plaform Manufacturing Config into an Element Map</a>
+              </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="platform-token">
+<section id="section-3.1.5.6">
+            <h5 id="name-platform-token">
+<a href="#section-3.1.5.6" class="section-number selfRef">3.1.5.6. </a><a href="#name-platform-token" class="section-name selfRef">Platform Token</a>
+            </h5>
+<p id="section-3.1.5.6-1">The following function maps the CCA platform's claims set to a single CoRIM <code>ae-item</code>.<a href="#section-3.1.5.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5.6-2">The environment is synthesized from instance and implementation identifiers.
+Each software component is mapped to an <code>element-map</code> entry with identifier "cca.software-component".
+The platform configuration is mapped to an <code>element-map</code> entry with identifier "cca.platform-config".
+The Platform TBB ROTPK is mapped to an <code>element-map</code> entry, the identifier of which is computed by concatenating the cca.lifecycle claim with the string representations of the integer indices of the active ROTPK array and the active array entry.
+The platform manufacturing configuration is mapped to an <code>element-map</code> entry with identifier "cca.platform-manufacturing-config".<a href="#section-3.1.5.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.5.6-3">The process uses the functions defined in <a href="#trans-platform-id" class="auto internal xref">Figure 15</a>, <a href="#trans-sw-comp" class="auto internal xref">Figure 16</a>, <a href="#trans-plat-conf" class="auto internal xref">Figure 17</a>, <a href="#trans-tbb-rotpk" class="auto internal xref">Figure 18</a> and <a href="#trans-plat-mfg-conf" class="auto internal xref">Figure 19</a>.<a href="#section-3.1.5.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.5.6-4">The process assumes that the profile of the CCA Platform claims-set is "tag:arm.com,2024:cca_platform#2.0.0".<a href="#section-3.1.5.6-4" class="pilcrow">¶</a></p>
+<span id="name-transform-a-cca-plaform-int"></span><div id="trans-plat">
+<figure id="figure-20">
+              <div class="breakable lang-pseudocode sourcecode" id="section-3.1.5.6-5.1">
 <pre>
 FUNC transform(
     P: arm-platform-claims,
@@ -1958,11 +2027,27 @@ FUNC transform(
         "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
     item.addition.authority::APPEND(cpak_pub)
 
+    # map platform tbb rotpk to elements
+    FOREACH pk IN P.arm-platform-tbb-rotpk:
+       e := element-from-tbb-rotpk(pk)
+       element-list::APPEND(e)
+
+    # map platform manufacturing config to element
+    e := element-from-platform-manufacturing-config(
+        P.arm-platform-manufacturing-config-label
+    )
+    element-list::APPEND(e)
+
+    item.addition.element-list = element-list
+    item.addition.profile =
+        "tag:arm.com,2025:endorsements/cca_platform#1.0.0"
+    item.addition.authority::APPEND(cpak_pub)
+
     RETURN item
 }
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-transform-a-cca-plaform-int" class="selfRef">Transform a CCA Plaform into a CoRIM `ae` Relation</a>
               </figcaption></figure>
 </div>
@@ -1987,9 +2072,9 @@ Arm CCA allows the initial and run-time state of a Realm to be attested (<span><
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-arm-cca-realm-endorsement-p" class="section-name selfRef">Arm CCA Realm Endorsement Profile</a>
           </h4>
 <p id="section-3.2.1-1">Arm CCA Realm Endorsements are carried in a CoMID within a CoRIM.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:endorsements/cca_realm#1.0.0</code> as shown in <a href="#ex-cca-realm-profile" class="auto internal xref">Figure 19</a>.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-2">The profile attribute in the CoRIM MUST be present and MUST be the URI <code>tag:arm.com,2025:endorsements/cca_realm#1.0.0</code> as shown in <a href="#ex-cca-realm-profile" class="auto internal xref">Figure 21</a>.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 <span id="name-corim-profile-for-cca-realm"></span><div id="ex-cca-realm-profile">
-<figure id="figure-19">
+<figure id="figure-21">
             <div class="lang-cbor-diag sourcecode" id="section-3.2.1-3.1">
 <pre>
 / corim-map / {
@@ -1999,7 +2084,7 @@ Arm CCA allows the initial and run-time state of a Realm to be attested (<span><
 }
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-corim-profile-for-cca-realm" class="selfRef">CoRIM profile for CCA Realm Endorsements version 1.0.0</a>
             </figcaption></figure>
 </div>
@@ -2012,9 +2097,9 @@ Arm CCA allows the initial and run-time state of a Realm to be attested (<span><
           </h4>
 <p id="section-3.2.2-1">Realms do not have <em>explicit</em> class or instance identifiers.
 However, the Realm Initial Measurement (RIM) is unique and stable enough to serve as an identifier for the Realm Target Environment.
-Therefore, this profile employs an <code>environment-map</code> with a class identifier that uses the <code>tagged-bytes</code> variant of the <code>$class-id-type-choice</code> to encode the RIM value (<a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 20</a>).<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+Therefore, this profile employs an <code>environment-map</code> with a class identifier that uses the <code>tagged-bytes</code> variant of the <code>$class-id-type-choice</code> to encode the RIM value (<a href="#ex-cca-realm-identifiers" class="auto internal xref">Figure 22</a>).<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-identification"></span><div id="ex-cca-realm-identifiers">
-<figure id="figure-20">
+<figure id="figure-22">
             <div class="lang-cbor-diag sourcecode" id="section-3.2.2-2.1">
 <pre>
 / environment-map / {
@@ -2028,7 +2113,7 @@ Therefore, this profile employs an <code>environment-map</code> with a class ide
 }
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-cca-realm-identification" class="selfRef">CCA Realm Identification</a>
             </figcaption></figure>
 </div>
@@ -2066,9 +2151,9 @@ The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NO
             <h5 id="name-comid-example-3">
 <a href="#section-3.2.3.1" class="section-number selfRef">3.2.3.1. </a><a href="#name-comid-example-3" class="section-name selfRef">CoMID Example</a>
             </h5>
-<p id="section-3.2.3.1-1">An example CoMID containing one Reference Values triple with the expected values for a Realm is given in <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 21</a>.<a href="#section-3.2.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.3.1-1">An example CoMID containing one Reference Values triple with the expected values for a Realm is given in <a href="#ex-cca-realm-refval" class="auto internal xref">Figure 23</a>.<a href="#section-3.2.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-cca-realm-identifiers"></span><div id="ex-cca-realm-refval">
-<figure id="figure-21">
+<figure id="figure-23">
               <div class="alignLeft art-text artwork" id="section-3.2.3.1-2.1">
 <pre>
 / concise-mid-tag / {
@@ -2157,7 +2242,7 @@ The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NO
 }
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-cca-realm-identifiers" class="selfRef">CCA realm identifiers</a>
               </figcaption></figure>
 </div>
@@ -2171,7 +2256,7 @@ The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NO
 <a href="#section-3.2.4" class="section-number selfRef">3.2.4. </a><a href="#name-evidence-transformations-2" class="section-name selfRef">Evidence Transformations</a>
           </h4>
 <p id="section-3.2.4-1">This section describes the transformations required to map a CCA Realm Token to its equivalent CoRIM internal representation.<a href="#section-3.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.4-2"><a href="#trans-realm" class="auto internal xref">Figure 26</a> shows the complete transformation.<a href="#section-3.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.4-2"><a href="#trans-realm" class="auto internal xref">Figure 28</a> shows the complete transformation.<a href="#section-3.2.4-2" class="pilcrow">¶</a></p>
 <div id="realm-identification">
 <section id="section-3.2.4.1">
             <h5 id="name-realm-identification">
@@ -2179,7 +2264,7 @@ The <code>authorized-by</code> field of the <code>measurement-map</code> MUST NO
             </h5>
 <p id="section-3.2.4.1-1">The following function maps the CCA Realm Initial Measurement - which, as discussed in <a href="#realm-id" class="auto internal xref">Section 3.2.2</a>, provides a stable identifier for the Realm - onto a CoRIM <code>environment-map</code>.<a href="#section-3.2.4.1-1" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-initi"></span><div id="trans-realm-id">
-<figure id="figure-22">
+<figure id="figure-24">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.1-2.1">
 <pre>
 FUNC cca_realm_id_to_env(
@@ -2192,7 +2277,7 @@ FUNC cca_realm_id_to_env(
 }
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-transform-a-cca-realm-initi" class="selfRef">Transform a CCA Realm Initial Measurement into an Element Map</a>
               </figcaption></figure>
 </div>
@@ -2206,7 +2291,7 @@ FUNC cca_realm_id_to_env(
 <p id="section-3.2.4.2-1">The following function maps the CCA Realm Initial Measurement claim to a CoRIM element map.
 The element identifier is "cca.rim", and the element claims use the standard digests attribute to represent the RIM value, using the digest algorithm taken from the Realm hash algorithm ID claim.<a href="#section-3.2.4.2-1" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-initia"></span><div id="trans-rim">
-<figure id="figure-23">
+<figure id="figure-25">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.2-2.1">
 <pre>
 FUNC element-from-rim(
@@ -2224,7 +2309,7 @@ FUNC element-from-rim(
 }
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-transform-a-cca-realm-initia" class="selfRef">Transform a CCA Realm Initial Measurement into an Element Map</a>
               </figcaption></figure>
 </div>
@@ -2238,7 +2323,7 @@ FUNC element-from-rim(
 <p id="section-3.2.4.3-1">The following function maps the i-th (0..3) bank of a CCA Realm Extended Measurements claim to a CoRIM element map.
 The element identifier is one of "cca.rem0".."cca.rem3", depending on the bank index, and the element claims use the standard digests attribute to represent the REM value, using the digest algorithm taken from the Realm hash algorithm ID claim.<a href="#section-3.2.4.3-1" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-exten"></span><div id="trans-rem">
-<figure id="figure-24">
+<figure id="figure-26">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.3-2.1">
 <pre>
 FUNC element-from-rem(
@@ -2257,7 +2342,7 @@ FUNC element-from-rem(
 }
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
 <a href="#name-transform-a-cca-realm-exten" class="selfRef">Transform a CCA Realm Extended Measurement Bank into an Element Map</a>
               </figcaption></figure>
 </div>
@@ -2271,7 +2356,7 @@ FUNC element-from-rem(
 <p id="section-3.2.4.4-1">The following function maps the CCA realm personalization value claim to a CoRIM element map.
 The element identifier is "cca.rpv", and the element claims use the standard raw-values attribute to represent the personalization value as tagged-bytes.<a href="#section-3.2.4.4-1" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-perso"></span><div id="trans-rpv">
-<figure id="figure-25">
+<figure id="figure-27">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.4-2.1">
 <pre>
 FUNC element-from-rpv(
@@ -2287,7 +2372,7 @@ FUNC element-from-rpv(
 }
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
 <a href="#name-transform-a-cca-realm-perso" class="selfRef">Transform a CCA Realm Personalization Value into an Element Map</a>
               </figcaption></figure>
 </div>
@@ -2302,10 +2387,10 @@ FUNC element-from-rpv(
 <p id="section-3.2.4.5-2">The environment is synthesized from the RIM.
 Each REM bank, if present, is mapped to an element-map entry with identifier "cca.rem0".."cca.rem3".
 The personalization value, if present, is mapped to an element-map entry with identifier "cca.rpv".<a href="#section-3.2.4.5-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.4.5-3">The process uses the functions defined in <a href="#trans-realm-id" class="auto internal xref">Figure 22</a>, <a href="#trans-rim" class="auto internal xref">Figure 23</a>, <a href="#trans-rem" class="auto internal xref">Figure 24</a>, and <a href="#trans-rpv" class="auto internal xref">Figure 25</a>.<a href="#section-3.2.4.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.4.5-3">The process uses the functions defined in <a href="#trans-realm-id" class="auto internal xref">Figure 24</a>, <a href="#trans-rim" class="auto internal xref">Figure 25</a>, <a href="#trans-rem" class="auto internal xref">Figure 26</a>, and <a href="#trans-rpv" class="auto internal xref">Figure 27</a>.<a href="#section-3.2.4.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.2.4.5-4">The process assumes that the profile of the CCA Realm claims-set is "tag:arm.com,2024:realm#2.0.0".<a href="#section-3.2.4.5-4" class="pilcrow">¶</a></p>
 <span id="name-transform-a-cca-realm-into-"></span><div id="trans-realm">
-<figure id="figure-26">
+<figure id="figure-28">
               <div class="lang-pseudocode sourcecode" id="section-3.2.4.5-5.1">
 <pre>
 FUNC transform(
@@ -2351,7 +2436,7 @@ FUNC transform(
 }
 </pre>
 </div>
-<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
 <a href="#name-transform-a-cca-realm-into-" class="selfRef">Transform a CCA Realm into a CoRIM `ae` Relation</a>
               </figcaption></figure>
 </div>
