@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 12 December 2026                                         Linaro
-                                                            10 June 2026
+Expires: 19 December 2026                                         Linaro
+                                                            17 June 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 December 2026.
+   This Internet-Draft will expire on 19 December 2026.
 
 Copyright Notice
 
@@ -282,27 +282,30 @@ Table of Contents
 
              Figure 5: CCA Platform Software Component encoding
 
-   version (key 0):  A version-map with its version field containing the
-      version (key 4) of the arm-platform-sw-component.  The version-
-      scheme field of the version-map MUST NOT be present.  This field
-      is optional.
+   version (key 0):
+      A version-map with its version field containing the version (key
+      4) of the arm-platform-sw-component.  The version-scheme field of
+      the version-map MUST NOT be present.  This field is optional.
 
-   digests (key 2):  Each array element encodes the "measurement value"
-      (key 2) and "hash algorithm identifier" (key 6) of the arm-
-      platform-sw-component in the val and alg entries, respectively.
-      The alg entry MUST use the text encoding.  The digests array MUST
-      contain at least one entry and MAY contain more than one entry if
-      multiple digests (obtained with different hash algorithms) of the
-      same measured component exist.  If multiple entries exist, they
-      MUST have different alg values.  This field is mandatory.
+   digests (key 2):
+      Each array element encodes the "measurement value" (key 2) and
+      "hash algorithm identifier" (key 6) of the arm-platform-sw-
+      component in the val and alg entries, respectively.  The alg entry
+      MUST use the text encoding.  The digests array MUST contain at
+      least one entry and MAY contain more than one entry if multiple
+      digests (obtained with different hash algorithms) of the same
+      measured component exist.  If multiple entries exist, they MUST
+      have different alg values.  This field is mandatory.
 
-   name (key 11):  A text value containing the "component type" (key 1)
-      of the arm-platform-sw-component.  This field is optional.
+   name (key 11):
+      A text value containing the "component type" (key 1) of the arm-
+      platform-sw-component.  This field is optional.
 
-   cryptokeys (key 13):  An array with _only one_ entry using the
-      tagged-bytes variant of the $crypto-key-type-choice.  The entry
-      contains the "signer id" (key 5) of the arm-platform-sw-component.
-      This field is mandatory.
+   cryptokeys (key 13):
+      An array with _only one_ entry using the tagged-bytes variant of
+      the $crypto-key-type-choice.  The entry contains the "signer id"
+      (key 5) of the arm-platform-sw-component.  This field is
+      mandatory.
 
    Each measurement-values-map for a CCA Platform software component is
    wrapped in a measurement-map with an mkey using the text variant of
