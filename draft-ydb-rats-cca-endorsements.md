@@ -208,6 +208,7 @@ cca-swcomp-signer-id = #6.560(cca-hash-type)
 ~~~
 {: #cddl-swcomp-mvm title="CCA Platform Software Component encoding"}
 
+{:vspace}
 version (key 0):
 : A `version-map` with its `version` field containing the version (key 4) of the `arm-platform-sw-component`.
 The `version-scheme` field of the `version-map` MUST NOT be present.
