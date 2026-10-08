@@ -300,9 +300,9 @@ Each array entry is encoded in a single Reference Value Triple.
 Each public key identifier is encoded in a single `measurement-map`.
 
 1. `mkey` uniquely identifies the position of each key identifier, using the text variant of `$measured-element-type-choice`.
-The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), then the array index (starting from zero), and finally the entry position within the array (starting from zero).
+The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"),and finally the entry position within the array (starting from zero).
 The parts are separated by `"."`.
-For example, to encode a "CM" key identifier for an active array index of 2 at position 3 in the array, mkey will be set to "cca.rotpk.CM.2.3".
+For example, to encode a "CM" key identifier at active position 3, mkey will be set to "cca.rotpk.CM.3".
 
 2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
 The length of the `tagged-bytes` MUST be 32, 48 or 64 bytes.
@@ -324,7 +324,7 @@ cca-rotpk-id = #6.560(cca-hash-type)
 
 ~~~ cddl
 cca-rotpk-measurement-map = {
-  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-7]\\.[0-5]"
+  &(mkey: 0) => text .regexp "cca.rotpk.[CD]M\\.[0-5]"
   &(mval: 1) => cca-rotpk-measurement-values-map
 }
 ~~~
@@ -490,7 +490,6 @@ FUNC element-from-tbb-rotpk(
     em.element-id = tstr(
         "cca.rotpk."
         + C.life-cycle + "."
-        + C.active-rotpk-array + "."
         + C.active-rotpk-index
     )
 
