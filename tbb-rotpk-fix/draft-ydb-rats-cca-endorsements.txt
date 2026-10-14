@@ -376,8 +376,11 @@ Table of Contents
 
    For CCA Implementation, there MUST be only two types of arrays,
    corresponding to the provisioning lifecycle stage, see Section 4.6.8
-   of [I-D.ffm-rats-cca-token]: 1.  Chip Manufacturing array - known as
-   "CM" 2.  Device Manufacturing array - known as "DM"
+   of [I-D.ffm-rats-cca-token]:
+
+   1.  Chip Manufacturing array - known as "CM"
+
+   2.  Device Manufacturing array - known as "DM"
 
    In CCA Implementation, for a particular type of array, the maximum
    number of array entries SHALL be 8, while the maximum entries in a
