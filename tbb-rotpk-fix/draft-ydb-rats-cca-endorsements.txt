@@ -375,9 +375,9 @@ Table of Contents
    key identifiers.
 
    For CCA Implementation, there MUST be only two types of arrays,
-   corresponding to the provisioning lifecycle stage, see
-   Section 4.6.8.1 of [I-D.ffm-rats-cca-token]: 1.  Chip Manufacturing
-   array - known as "CM" 2.  Device Manufacturing array - known as "DM"
+   corresponding to the provisioning lifecycle stage, see Section 4.6.8
+   of [I-D.ffm-rats-cca-token]: 1.  Chip Manufacturing array - known as
+   "CM" 2.  Device Manufacturing array - known as "DM"
 
    In CCA Implementation, for a particular type of array, the maximum
    number of array entries SHALL be 8, while the maximum entries in a
@@ -395,7 +395,8 @@ Table of Contents
        encoding follows a consistent pattern: the prefix "cca.rotpk",
        followed by the set name ("CM" or "DM"),and finally the entry
        position within the active array (starting from zero).  The parts
-       are separated by ".".  See Section 4.6.8.1 of
+       are separated by ".". mkey is aligned to elements received in TBB
+       RoTPK Claim from CCA Evidence as in Section 4.6.8 of
        [I-D.ffm-rats-cca-token].
 
    For example, to encode a "CM" key identifier at active position 3,
