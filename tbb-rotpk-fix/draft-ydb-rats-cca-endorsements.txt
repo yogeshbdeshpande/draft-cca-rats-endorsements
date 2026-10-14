@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 11 April 2027                                            Linaro
-                                                          8 October 2026
+Expires: 17 April 2027                                            Linaro
+                                                         14 October 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2027.
+   This Internet-Draft will expire on 17 April 2027.
 
 Copyright Notice
 
@@ -393,9 +393,10 @@ Table of Contents
        using the text variant of $measured-element-type-choice.  The
        encoding follows a consistent pattern: the prefix "cca.rotpk",
        followed by the set name ("CM" or "DM"),and finally the entry
-       position within the array (starting from zero).  The parts are
-       separated by ".".  For example, to encode a "CM" key identifier
-       at active position 3, mkey will be set to "cca.rotpk.CM.3".
+       position within the active array (starting from zero).  The parts
+       are separated by ".".  For example, to encode a "CM" key
+       identifier at active position 3, mkey will be set to
+       "cca.rotpk.CM.3".
 
    2.  The public key identifier is encoded using cryptokeys (key 13).
        The array MUST have only one entry encoded using the tagged-bytes
