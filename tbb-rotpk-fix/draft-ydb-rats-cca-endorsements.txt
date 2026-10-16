@@ -5,8 +5,8 @@
 RATS                                                        Y. Deshpande
 Internet-Draft                                                   Arm Ltd
 Intended status: Informational                                T. Fossati
-Expires: 17 April 2027                                            Linaro
-                                                         14 October 2026
+Expires: 19 April 2027                                            Linaro
+                                                         16 October 2026
 
 
   A CoRIM Profile for Arm's Confidential Computing Architecture (CCA)
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2027.
+   This Internet-Draft will expire on 19 April 2027.
 
 Copyright Notice
 
@@ -396,11 +396,11 @@ Table of Contents
    1.  mkey uniquely identifies the position of each key identifier,
        using the text variant of $measured-element-type-choice.  The
        encoding follows a consistent pattern: the prefix "cca.rotpk",
-       followed by the set name ("CM" or "DM"),and finally the entry
+       followed by the set name ("CM" or "DM"), and finally the entry
        position within the active array (starting from zero).  The parts
-       are separated by ".". mkey is aligned to elements received in TBB
-       RoTPK Claim from CCA Evidence as in Section 4.6.8 of
-       [I-D.ffm-rats-cca-token].
+       are separated by ".". mkey is aligned to the elements received in
+       the TBB RoTPK claim from the CCA evidence, as detailed in
+       Section 4.6.8 of [I-D.ffm-rats-cca-token].
 
    For example, to encode a "CM" key identifier at active position 3,
    mkey will be set to "cca.rotpk.CM.3".
