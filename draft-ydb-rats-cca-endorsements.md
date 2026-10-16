@@ -302,10 +302,11 @@ Each array entry is encoded in a single Reference Value Triple.
 Each public key identifier is encoded in a single `measurement-map`.
 
 1. `mkey` uniquely identifies the position of each key identifier, using the text variant of `$measured-element-type-choice`.
-The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"),and finally the entry position within the active array (starting from zero).
-The parts are separated by `"."`. `mkey` is aligned to elements received in TBB RoTPK Claim from CCA Evidence as in {{Section 4.6.8 of -cca-token}}.
+The encoding follows a consistent pattern: the prefix "cca.rotpk", followed by the set name ("CM" or "DM"), and finally the entry position within the active array (starting from zero).
+The parts are separated by `"."`.
+`mkey` is aligned to the elements received in the TBB RoTPK claim from the CCA evidence, as detailed in {{Section 4.6.8 of -cca-token}}.
 
-For example, to encode a "CM" key identifier at active position 3, mkey will be set to "cca.rotpk.CM.3".
+For example, to encode a "CM" key identifier at active position 3, `mkey` will be set to "cca.rotpk.CM.3".
 
 
 2. The public key identifier is encoded using cryptokeys (key 13). The array MUST have only one entry encoded using the `tagged-bytes` variant of the `$crypto-key-type-choice`.
